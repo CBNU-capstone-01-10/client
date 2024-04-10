@@ -14,8 +14,8 @@ export default function drawVideoSnapshot(videoElement: HTMLVideoElement) {
 
   if (video) {
     ctx?.drawImage(video, 0, 0, canvas.width, canvas.height);
-    const driverImageData = canvas.toDataURL("image/jpeg");
-    console.log(driverImageData);
+    driverImageData = canvas.toDataURL("image/jpeg");
   }
+
   return driverImageData;
 }
