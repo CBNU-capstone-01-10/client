@@ -1,13 +1,16 @@
 export default function drawVideoSnapshot(videoElement: HTMLVideoElement) {
   let driverImageData;
   const video = videoElement;
+  console.log(video);
 
   const canvas = document.createElement("canvas");
 
+  const ctx = canvas.getContext("2d");
+
   const dpr = window.devicePixelRatio;
 
-  const ctx = canvas.getContext("2d");
-  ctx?.scale(dpr, dpr);
+  canvas.width = video.width * dpr;
+  canvas.height = video.height * dpr;
 
   if (video) {
     ctx?.drawImage(video, 0, 0, canvas.width, canvas.height);
