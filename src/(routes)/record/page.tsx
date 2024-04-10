@@ -1,16 +1,14 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import useWatchLocation from "../../hooks/useWatchLocation";
 import drawVideoSnapshot from "./_utils/drawVideoSnapshot";
+import useInterval from "../../hooks/useInterval";
 
 const geoOptions = {
   // enableHighAccuracy: false,
   // maximumAge: 0,
   timeout: 15000,
 };
-interface IUseInterval {
-  (callback: () => void, interval: number): void;
-}
 
 export default function Page() {
   const socket = io();
@@ -40,25 +38,6 @@ export default function Page() {
 
     // 서버 전송 로직
     console.log(latitude, longitude);
-  };
-
-  const useInterval: IUseInterval = (callback, delay) => {
-    const savedCallback = useRef<(() => void) | null>(null);
-
-    // 콜백함수 등록
-    useEffect(() => {
-      savedCallback.current = callback;
-    }, [callback]);
-
-    useEffect(() => {
-      const executeCallback = () => {
-        savedCallback.current && savedCallback.current();
-      };
-
-      const timerId = setInterval(executeCallback, delay);
-
-      return () => clearInterval(timerId);
-    }, [delay]);
   };
 
   useInterval(() => {
