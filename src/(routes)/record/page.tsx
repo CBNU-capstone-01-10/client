@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import useWatchLocation from "../../hooks/useWatchLocation";
+import drawVideoSnapshot from "./_utils/drawVideoSnapshot";
 
 const geoOptions = {
   // enableHighAccuracy: false,
@@ -41,32 +42,6 @@ export default function Page() {
     console.log(latitude, longitude);
   };
 
-  // test
-  useEffect(() => {
-    console.log("geo");
-    console.log(location);
-  }, [location]);
-
-  const drawVideoSnapshot = (videoElement: HTMLVideoElement) => {
-    const video = videoElement;
-
-    const canvas = document.createElement("canvas");
-
-    const dpr = window.devicePixelRatio;
-
-    const ctx = canvas.getContext("2d");
-    ctx?.scale(dpr, dpr);
-
-    if (video) {
-      ctx?.drawImage(video, 0, 0, canvas.width, canvas.height);
-      const driverImageData = canvas.toDataURL("image/jpeg");
-      // console.log(driverImageData);
-
-      // 이미지 전송
-      socket.emit("image", driverImageData);
-    }
-  };
-
   const useInterval: IUseInterval = (callback, delay) => {
     const savedCallback = useRef<(() => void) | null>(null);
 
@@ -88,8 +63,11 @@ export default function Page() {
 
   useInterval(() => {
     if (videoRef.current) {
-      drawVideoSnapshot(videoRef.current);
+      const driverImage = drawVideoSnapshot(videoRef.current);
+      console.log(driverImage);
+      socket.emit("image", driverImage);
     }
+    sendPosition();
   }, 2000);
 
   useEffect(() => {
