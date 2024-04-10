@@ -1,6 +1,12 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { io } from "socket.io-client";
+import useWatchLocation from "../../hooks/useWatchLocation";
 
+const geoOptions = {
+  // enableHighAccuracy: false,
+  // maximumAge: 0,
+  timeout: 15000,
+};
 interface IUseInterval {
   (callback: () => void, interval: number): void;
 }
@@ -8,80 +14,38 @@ interface IUseInterval {
 export default function Page() {
   const socket = io();
   const [stream, setStream] = useState<MediaStream>();
-  const [geoLocPosition, setGeoLocPosition] = useState<number[]>([0, 0]);
-  const [geoLocWatchId, setGeoLocWatchId] = useState();
+
+  const { location, cancelLocationWatch, errorMessage } =
+    useWatchLocation(geoOptions);
 
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const getCameraPermission = async () => {
+  const getCameraPermission = useCallback(async () => {
     try {
-      const myStream = await navigator.mediaDevices.getUserMedia({
+      const driverStream = await navigator.mediaDevices.getUserMedia({
         video: true,
         audio: false,
       });
 
-      setStream(myStream);
+      setStream(driverStream);
     } catch (e) {
       console.log(e);
     }
-  };
+  }, []);
 
-  const geoOptions = {
-    // enableHighAccuracy: false,
-    // maximumAge: 0,
-    timeout: 15000,
-  };
+  const sendPosition = () => {
+    const latitude = location?.coords.latitude;
+    const longitude = location?.coords.longitude;
 
-  const markPosition = (pos: GeolocationPosition) => {
-    const latitude = pos.coords.latitude;
-    const longitude = pos.coords.longitude;
-
-    if (latitude !== null && longitude !== null) {
-      setGeoLocPosition([latitude, longitude]);
-    }
-
+    // 서버 전송 로직
     console.log(latitude, longitude);
   };
 
-  const showErrorMsg = (error: GeolocationPositionError) => {
-    console.log(error.code);
-    console.log(error.PERMISSION_DENIED);
-    try {
-      if (error.code === error.PERMISSION_DENIED) {
-        console.log("요청거부");
-      }
-      if (error.code === error.POSITION_UNAVAILABLE) {
-        console.log("위치정보 사용불가");
-      }
-      if (error.code === error.TIMEOUT) {
-        console.log("요청시간초과");
-      }
-    } catch (e) {
-      console.log("알 수 없는 에러");
-    } finally {
-      console.log("위치정보 수집에 따른 부가적인 알림을 확인할 수 없습니다.");
-    }
-  };
-
-  const getGPSPermission = async () => {
-    try {
-      const id = navigator.geolocation.watchPosition(
-        // getCurrentPosition 버전
-        // navigator.geolocation.getCurrentPosition(
-        markPosition,
-        showErrorMsg,
-        geoOptions
-      );
-      console.log(id);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
+  // test
   useEffect(() => {
     console.log("geo");
-    console.log(geoLocPosition);
-  }, [geoLocPosition]);
+    console.log(location);
+  }, [location]);
 
   const drawVideoSnapshot = (videoElement: HTMLVideoElement) => {
     const video = videoElement;
@@ -95,11 +59,11 @@ export default function Page() {
 
     if (video) {
       ctx?.drawImage(video, 0, 0, canvas.width, canvas.height);
-      const imageData = canvas.toDataURL("image/jpeg");
-      // console.log(imageData);
+      const driverImageData = canvas.toDataURL("image/jpeg");
+      // console.log(driverImageData);
 
       // 이미지 전송
-      socket.emit("image", imageData);
+      socket.emit("image", driverImageData);
     }
   };
 
@@ -128,13 +92,6 @@ export default function Page() {
     }
   }, 2000);
 
-  // getCurrentPosition 버전
-  // useInterval(() => {
-  //   if (geoLocPosition) {
-  //     markPosition(geoLocPosition);
-  //   }
-  // }, 2000);
-
   useEffect(() => {
     if (!videoRef.current) {
       return;
@@ -146,10 +103,10 @@ export default function Page() {
 
   useEffect(() => {
     getCameraPermission();
-    getGPSPermission();
 
     return () => {
       socket.disconnect();
+      cancelLocationWatch();
     };
   }, []);
 
