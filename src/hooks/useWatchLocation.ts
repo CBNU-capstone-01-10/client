@@ -8,6 +8,8 @@ export default function useWatchLocation(geoOptions = {}) {
 
   // watchPosition 성공시 실행하는 핸들러
   const handleSuccess = (pos: GeolocationPosition) => {
+    console.log(pos);
+
     setLocation(pos);
   };
 

@@ -1,7 +1,6 @@
 export default function drawVideoSnapshot(videoElement: HTMLVideoElement) {
   let driverImageData;
   const video = videoElement;
-  console.log(video);
 
   const canvas = document.createElement("canvas");
 

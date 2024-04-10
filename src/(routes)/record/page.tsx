@@ -32,21 +32,19 @@ export default function Page() {
     }
   }, []);
 
-  const sendPosition = () => {
+  const sendPosition = useCallback(() => {
     const latitude = location?.coords.latitude;
     const longitude = location?.coords.longitude;
 
     // 서버 전송 로직
     console.log(latitude, longitude);
-  };
+  }, [location]);
 
   useInterval(() => {
     if (videoRef.current) {
       const driverImage = drawVideoSnapshot(videoRef.current);
-      console.log(driverImage);
       socket.emit("image", driverImage);
     }
-    sendPosition();
   }, 2000);
 
   useEffect(() => {
@@ -57,6 +55,13 @@ export default function Page() {
       videoRef.current.srcObject = stream;
     }
   }, [stream]);
+
+  useEffect(() => {
+    // 위치가 변경될 때마다 서버에 위치를 전송
+    if (location) {
+      sendPosition();
+    }
+  }, [location, sendPosition]);
 
   useEffect(() => {
     getCameraPermission();
@@ -80,6 +85,7 @@ export default function Page() {
         loop
         playsInline
       />
+      <div>{errorMessage}</div>
     </>
   );
 }
