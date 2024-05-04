@@ -3,12 +3,26 @@ import { io } from "socket.io-client";
 import useWatchLocation from "../../hooks/useWatchLocation";
 import drawVideoSnapshot from "./_utils/drawVideoSnapshot";
 import useInterval from "../../hooks/useInterval";
+import styled from "styled-components";
 
 const geoOptions = {
   // enableHighAccuracy: false,
   // maximumAge: 0,
   timeout: 15000,
 };
+
+const Wrapper = styled.div`
+  width: 100%;
+  padding-top: var(--top-navbar-width);
+`;
+const VideoWrapper = styled.div`
+  width: 100%;
+`;
+const VideoElement = styled.video`
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+`;
 
 export default function Page() {
   const socket = io();
@@ -73,19 +87,18 @@ export default function Page() {
   }, []);
 
   return (
-    <>
-      <h1>Record</h1>
-      <video
-        ref={videoRef}
-        id="local-video"
-        width="375"
-        height="280"
-        autoPlay
-        muted
-        loop
-        playsInline
-      />
+    <Wrapper>
+      <VideoWrapper>
+        <VideoElement
+          ref={videoRef}
+          id="local-video"
+          autoPlay
+          muted
+          loop
+          playsInline
+        />
+      </VideoWrapper>
       <div>{errorMessage}</div>
-    </>
+    </Wrapper>
   );
 }

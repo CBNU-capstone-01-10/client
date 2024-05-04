@@ -8,7 +8,7 @@ const Wrapper = styled.nav`
   right: 0;
   top: 0;
   width: 100%;
-  height: var(--navbar-width);
+  height: var(--top-navbar-width);
   background-color: blue;
 `;
 export default function TopNavBar() {
