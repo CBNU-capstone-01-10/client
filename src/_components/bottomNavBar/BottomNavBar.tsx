@@ -27,8 +27,8 @@ const Wrapper = styled.ul`
 export default function BottomNavBar() {
   const content = [
     { icon: SlCamrecorder, path: "/record", text: "녹화" },
-    { icon: LuBarChart3, path: "/log", text: "마이" },
-    { icon: FaRegUser, path: "/profile", text: "기록" },
+    { icon: LuBarChart3, path: "/log", text: "기록" },
+    { icon: FaRegUser, path: "/profile", text: "마이" },
   ];
 
   return (
