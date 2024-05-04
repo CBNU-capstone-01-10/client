@@ -9,7 +9,7 @@ export interface ITabContent {
   path: string;
 }
 
-const Wrapper = styled.ul`
+const Wrapper = styled.nav`
   width: 100%;
   height: 4.5rem;
   background-color: blue;
