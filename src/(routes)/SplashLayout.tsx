@@ -1,9 +1,9 @@
 import { Outlet } from "react-router";
 
-export default function EnterLayout() {
+export default function SplashLayout() {
   return (
     <>
-      <h1>EnterLayout</h1>
+      <h1>SplashLayout</h1>
       <Outlet />
     </>
   );

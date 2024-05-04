@@ -7,7 +7,7 @@ import Log from "./(routes)/log/page";
 
 import Profile from "./(routes)/profile/page";
 
-import EnterLayout from "./(routes)/EnterLayout";
+import SplashLayout from "./(routes)/SplashLayout";
 import MainLayout from "./(routes)/MainLayout";
 
 const router = createBrowserRouter([
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
     // loader: async () => {},
     children: [
       {
-        element: <EnterLayout />,
+        element: <SplashLayout />,
         children: [
           {
             path: "/signin",
