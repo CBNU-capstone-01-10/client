@@ -4,6 +4,7 @@ import useWatchLocation from "../../hooks/useWatchLocation";
 import drawVideoSnapshot from "./_utils/drawVideoSnapshot";
 import useInterval from "../../hooks/useInterval";
 import styled from "styled-components";
+import LiveScoreLog from "./_components/LiveScoreLog";
 
 const geoOptions = {
   // enableHighAccuracy: false,
@@ -46,7 +47,7 @@ export default function Page() {
     }
   }, []);
 
-  const sendPosition = useCallback(() => {
+  const sendLocation = useCallback(() => {
     const latitude = location?.coords.latitude;
     const longitude = location?.coords.longitude;
 
@@ -73,9 +74,9 @@ export default function Page() {
   useEffect(() => {
     // 위치가 변경될 때마다 서버에 위치를 전송
     if (location) {
-      sendPosition();
+      sendLocation();
     }
-  }, [location, sendPosition]);
+  }, [location, sendLocation]);
 
   useEffect(() => {
     getCameraPermission();
@@ -99,6 +100,7 @@ export default function Page() {
         />
       </VideoWrapper>
       <div>{errorMessage}</div>
+      <LiveScoreLog />
     </Wrapper>
   );
 }
