@@ -11,7 +11,11 @@ export const GlobalStyle = createGlobalStyle`
   :root {
     --top-navbar-width: ${NAVBAR_WIDTH};
   }
-
+  
+  * {
+    box-sizing: border-box;
+  }
+  
   body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
