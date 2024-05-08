@@ -14,7 +14,7 @@ const geoOptions = {
 
 const Wrapper = styled.div`
   width: 100%;
-  padding-top: var(--top-navbar-width);
+  padding-top: var(--top-navbar-height);
 `;
 const VideoWrapper = styled.div`
   width: 100%;
