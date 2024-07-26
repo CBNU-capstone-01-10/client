@@ -2,14 +2,16 @@ import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
 // Global Constants
-const NAVBAR_HEIGTH = "5rem";
+const TOP_NAVBAR_HEIGTH = "10rem";
+const BTM_NAVBAR_HEIGTH = "5.5rem";
 
 export const GlobalStyle = createGlobalStyle`
   ${reset}
 
   /* Global Styles */
   :root {
-    --top-navbar-height: ${NAVBAR_HEIGTH};
+    --top-navbar-height: ${TOP_NAVBAR_HEIGTH};
+    --bottom-navbar-height: ${BTM_NAVBAR_HEIGTH};
   }
   
   * {
@@ -18,7 +20,6 @@ export const GlobalStyle = createGlobalStyle`
   
   body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
     margin: 0;
     padding: 0;
   }
