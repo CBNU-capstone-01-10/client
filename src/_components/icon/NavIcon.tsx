@@ -13,7 +13,7 @@ const IconWrapper = styled.div<Omit<IIconProps, "icon">>`
   font-size: ${(props) => (props.size ? props.size : "2rem")};
 `;
 
-const IconText = styled.text`
+const IconText = styled.h1`
   font-size: 1rem;
 `;
 
