@@ -5,6 +5,7 @@ import drawVideoSnapshot from "./_utils/drawVideoSnapshot";
 import useInterval from "../../hooks/useInterval";
 import LiveScoreLog from "./_components/LiveScoreLog";
 import * as S from "./page.style";
+import TodayScore from "./_components/today-score/today-score";
 
 const geoOptions = {
   // enableHighAccuracy: false,
@@ -76,18 +77,21 @@ export default function Page() {
 
   return (
     <S.Wrapper>
-      <S.VideoWrapper>
-        <S.VideoElement
-          ref={videoRef}
-          id="local-video"
-          autoPlay
-          muted
-          loop
-          playsInline
-        />
-      </S.VideoWrapper>
-      <div>{errorMessage}</div>
-      <LiveScoreLog />
+      <S.ContentWrapper>
+        <TodayScore />
+        <S.VideoWrapper>
+          <S.VideoElement
+            ref={videoRef}
+            id="local-video"
+            autoPlay
+            muted
+            loop
+            playsInline
+          />
+        </S.VideoWrapper>
+        <div>{errorMessage}</div>
+        <LiveScoreLog />
+      </S.ContentWrapper>
     </S.Wrapper>
   );
 }
