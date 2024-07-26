@@ -3,27 +3,14 @@ import { io } from "socket.io-client";
 import useWatchLocation from "../../hooks/useWatchLocation";
 import drawVideoSnapshot from "./_utils/drawVideoSnapshot";
 import useInterval from "../../hooks/useInterval";
-import styled from "styled-components";
 import LiveScoreLog from "./_components/LiveScoreLog";
+import * as S from "./page.style";
 
 const geoOptions = {
   // enableHighAccuracy: false,
   // maximumAge: 0,
   timeout: 15000,
 };
-
-const Wrapper = styled.div`
-  width: 100%;
-  padding-top: var(--top-navbar-height);
-`;
-const VideoWrapper = styled.div`
-  width: 100%;
-`;
-const VideoElement = styled.video`
-  width: 100%;
-  display: block;
-  margin: 0 auto;
-`;
 
 export default function Page() {
   const socket = io();
@@ -47,13 +34,13 @@ export default function Page() {
     }
   }, []);
 
+  // WS: 서버 전송
   const sendLocation = useCallback(() => {
-    const latitude = location?.coords.latitude;
-    const longitude = location?.coords.longitude;
-
-    // 서버 전송 로직
-    console.log(latitude, longitude);
-  }, [location]);
+    if (location) {
+      const { latitude, longitude } = location.coords;
+      socket.emit("location", { latitude, longitude });
+    }
+  }, [location, socket]);
 
   useInterval(() => {
     if (videoRef.current) {
@@ -88,9 +75,9 @@ export default function Page() {
   }, []);
 
   return (
-    <Wrapper>
-      <VideoWrapper>
-        <VideoElement
+    <S.Wrapper>
+      <S.VideoWrapper>
+        <S.VideoElement
           ref={videoRef}
           id="local-video"
           autoPlay
@@ -98,9 +85,9 @@ export default function Page() {
           loop
           playsInline
         />
-      </VideoWrapper>
+      </S.VideoWrapper>
       <div>{errorMessage}</div>
       <LiveScoreLog />
-    </Wrapper>
+    </S.Wrapper>
   );
 }
