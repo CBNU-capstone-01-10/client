@@ -11,7 +11,7 @@ export const GlobalStyle = createGlobalStyle`
   /* Global Styles */
   :root {
     --top-navbar-height: ${TOP_NAVBAR_HEIGTH};
-    --bottom-navbar-height: ${BTM_NAVBAR_HEIGTH};
+    --btm-navbar-height: ${BTM_NAVBAR_HEIGTH};
   }
   
   * {
@@ -22,6 +22,7 @@ export const GlobalStyle = createGlobalStyle`
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    overflow: hidden;
   }
 
   a {
