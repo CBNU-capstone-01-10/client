@@ -1,23 +1,10 @@
-import styled from "styled-components";
-import LoginStatus from "./LoginStatus";
-import LogoutStatus from "./LogoutStatus";
+import * as S from "./styles/TopNavBar.style";
 
-const Wrapper = styled.nav`
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  width: 100%;
-  height: var(--top-navbar-width);
-  background-color: blue;
-`;
+// COMPONENT: 상단 네비게이션 바
 export default function TopNavBar() {
   return (
-    <>
-      <Wrapper>
-        <LoginStatus />
-        {/* {isLoggedIn ? <LoginStatus /> : <LogoutStatus />} */}
-      </Wrapper>
-    </>
+    <S.Wrapper>
+      <S.Background></S.Background>
+    </S.Wrapper>
   );
 }
