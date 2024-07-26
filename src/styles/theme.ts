@@ -1,6 +1,9 @@
 export const theme = {
   light: {
-    primaryBgColor: "#1e2b67",
-    primaryCautionBgColor: "#800000",
+    primaryColor: `rgba(31, 135, 254)`,
+    secondaryColor: `rgba(47, 60, 120)`,
+    primaryBgColor: `rgba(244, 246, 250)`,
+    primaryCautionBgColor: `rgba(128, 0, 0)`,
+    transparentWhite: `rgba(255, 255, 255, 0.3)`,
   },
 };
