@@ -9,7 +9,6 @@ const IconWrapper = styled.div<Omit<IIconProps, "icon">>`
   align-items: center;
   justify-content: space-between;
   padding: 0;
-  margin: 0.5rem;
   color: ${(props) => (props.color ? props.color : "inherit")};
   font-size: ${(props) => (props.size ? props.size : "2rem")};
 `;
