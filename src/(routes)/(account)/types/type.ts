@@ -4,8 +4,8 @@ export interface ILoginParams {
   password: string;
 }
 
-// 회원가입시 입력값
-export interface IAccountRegistrationData {
+// 회원가입시 입력 파라미터
+export interface IAccountRegistrationParams {
   username: string;
   email: string;
   password: string;
@@ -20,4 +20,10 @@ export interface IRegisterResponseData {
   pfp: string;
   updated_at: string;
   username: string;
+}
+
+// 이메일 인증 확인 파라미터
+export interface IVerificationParams {
+  userId: string;
+  verificationToken: string;
 }
