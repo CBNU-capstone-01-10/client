@@ -38,3 +38,30 @@ export const useLogin = () => {
     },
   });
 };
+
+// DELETE: 로그아웃
+export const useLogout = () => {
+  const queryClient = useQueryClient();
+  return useMutation<AxiosResponse, AxiosError>({
+    mutationFn: async () => {
+      const logoutURL = `api/logout`;
+      return await axios.delete(logoutURL);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["loggedInUser"],
+      });
+    },
+    onError: (err) => {
+      if (!isServerError(err)) {
+        alert("에러가 발생했습니다. 관리자에게 문의해주세요.");
+        return;
+      }
+      switch (err.response?.status) {
+        default:
+          alert("에러가 발생했습니다. 관리자에게 문의해주세요.");
+          break;
+      }
+    },
+  });
+};
