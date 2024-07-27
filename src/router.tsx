@@ -7,6 +7,9 @@ import Log from "./(routes)/log/page";
 
 import Profile from "./(routes)/profile/page";
 
+import SignupPage from "./(routes)/(account)/signup/page";
+import SigninPage from "./(routes)/(account)/signin/page";
+
 import SplashLayout from "./(routes)/SplashLayout";
 import MainLayout from "./(routes)/MainLayout";
 
@@ -24,10 +27,10 @@ const router = createBrowserRouter([
         element: <SplashLayout />,
         children: [
           {
-            path: "/signin",
+            path: "/",
             children: [
-              // { path: "/signin", element: <SignInPage /> },
-              // { path: "/signup", element: <SignUpPage /> },
+              { path: "/signin", element: <SigninPage /> },
+              { path: "/signup", element: <SignupPage /> },
             ],
           },
         ],
