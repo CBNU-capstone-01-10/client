@@ -1,18 +1,24 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
+  IAccountRegistrationParams,
   ILoginParams,
   IRegisterResponseData,
+  IVerificationParams,
 } from "../(routes)/(account)/types/type";
 import isServerError from "../error/is-server-error";
 
 /** REACT-QUERY: 계정 관련 */
 // POST: 임시등록(이메일 인증코드 발송)
 export const useRegisterEmail = () => {
-  return useMutation<AxiosResponse<IRegisterResponseData>, AxiosError>({
-    mutationFn: async (temporaryRegistrationData) => {
+  return useMutation<
+    AxiosResponse<IRegisterResponseData>,
+    AxiosError,
+    IAccountRegistrationParams
+  >({
+    mutationFn: async (unverifiedAccountData) => {
       const registerURL = `api/register`;
-      return await axios.post(registerURL, temporaryRegistrationData, {
+      return await axios.post(registerURL, unverifiedAccountData, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -30,6 +36,37 @@ export const useRegisterEmail = () => {
           break;
         // 이미 등록된 이메일
         case 409:
+          alert(err.response?.data.message);
+          break;
+        default:
+          alert("잠시후 다시 시도해주세요.");
+          break;
+      }
+    },
+  });
+};
+
+// POST: 이메일 인증 코드 확인
+export const useConfirmVerificationToken = () => {
+  return useMutation<AxiosResponse, AxiosError, IVerificationParams>({
+    mutationFn: async (verificationData) => {
+      const { userId, verificationToken } = verificationData;
+      return await axios.post(`/api/register/verify`, {
+        user_id: userId,
+        token: verificationToken,
+      });
+    },
+    onSuccess: (res) => {
+      console.log("🚀 ~ .then ~ res:", res);
+    },
+    onError: (err) => {
+      if (!isServerError(err)) {
+        alert("에러가 발생했습니다. 관리자에게 문의해주세요.");
+        return;
+      }
+      switch (err.response?.status) {
+        // Bad Request
+        case 400:
           alert(err.response?.data.message);
           break;
         default:
