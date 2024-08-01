@@ -16,7 +16,7 @@ export default function App() {
   axios.defaults.withCredentials = true;
   return (
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />;
+      <RouterProvider router={router} />
       <ReactQueryDevtools />
     </QueryClientProvider>
   );
