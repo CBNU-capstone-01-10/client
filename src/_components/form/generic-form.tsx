@@ -5,6 +5,7 @@ import {
   UseFormProps,
   FieldValues,
 } from "react-hook-form";
+import * as S from "./generic-form.style";
 
 interface IGenericFormProps<TFormData extends FieldValues> {
   children: React.ReactNode;
@@ -19,7 +20,7 @@ export default function GenericForm<TFormData extends FieldValues>({
 
   return (
     <FormProvider {...methods}>
-      <form>{children}</form>
+      <S.FormContainer>{children}</S.FormContainer>
     </FormProvider>
   );
 }
