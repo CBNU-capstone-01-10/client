@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
-  IAccountRegistrationParams,
+  ISignupParams,
   ILoginParams,
   IRegisterResponseData,
   IVerificationParams,
@@ -14,7 +14,7 @@ export const useRegisterEmail = () => {
   return useMutation<
     AxiosResponse<IRegisterResponseData>,
     AxiosError,
-    IAccountRegistrationParams
+    ISignupParams
   >({
     mutationFn: async (unverifiedAccountData) => {
       const registerURL = `api/register`;

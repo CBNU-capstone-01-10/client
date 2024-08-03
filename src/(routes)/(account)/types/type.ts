@@ -5,7 +5,7 @@ export interface ILoginParams {
 }
 
 // 회원가입시 입력 파라미터
-export interface IAccountRegistrationParams {
+export interface ISignupParams {
   username: string;
   email: string;
   password: string;
