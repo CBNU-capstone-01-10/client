@@ -37,7 +37,9 @@ export default function SetupUsername({ onNext }: ISetupUsernameProps) {
           <S.ErrorMessage>{errors.username.message}</S.ErrorMessage>
         )}
       </S.InputContainer>
-      <S.NextBtn onClick={handleSubmit(onSubmit)}>다음</S.NextBtn>
+      <S.NextBtn disabled={!!errors.username} onClick={handleSubmit(onSubmit)}>
+        다음
+      </S.NextBtn>
     </S.SetupPageWrapper>
   );
 }
