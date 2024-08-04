@@ -11,7 +11,7 @@ export default function SetupUsername({ onNext }: ISetupUsernameProps) {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useFormContext<IFieldValues>();
 
   // HANDLER
@@ -37,7 +37,7 @@ export default function SetupUsername({ onNext }: ISetupUsernameProps) {
           <S.ErrorMessage>{errors.username.message}</S.ErrorMessage>
         )}
       </S.InputContainer>
-      <S.NextBtn disabled={!!errors.username} onClick={handleSubmit(onSubmit)}>
+      <S.NextBtn disabled={!isValid} onClick={handleSubmit(onSubmit)}>
         다음
       </S.NextBtn>
     </S.SetupPageWrapper>
