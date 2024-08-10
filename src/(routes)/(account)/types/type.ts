@@ -9,6 +9,7 @@ export interface ISignupParams {
   username: string;
   email: string;
   password: string;
+  password_confirm: string;
 }
 
 // 회원가입시 응답값
