@@ -29,7 +29,7 @@ export default function SetupUsername({ onNext }: ISetupUsernameProps) {
           placeholder="이름을 입력하세요"
           required
           {...register("username", {
-            required: "이름을 입력하세요",
+            required: { value: true, message: "이름을 입력하세요." },
             maxLength: { value: 12, message: "이름은 12자 이내여야 합니다" },
           })}
         />
