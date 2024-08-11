@@ -7,11 +7,13 @@ import Log from "./(routes)/log/page";
 
 import Profile from "./(routes)/profile/page";
 
-import SignupPage from "./(routes)/(account)/signup/page";
+// import SignupPage from "./(routes)/(account)/signup/page";
+import SignupPage from "./(routes)/(account)/signup/signup-page";
 import SigninPage from "./(routes)/(account)/signin/page";
 
 import SplashLayout from "./(routes)/SplashLayout";
 import MainLayout from "./(routes)/MainLayout";
+import SignupLayout from "./(routes)/signup-layout";
 
 const router = createBrowserRouter([
   {
@@ -24,16 +26,11 @@ const router = createBrowserRouter([
     // loader: async () => {},
     children: [
       {
-        element: <SplashLayout />,
-        children: [
-          {
-            path: "/",
-            children: [
-              { path: "/signin", element: <SigninPage /> },
-              { path: "/signup", element: <SignupPage /> },
-            ],
-          },
-        ],
+        children: [{ path: "/signin", element: <SigninPage /> }],
+      },
+      {
+        element: <SignupLayout />,
+        children: [{ path: "/signup", element: <SignupPage /> }],
       },
       {
         path: "/",
@@ -41,7 +38,7 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            path: "record",
+            // path: "record",
             element: <RecordPage />,
           },
           {
