@@ -14,7 +14,7 @@ export const useRegisterEmail = () => {
   return useMutation<
     AxiosResponse<IRegisterResponseData>,
     AxiosError,
-    ISignupParams
+    Omit<ISignupParams, "password_confirm">
   >({
     mutationFn: async (unverifiedAccountData) => {
       const registerURL = `api/register`;
@@ -61,16 +61,18 @@ export const useConfirmVerificationToken = () => {
     },
     onError: (err) => {
       if (!isServerError(err)) {
-        alert("에러가 발생했습니다. 관리자에게 문의해주세요.");
+        err.message =
+          "일시적인 에러가 발생했습니다. 잠시 후 다시 시도해주세요.";
         return;
       }
       switch (err.response?.status) {
         // Bad Request
         case 400:
-          alert(err.response?.data.message);
+          err.message = "인증코드를 다시 확인해주세요.";
           break;
         default:
-          alert("잠시후 다시 시도해주세요.");
+          err.message =
+            "현재 요청하신 정보를 처리할 수 없습니다. 관리자에게 문의해주세요.";
           break;
       }
     },
