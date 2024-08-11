@@ -18,8 +18,7 @@ export default function AccountSetup({
   Step,
 }: AccountSetupInterface) {
   return (
-    // @@@레이아웃 제작 필요
-    <div>
+    <>
       <Funnel>
         <Step name="이름 설정">
           <SetupUsername onNext={() => nextClickHandler(steps[1])} />
@@ -33,6 +32,6 @@ export default function AccountSetup({
           <SetupEmail />
         </Step>
       </Funnel>
-    </div>
+    </>
   );
 }
