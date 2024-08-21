@@ -26,7 +26,7 @@ const router = createBrowserRouter([
     // loader: async () => {},
     children: [
       {
-        children: [{ path: "/signin", element: <SigninPage /> }],
+        children: [{ index: true, element: <SigninPage /> }],
       },
       {
         element: <SignupLayout />,
@@ -38,7 +38,7 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            // path: "record",
+            path: "record",
             element: <RecordPage />,
           },
           {
