@@ -5,8 +5,3 @@ export interface IIconProps {
   color?: string;
   icon: IconType;
 }
-
-export interface INavIconProps extends IIconProps {
-  to: string;
-  text?: string;
-}
