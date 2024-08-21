@@ -1,4 +1,4 @@
-import NavIcon from "../icon/NavIcon";
+import NavIcon from "../icon/navigation-icon";
 import { SlCamrecorder } from "react-icons/sl";
 import { FaRegUser } from "react-icons/fa";
 import { LuBarChart3 } from "react-icons/lu";
