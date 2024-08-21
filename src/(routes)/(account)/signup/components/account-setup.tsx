@@ -4,9 +4,10 @@ import SetupUsername from "./account-setup-step/setup-username";
 import SetupPassword from "./account-setup-step/setup-password";
 import SetupEmail from "./account-setup-step/setup-email";
 
-export interface AccountSetupInterface {
+export interface IAccountSetupProps {
   steps: string[];
   nextClickHandler: (nextStep: string) => void;
+  prevClickHandler: (prevStep: string) => void;
   Funnel: React.ComponentType<FunnelProps>;
   Step: React.ComponentType<StepProps>;
 }
@@ -14,9 +15,10 @@ export interface AccountSetupInterface {
 export default function AccountSetup({
   steps,
   nextClickHandler,
+  prevClickHandler,
   Funnel,
   Step,
-}: AccountSetupInterface) {
+}: IAccountSetupProps) {
   return (
     <>
       <Funnel>
@@ -25,11 +27,14 @@ export default function AccountSetup({
         </Step>
 
         <Step name="비밀번호 설정">
-          <SetupPassword onNext={() => nextClickHandler(steps[2])} />
+          <SetupPassword
+            onNext={() => nextClickHandler(steps[2])}
+            onPrevious={() => prevClickHandler(steps[0])}
+          />
         </Step>
 
         <Step name="이메일 인증">
-          <SetupEmail />
+          <SetupEmail onPrevious={() => prevClickHandler(steps[1])} />
         </Step>
       </Funnel>
     </>

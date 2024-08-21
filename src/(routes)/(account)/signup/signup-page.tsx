@@ -10,7 +10,9 @@ export default function SignupPage() {
   const nextClickHandler = (step: string) => {
     setStep(step);
   };
-  const prevClickHandler = () => {};
+  const prevClickHandler = (step: string) => {
+    setStep(step);
+  };
 
   return (
     <>
@@ -18,6 +20,7 @@ export default function SignupPage() {
         <AccountSetup
           steps={steps}
           nextClickHandler={nextClickHandler}
+          prevClickHandler={prevClickHandler}
           Funnel={Funnel}
           Step={Step}
         />

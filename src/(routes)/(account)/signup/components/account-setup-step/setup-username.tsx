@@ -37,9 +37,11 @@ export default function SetupUsername({ onNext }: ISetupUsernameProps) {
           <S.ErrorMessage>{errors.username.message}</S.ErrorMessage>
         )}
       </S.InputContainer>
-      <S.NextBtn disabled={!isValid} onClick={handleSubmit(onSubmit)}>
-        다음
-      </S.NextBtn>
+      <S.BtnWrapper>
+        <S.NextBtn disabled={!isValid} onClick={handleSubmit(onSubmit)}>
+          다음
+        </S.NextBtn>
+      </S.BtnWrapper>
     </S.SetupPageWrapper>
   );
 }

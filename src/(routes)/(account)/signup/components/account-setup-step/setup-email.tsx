@@ -8,10 +8,13 @@ import {
 import { ISignupParams, IVerificationParams } from "../../../types/type";
 import { useNavigate } from "react-router";
 
+interface ISetupEmailProps {
+  onPrevious: () => void;
+}
 // STEP-PAGE: 이메일 인증
 type TFieldValues = ISignupParams &
   Pick<IVerificationParams, "verificationToken">;
-export default function SetupEmail() {
+export default function SetupEmail({ onPrevious }: ISetupEmailProps) {
   const [userId, setUserId] = useState<string>("");
   const navigate = useNavigate();
   const {
@@ -127,6 +130,9 @@ export default function SetupEmail() {
       {errors.verificationToken && (
         <S.ErrorMessage>{errors.verificationToken.message}</S.ErrorMessage>
       )}
+      <S.BtnWrapper>
+        <S.PrevBtn onClick={() => onPrevious()}>이전</S.PrevBtn>
+      </S.BtnWrapper>
     </S.SetupPageWrapper>
   );
 }

@@ -6,8 +6,12 @@ import { ISignupParams } from "../../../types/type";
 type IFieldValues = Pick<ISignupParams, "password" | "password_confirm">;
 interface ISetupPasswordProps {
   onNext: () => void;
+  onPrevious: () => void;
 }
-export default function SetupPassword({ onNext }: ISetupPasswordProps) {
+export default function SetupPassword({
+  onNext,
+  onPrevious,
+}: ISetupPasswordProps) {
   const {
     register,
     formState: { errors, isValid, touchedFields },
@@ -15,7 +19,6 @@ export default function SetupPassword({ onNext }: ISetupPasswordProps) {
 
   const password = useWatch({ name: "password" });
   const passwordConfirm = useWatch({ name: "password_confirm" });
-  console.log("패스워드");
 
   return (
     <S.SetupPageWrapper>
@@ -59,9 +62,12 @@ export default function SetupPassword({ onNext }: ISetupPasswordProps) {
         password !== passwordConfirm && (
           <S.ErrorMessage>비밀번호가 일치하지 않습니다.</S.ErrorMessage>
         )}
-      <S.NextBtn disabled={!isValid} onClick={() => onNext()}>
-        다음
-      </S.NextBtn>
+      <S.BtnWrapper>
+        <S.PrevBtn onClick={() => onPrevious()}>이전</S.PrevBtn>
+        <S.NextBtn disabled={!isValid} onClick={() => onNext()}>
+          다음
+        </S.NextBtn>
+      </S.BtnWrapper>
     </S.SetupPageWrapper>
   );
 }
