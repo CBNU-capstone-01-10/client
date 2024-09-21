@@ -1,6 +1,9 @@
 import styled from "styled-components";
+interface WrapperProps {
+  height?: string;
+}
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<WrapperProps>`
   width: 100%;
   height: ${(props) => props.height || "5rem"};
   background-color: white;
