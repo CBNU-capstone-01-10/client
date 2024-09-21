@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { IIconProps } from "../../interface/IconInterface";
-import * as S from "./navigation-icon.style";
+import * as S from "./icon.style";
 
 // 네비게이션바 아이콘
 export interface INavIconProps extends IIconProps {
