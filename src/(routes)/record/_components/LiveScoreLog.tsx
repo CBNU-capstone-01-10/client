@@ -1,58 +1,50 @@
-import ContentBlockWrapper from "../../../_components/block/content-block-wrapper";
+import OvalLoadingSpinner from "../../../_components/loading-spinner/oval-loading-spinner";
+import { useGetRecentDriverActions } from "../../../api/action";
+import useInterval from "../../../hooks/useInterval";
+import getElapsedTime from "../_utils/getElapsedTime";
 import * as S from "../style/LiveScoreLog.style";
 
-const liveScoreLog = [
-  {
-    text: "안전운전 20분 유지",
-    elapsedTime: "2분 17초 전",
-    score: 8.0,
-  },
-  {
-    text: "전방주시 태만",
-    elapsedTime: "3분 17초 전",
-    score: -20.0,
-  },
-  {
-    text: "안전운전 10분 유지",
-    elapsedTime: "2분 17초 전",
-    score: 8.0,
-  },
-  {
-    text: "안전운전 10분 유지",
-    elapsedTime: "2분 17초 전",
-    score: 8.0,
-  },
-  {
-    text: "안전운전 10분 유지",
-    elapsedTime: "2분 17초 전",
-    score: 8.0,
-  },
-  {
-    text: "안전운전 10분 유지",
-    elapsedTime: "2분 17초 전",
-    score: 8.0,
-  },
-  {
-    text: "안전운전 10분 유지",
-    elapsedTime: "2분 17초 전",
-    score: 8.0,
-  },
-];
+// COMPONENT: 최근 운전행위에 대한 운전점수를 실시간으로 표시하는 점수 로그
 export default function LiveScoreLog() {
+  const {
+    data: recentDriverActions,
+    isLoading,
+    isError,
+    refetch: refetchRecentDriverActions,
+  } = useGetRecentDriverActions();
+
+  useInterval(() => {
+    refetchRecentDriverActions();
+  }, 10000);
+
+  if (isLoading)
+    return (
+      <S.LiveScoreLogWrapper>
+        <OvalLoadingSpinner />
+      </S.LiveScoreLogWrapper>
+    );
+
+  if (isError)
+    return (
+      <S.LiveScoreLogWrapper>
+        최근 점수를 불러올 수 없습니다.
+      </S.LiveScoreLogWrapper>
+    );
+
   return (
     <S.LiveScoreLogWrapper>
-      {liveScoreLog?.map((liveScoreLogItem, idx) => (
-        <ContentBlockWrapper key={idx}>
-          <S.LiveScoreLogItem>
-            <S.ContentWrapper>
-              <S.Content>{liveScoreLogItem.text}</S.Content>
-              <S.ElapsedTime>{liveScoreLogItem.elapsedTime}</S.ElapsedTime>
-            </S.ContentWrapper>
-            <S.ScoreWrapper score={liveScoreLogItem.score}>
-              {liveScoreLogItem.score}
-            </S.ScoreWrapper>
-          </S.LiveScoreLogItem>
-        </ContentBlockWrapper>
+      {recentDriverActions?.map((recentDriverActionItem) => (
+        <S.LiveScoreLogItem key={recentDriverActionItem.id}>
+          <S.ContentWrapper>
+            <S.Content>{recentDriverActionItem.label}</S.Content>
+            <S.ElapsedTime>
+              {getElapsedTime(recentDriverActionItem.recorded_at)}
+            </S.ElapsedTime>
+          </S.ContentWrapper>
+          <S.ScoreWrapper score={recentDriverActionItem.score}>
+            {recentDriverActionItem.score}
+          </S.ScoreWrapper>
+        </S.LiveScoreLogItem>
       ))}
     </S.LiveScoreLogWrapper>
   );
