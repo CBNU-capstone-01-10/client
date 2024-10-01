@@ -1,11 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import isServerError from "../error/is-server-error";
-import { getFormattedDate } from "../_utils/date";
 import {
   IDriverActionRequestBody,
   IDriverActionResponse,
 } from "../(routes)/record/types/type";
+import { RECENT_LOOKUP_TIMES } from "../constants/constants";
 
 // POST: 운전자 행위 캡처 이미지 전송
 export const useSendDriverActionCapture = () => {
@@ -42,9 +42,8 @@ export const useGetRecentDriverActions = () => {
   return useQuery<IDriverActionResponse[]>({
     queryKey: ["recent-driver-actions"],
     queryFn: async () => {
-      const date = getFormattedDate();
-      const minutes = 30;
-      const recentDriverActionsURL = `/api/actions?date_start=${date}&date_end=${date}&before_m=${minutes}`;
+      const minutes = RECENT_LOOKUP_TIMES;
+      const recentDriverActionsURL = `/api/actions?before_m=${minutes}`;
 
       return await axios.get(recentDriverActionsURL).then((res) => {
         return res.data.response;
