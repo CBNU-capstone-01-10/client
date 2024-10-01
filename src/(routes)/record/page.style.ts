@@ -20,4 +20,5 @@ export const VideoElement = styled.video`
   width: 100%;
   display: block;
   margin: 0 auto;
+  transform: scaleX(-1); // 좌우반전
 `;
