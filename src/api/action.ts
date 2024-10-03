@@ -12,12 +12,15 @@ export const usePostDriverAction = () => {
       const driverActionURL = `/api/actions`;
       return await axios.post(driverActionURL, driverActionData, {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
         },
       });
     },
-    onSuccess: () => {},
+    onSuccess: (res) => {
+      console.log("🚀 ~ usePostDriverAction ~ res:", res.data);
+    },
     onError: (err) => {
+      console.log("🚀 ~ usePostDriverAction ~ err:", err);
       if (!isServerError(err)) {
         alert("에러가 발생했습니다. 관리자에게 문의해주세요.");
         return;
