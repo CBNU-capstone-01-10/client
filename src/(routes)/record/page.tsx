@@ -6,6 +6,9 @@ import useInterval from "../../hooks/useInterval";
 import LiveScoreLog from "./_components/LiveScoreLog";
 import * as S from "./page.style";
 import TodayScore from "./_components/today-score/today-score";
+import { useSendDriverAction } from "../../api/action";
+import { convertDataURLToFile } from "../../_utils/convertor";
+import { SEND_DRIVER_IMAGE_INTERVAL_TIME } from "../../constants/constants";
 
 const geoOptions = {
   // enableHighAccuracy: false,
@@ -14,13 +17,15 @@ const geoOptions = {
 };
 
 export default function Page() {
-  const socket = io();
+  // const socket = io();
   const [stream, setStream] = useState<MediaStream>();
-
+  const [driverImage, setDriverImage] = useState<File>();
   const { location, cancelLocationWatch, errorMessage } =
     useWatchLocation(geoOptions);
 
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  const { mutate: createDriverAction } = useSendDriverAction();
 
   const getCameraPermission = useCallback(async () => {
     try {
@@ -35,20 +40,26 @@ export default function Page() {
     }
   }, []);
 
-  // WS: 서버 전송
-  const sendLocation = useCallback(() => {
-    if (location) {
-      const { latitude, longitude } = location.coords;
-      socket.emit("location", { latitude, longitude });
-    }
-  }, [location, socket]);
-
   useInterval(() => {
     if (videoRef.current) {
-      const driverImage = drawVideoSnapshot(videoRef.current);
-      socket.emit("image", driverImage);
+      const driverImageData = drawVideoSnapshot(videoRef.current);
+      // driverImageData가 존재하면 File 객체로 변환하여 반환
+      if (driverImageData) {
+        const filename = `snapshot_${new Date().toISOString()}.jpg`; // 파일 이름 설정
+        setDriverImage(convertDataURLToFile(driverImageData, filename));
+      }
+      // POST: 캡처한 이미지와 위치 정보가 존재할 경우 서버에 전송
+      if (driverImage && location) {
+        const { latitude, longitude } = location.coords;
+
+        const driverActionData = new FormData();
+        driverActionData.append("capture", driverImage);
+        driverActionData.append("location_x", latitude.toString());
+        driverActionData.append("location_y", longitude.toString());
+        // createDriverAction(driverActionData);
+      }
     }
-  }, 2000);
+  }, SEND_DRIVER_IMAGE_INTERVAL_TIME);
 
   useEffect(() => {
     if (!videoRef.current) {
@@ -60,17 +71,10 @@ export default function Page() {
   }, [stream]);
 
   useEffect(() => {
-    // 위치가 변경될 때마다 서버에 위치를 전송
-    if (location) {
-      sendLocation();
-    }
-  }, [location, sendLocation]);
-
-  useEffect(() => {
     getCameraPermission();
 
     return () => {
-      socket.disconnect();
+      // socket.disconnect();
       cancelLocationWatch();
     };
   }, []);
