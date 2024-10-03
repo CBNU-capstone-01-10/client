@@ -1,6 +1,9 @@
 # Env
 .env.*
 
+# Test
+db.json
+
 # Logs
 logs
 *.log
