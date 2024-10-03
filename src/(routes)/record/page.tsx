@@ -1,12 +1,12 @@
+// import { io } from "socket.io-client";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { io } from "socket.io-client";
 import useWatchLocation from "../../hooks/useWatchLocation";
 import drawVideoSnapshot from "./_utils/drawVideoSnapshot";
 import useInterval from "../../hooks/useInterval";
 import LiveScoreLog from "./_components/LiveScoreLog";
 import * as S from "./page.style";
 import TodayScore from "./_components/today-score/today-score";
-import { useSendDriverAction } from "../../api/action";
+import { usePostDriverAction } from "../../api/action";
 import { convertDataURLToFile } from "../../_utils/convertor";
 import { SEND_DRIVER_IMAGE_INTERVAL_TIME } from "../../constants/constants";
 
@@ -25,7 +25,7 @@ export default function Page() {
 
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const { mutate: createDriverAction } = useSendDriverAction();
+  const { mutate: createDriverAction } = usePostDriverAction();
 
   const getCameraPermission = useCallback(async () => {
     try {

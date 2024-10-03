@@ -1,18 +1,15 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import isServerError from "../error/is-server-error";
-import {
-  IDriverActionRequestBody,
-  IDriverActionResponse,
-} from "../(routes)/record/types/type";
-import { RECENT_LOOKUP_TIMES } from "../constants/constants";
+import { IDriverActionResponse } from "../(routes)/record/types/type";
+import { DESIRED_BEFORE_MINUTES } from "../constants/constants";
 
-// POST: 운전자 행위 캡처 이미지 전송
-export const useSendDriverActionCapture = () => {
+// POST: 운전자 행위 데이터 전송
+export const usePostDriverAction = () => {
   //   const queryClient = useQueryClient();
-  return useMutation<AxiosResponse, AxiosError, IDriverActionRequestBody>({
+  return useMutation<AxiosResponse, AxiosError, FormData>({
     mutationFn: async (driverActionData) => {
-      const driverActionURL = `api/action`;
+      const driverActionURL = `/api/actions`;
       return await axios.post(driverActionURL, driverActionData, {
         headers: {
           "Content-Type": "application/json",
@@ -27,7 +24,7 @@ export const useSendDriverActionCapture = () => {
       }
       switch (err.response?.status) {
         case 400:
-          alert(err.response?.data.message);
+          alert(err.response.data.message);
           break;
         default:
           alert("잠시후 다시 시도해주세요.");
@@ -42,7 +39,7 @@ export const useGetRecentDriverActions = () => {
   return useQuery<IDriverActionResponse[]>({
     queryKey: ["recent-driver-actions"],
     queryFn: async () => {
-      const minutes = RECENT_LOOKUP_TIMES;
+      const minutes = DESIRED_BEFORE_MINUTES;
       const recentDriverActionsURL = `/api/actions?before_m=${minutes}`;
 
       return await axios.get(recentDriverActionsURL).then((res) => {
