@@ -2,16 +2,17 @@ import styled from "styled-components";
 
 export const LiveScoreLogWrapper = styled.div`
   width: 100%;
-  height: 60%;
-  padding: 1rem 0;
+  height: calc(50% - var(--btm-navbar-height));
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   align-items: center;
   overflow-y: auto;
-  padding-bottom: var(--btm-navbar-height);
+  padding: 1rem 0.2rem var(--btm-navbar-height) 0.2rem;
 `;
 export const LiveScoreLogItem = styled.div`
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 4px;
+  border-radius: 1rem;
   display: flex;
   flex-direction: row;
   width: 100%;
