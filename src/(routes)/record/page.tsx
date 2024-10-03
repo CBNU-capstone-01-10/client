@@ -9,6 +9,7 @@ import TodayScore from "./_components/today-score/today-score";
 import { usePostDriverAction } from "../../api/action";
 import { convertDataURLToFile } from "../../_utils/convertor";
 import { SEND_DRIVER_IMAGE_INTERVAL_TIME } from "../../constants/constants";
+import { getCameraPermission } from "../../_utils/camera";
 
 const geoOptions = {
   // enableHighAccuracy: false,
@@ -16,6 +17,7 @@ const geoOptions = {
   timeout: 15000,
 };
 
+// 운전자 녹화 페이지
 export default function Page() {
   // const socket = io();
   const [stream, setStream] = useState<MediaStream>();
@@ -26,19 +28,6 @@ export default function Page() {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const { mutate: createDriverAction } = usePostDriverAction();
-
-  const getCameraPermission = useCallback(async () => {
-    try {
-      const driverStream = await navigator.mediaDevices.getUserMedia({
-        video: true,
-        audio: false,
-      });
-
-      setStream(driverStream);
-    } catch (e) {
-      console.log(e);
-    }
-  }, []);
 
   useInterval(() => {
     if (videoRef.current) {
@@ -71,11 +60,16 @@ export default function Page() {
   }, [stream]);
 
   useEffect(() => {
-    getCameraPermission();
+    const startCameraStream = async () => {
+      const driverStream = await getCameraPermission();
+      setStream(driverStream);
+    };
+
+    startCameraStream();
 
     return () => {
-      // socket.disconnect();
-      cancelLocationWatch();
+      // socket.disconnect();  // 주석 처리된 소켓 연결 해제
+      cancelLocationWatch(); // 위치 추적 해제
     };
   }, []);
 
