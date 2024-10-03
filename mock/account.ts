@@ -15,7 +15,7 @@ const successResponse = {
 
 // 목업 설정 함수
 export const setupMockForRegister = () => {
-  mock.onPost("api/register").reply((config) => {
+  mock.onPost("/api/register").reply((config) => {
     const requestData = JSON.parse(config.data);
 
     if (!requestData.email.includes("@")) {
