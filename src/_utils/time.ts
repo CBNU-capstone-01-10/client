@@ -1,5 +1,5 @@
 // 경과 시간을 계산하여 문자열로 반환하는 함수
-const getElapsedTime = (recordedAt: string): string => {
+export const getElapsedTime = (recordedAt: string): string => {
   const now = new Date(); // 현재 시간
   const actionTime = new Date(recordedAt); // recorded_at 시간
   const diffInMilliseconds = now.getTime() - actionTime.getTime(); // 현재 시간과 recorded_at 시간의 차이 (밀리초 단위)

@@ -1,7 +1,7 @@
 import OvalLoadingSpinner from "../../../_components/loading-spinner/oval-loading-spinner";
 import { useGetRecentDriverActions } from "../../../api/action";
 import useInterval from "../../../hooks/useInterval";
-import getElapsedTime from "../_utils/getElapsedTime";
+import getElapsedTime from "../../../_utils/time";
 import * as S from "../style/LiveScoreLog.style";
 
 // COMPONENT: 최근 운전행위에 대한 운전점수를 실시간으로 표시하는 점수 로그
