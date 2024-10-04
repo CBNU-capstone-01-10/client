@@ -1,0 +1,58 @@
+{
+  "get-actions": {
+    "response": [
+      {
+        "id": 12,
+        "label": "한손운전",
+        "score": -10,
+        "location_x": 31.4,
+        "location_y": 31.4,
+        "capture": "http://localhost:8080/action/capture/1727052112046.jpeg",
+        "recorded_at": "2024-09-23T00:41:52.057Z",
+        "user_id": 1
+      },
+      {
+        "id": 13,
+        "label": "한손운전",
+        "score": -10,
+        "location_x": 31.4,
+        "location_y": 31.4,
+        "capture": "http://localhost:8080/action/capture/1727052113372.jpeg",
+        "recorded_at": "2024-09-23T00:41:53.379Z",
+        "user_id": 1
+      },
+      {
+        "id": 14,
+        "label": "한손운전",
+        "score": -10,
+        "location_x": 31.4,
+        "location_y": 31.4,
+        "capture": "http://localhost:8080/action/capture/1727052114230.jpeg",
+        "recorded_at": "2024-09-23T00:41:54.237Z",
+        "user_id": 1
+      },
+      {
+        "id": 15,
+        "label": "한손운전",
+        "score": -10,
+        "location_x": 31.4,
+        "location_y": 31.4,
+        "capture": "http://localhost:8080/action/capture/1727052116046.jpeg",
+        "recorded_at": "2024-09-23T00:41:56.051Z",
+        "user_id": 1
+      }
+    ]
+  },
+  "post-actions": {
+    "response": {
+      "id": "",
+      "label": "한손운전",
+      "score": -10,
+      "location_x": 0,
+      "location_y": 0,
+      "capture": "",
+      "recorded_at": "",
+      "user_id": 1
+    }
+  }
+}
