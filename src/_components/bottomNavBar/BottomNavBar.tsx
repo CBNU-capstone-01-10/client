@@ -8,7 +8,7 @@ import * as S from "./BottomNavBar.style";
 export default function BottomNavBar() {
   const content = [
     { icon: SlCamrecorder, path: "/record", text: "녹화" },
-    { icon: LuBarChart3, path: "/log", text: "기록" },
+    { icon: LuBarChart3, path: "/statistics", text: "기록" },
     { icon: FaRegUser, path: "/profile", text: "마이" },
   ];
 

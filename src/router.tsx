@@ -3,7 +3,7 @@ import NotFoundErrorPage from "./(routes)/_errors/_components/NotFoundErrorPage"
 
 import RecordPage from "./(routes)/record/page";
 
-import Log from "./(routes)/log/page";
+import StatisticsPage from "./(routes)/statistics/page";
 
 import Profile from "./(routes)/profile/page";
 
@@ -42,8 +42,8 @@ const router = createBrowserRouter([
             element: <RecordPage />,
           },
           {
-            path: "log",
-            element: <Log />,
+            path: "statistics",
+            element: <StatisticsPage />,
           },
           {
             path: "profile",
