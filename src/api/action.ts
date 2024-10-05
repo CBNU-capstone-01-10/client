@@ -3,6 +3,7 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import isServerError from "../error/is-server-error";
 import { IDriverActionResponse } from "../(routes)/record/types/type";
 import { DESIRED_BEFORE_MINUTES } from "../constants/constants";
+import dayjs from "dayjs";
 
 // POST: 운전자 행위 데이터 전송
 export const usePostDriverAction = () => {
@@ -46,6 +47,28 @@ export const useGetRecentDriverActions = () => {
       return await axios
         .get(recentDriverActionsURL, {
           params: { before_m: DESIRED_BEFORE_MINUTES },
+        })
+        .then((res) => {
+          return res.data.response;
+        });
+    },
+    retry: 0,
+  });
+};
+
+// GET: 최근 일주일 운전자 점수 조회
+export const useGetRecentSevenDaysScore = () => {
+  return useQuery<IDriverActionResponse[]>({
+    queryKey: ["recent-seven-days-score"],
+    queryFn: async () => {
+      const recentDriverActionsURL = `/api/actions`;
+      // 날짜 계산: 최근 일주일의 시작일과 종료일
+      const date_end = dayjs().format("YYYY-MM-DD");
+      const date_start = dayjs().subtract(6, "day").format("YYYY-MM-DD");
+
+      return await axios
+        .get(recentDriverActionsURL, {
+          params: { date_start, date_end },
         })
         .then((res) => {
           return res.data.response;
