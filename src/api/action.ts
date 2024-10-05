@@ -6,7 +6,7 @@ import { DESIRED_BEFORE_MINUTES } from "../constants/constants";
 
 // POST: 운전자 행위 데이터 전송
 export const usePostDriverAction = () => {
-  //   const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
   return useMutation<AxiosResponse, AxiosError, FormData>({
     mutationFn: async (driverActionData) => {
       const driverActionURL = `/api/actions`;
@@ -17,10 +17,9 @@ export const usePostDriverAction = () => {
       });
     },
     onSuccess: (res) => {
-      console.log("🚀 ~ usePostDriverAction ~ res:", res.data);
+      // console.log("🚀 ~ usePostDriverAction ~ res:", res.data);
     },
     onError: (err) => {
-      console.log("🚀 ~ usePostDriverAction ~ err:", err);
       if (!isServerError(err)) {
         alert("에러가 발생했습니다. 관리자에게 문의해주세요.");
         return;
@@ -37,19 +36,20 @@ export const usePostDriverAction = () => {
   });
 };
 
-// GET: 운전자 행위 결과 다건 조회
+// GET: 최근 운전자 행위 결과 다건 조회
 export const useGetRecentDriverActions = () => {
   return useQuery<IDriverActionResponse[]>({
     queryKey: ["recent-driver-actions"],
     queryFn: async () => {
-      const minutes = DESIRED_BEFORE_MINUTES;
-      const recentDriverActionsURL = `/api/actions?before_m=${minutes}`;
+      const recentDriverActionsURL = `/api/actions`;
 
-      return await axios.get(recentDriverActionsURL).then((res) => {
-        return res.data.response;
-        // // JSON-SERVER
-        // return res.data;
-      });
+      return await axios
+        .get(recentDriverActionsURL, {
+          params: { before_m: DESIRED_BEFORE_MINUTES },
+        })
+        .then((res) => {
+          return res.data.response;
+        });
     },
     retry: 0,
   });
