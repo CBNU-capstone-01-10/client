@@ -15,6 +15,7 @@
     "@tanstack/react-query-devtools": "^5.51.11",
     "@types/react-modal": "^3.16.3",
     "axios-mock-adapter": "^2.0.0",
+    "chart.js": "^4.4.4",
     "dayjs": "^1.11.13",
     "happy-dom": "^15.0.0",
     "json-server": "^1.0.0-beta.3",
