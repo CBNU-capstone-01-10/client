@@ -1,13 +1,9 @@
 import MockAdapter from "axios-mock-adapter";
-import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 import successResponseData from "./response/actions-response.json";
 
-// Mock Adapter 인스턴스 생성
-const mock = new MockAdapter(axios);
-
 // Actions 관련 목업
-export const setupMockForActions = () => {
+export const setupMockForActions = (mock: MockAdapter) => {
   /**
    * GET
    */
@@ -115,8 +111,4 @@ export const setupMockForActions = () => {
     // 성공 응답으로 랜덤한 원소 반환
     return [201, randomResponse];
   });
-
-  console.log(
-    "Axios Mock Adapter가 활성화되어 axios 요청을 가로챌 준비가 되었습니다."
-  );
 };

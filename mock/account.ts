@@ -1,7 +1,4 @@
-import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
-
-const mock = new MockAdapter(axios);
 
 // 성공 응답 예제 데이터
 const successResponse = {
@@ -14,7 +11,7 @@ const successResponse = {
 };
 
 // 목업 설정 함수
-export const setupMockForRegister = () => {
+export const setupMockForRegister = (mock: MockAdapter) => {
   mock.onPost("/api/register").reply((config) => {
     const requestData = JSON.parse(config.data);
 
@@ -31,14 +28,4 @@ export const setupMockForRegister = () => {
 
     return [200, successResponse];
   });
-
-  console.log(
-    "Axios Mock Adapter가 활성화되어 axios 요청을 가로챌 준비가 되었습니다."
-  );
-};
-
-// 목업 비활성화 함수
-export const disableMock = () => {
-  mock.restore(); // Mock 설정 해제
-  console.log("Axios Mock Adapter가 비활성화 되었습니다.");
 };
