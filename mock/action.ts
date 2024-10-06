@@ -1,24 +1,65 @@
 import MockAdapter from "axios-mock-adapter";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
+import successResponseData from "./response/actions-response.json";
 
 // Mock Adapter 인스턴스 생성
 const mock = new MockAdapter(axios);
 
-// 성공 응답 예제 데이터
-const successResponse = {
-  id: "",
-  label: "한손운전",
-  score: -10,
-  location_x: 0,
-  location_y: 0,
-  capture: "",
-  recorded_at: "",
-  user_id: 1,
-};
-
-// 목업 설정 함수
+// Actions 관련 목업
 export const setupMockForActions = () => {
+  /**
+   * GET
+   */
+  mock.onGet("/api/actions").reply((config) => {
+    const { before_m, date_start, date_end } = config.params;
+
+    // 올바른 쿼리 파라미터 조합 및 값인지 검증
+    if (before_m && (date_start || date_end)) {
+      return [
+        400,
+        {
+          status: 400,
+          statusText: "Bad Request",
+          message: "bad query parameter combination",
+        },
+      ];
+    }
+
+    if (date_start && date_end && new Date(date_start) > new Date(date_end)) {
+      return [
+        400,
+        {
+          status: 400,
+          statusText: "Bad Request",
+          message: "date_start can not greater than date_end",
+        },
+      ];
+    }
+
+    // 특정 쿼리 파라미터 조합이 없는 경우에도 400 오류 반환
+    if (date_start && !date_end) {
+      return [
+        400,
+        {
+          status: 400,
+          statusText: "Bad Request",
+          message: "bad query parameter combination",
+        },
+      ];
+    }
+
+    // 올바른 요청일 때 성공 응답 반환
+    if (before_m) {
+      return [200, successResponseData["get-recent-actions"]];
+    } else {
+      return [200, successResponseData["get-recent-seven-days-score"]];
+    }
+  });
+
+  /**
+   * POST
+   */
   mock.onPost("/api/actions").reply((config) => {
     // FormData의 각 필드를 분해할당
     let captureFile: File | null = null;
@@ -60,11 +101,18 @@ export const setupMockForActions = () => {
 
     // 모든 조건이 만족되었을 때 성공 응답
     const newId = uuidv4();
-    successResponse.id = newId;
-    successResponse.location_x = parseFloat(location_x);
-    successResponse.location_y = parseFloat(location_y);
-    successResponse.recorded_at = new Date().toISOString();
+    successResponseData["post-actions"].response.id = newId;
+    successResponseData["post-actions"].response.location_x =
+      parseFloat(location_x);
+    successResponseData["post-actions"].response.location_y =
+      parseFloat(location_y);
+    successResponseData["post-actions"].response.recorded_at =
+      new Date().toISOString();
 
-    return [201, successResponse];
+    return [201, successResponseData["post-actions"].response];
   });
+
+  console.log(
+    "Axios Mock Adapter가 활성화되어 axios 요청을 가로챌 준비가 되었습니다."
+  );
 };
