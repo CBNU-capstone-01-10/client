@@ -1,0 +1,11 @@
+{
+  "get-self": {
+    "response": {
+      "pfp": "https://via.placeholder.com/80",
+      "username": "허왕눈이",
+      "alias": "방어운전의 고수",
+      "email": "john.doe@example.com",
+      "address": "충청북도 청주시 서원구 충대로 1 충북대학교"
+    }
+  }
+}
