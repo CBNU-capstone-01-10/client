@@ -7,7 +7,7 @@ export const ChartHeader = styled.div`
   padding: 0.4rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.8rem;
 `;
 export const Title = styled.div`
   font-size: 1rem;
