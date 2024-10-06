@@ -57,7 +57,7 @@ export const useGetRecentDriverActions = () => {
 };
 
 // GET: 최근 일주일 운전자 점수 조회
-export const useGetRecentSevenDaysScore = () => {
+export const useGetRecentSevenDaysDriverActions = () => {
   return useQuery<IDriverActionResponse[]>({
     queryKey: ["recent-seven-days-score"],
     queryFn: async () => {
