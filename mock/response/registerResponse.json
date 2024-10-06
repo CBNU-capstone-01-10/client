@@ -1,0 +1,13 @@
+{
+    "data": [
+        {
+            "id": 224,
+            "username": "testUser",
+            "encrypted_password": "$2b$10$KmktFTicOsz1rpUCjXx5NOW.wZhyhXFm3WFttRyZVylyXJ.CYfOtO",
+            "email": "wonza4372@nav.com",
+            "pfp": "",
+            "created_at": "2024-09-18T14:38:59.341Z",
+            "updated_at": "2024-09-18T14:38:59.341Z"
+        }
+    ]
+}

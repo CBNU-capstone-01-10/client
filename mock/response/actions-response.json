@@ -1,5 +1,5 @@
 {
-  "get-actions": {
+  "get-recent-actions": {
     "response": [
       {
         "id": 12,
@@ -8,17 +8,17 @@
         "location_x": 31.4,
         "location_y": 31.4,
         "capture": "http://localhost:8080/action/capture/1727052112046.jpeg",
-        "recorded_at": "2024-09-23T00:41:52.057Z",
+        "recorded_at": "2024-09-30T00:41:52.057Z",
         "user_id": 1
       },
       {
         "id": 13,
-        "label": "한손운전",
-        "score": -10,
+        "label": "안전운전 5분 유지",
+        "score": 5.0,
         "location_x": 31.4,
         "location_y": 31.4,
         "capture": "http://localhost:8080/action/capture/1727052113372.jpeg",
-        "recorded_at": "2024-09-23T00:41:53.379Z",
+        "recorded_at": "2024-10-01T10:10:53.379Z",
         "user_id": 1
       },
       {
@@ -28,17 +28,151 @@
         "location_x": 31.4,
         "location_y": 31.4,
         "capture": "http://localhost:8080/action/capture/1727052114230.jpeg",
-        "recorded_at": "2024-09-23T00:41:54.237Z",
+        "recorded_at": "2024-10-01T10:41:54.237Z",
         "user_id": 1
       },
       {
         "id": 15,
+        "label": "안전운전 5분 유지",
+        "score": 5.0,
+        "location_x": 31.4,
+        "location_y": 31.4,
+        "capture": "http://localhost:8080/action/capture/1727052116046.jpeg",
+        "recorded_at": "2024-10-01T11:24:56.051Z",
+        "user_id": 1
+      },
+      {
+        "id": 16,
+        "label": "안전운전 10분 유지",
+        "score": 10.0,
+        "location_x": 31.4,
+        "location_y": 31.4,
+        "capture": "http://localhost:8080/action/capture/1727052116046.jpeg",
+        "recorded_at": "2024-10-01T11:29:56.051Z",
+        "user_id": 1
+      },
+      {
+        "id": 17,
+        "label": "안전운전 15분 유지",
+        "score": 15.0,
+        "location_x": 31.4,
+        "location_y": 31.4,
+        "capture": "http://localhost:8080/action/capture/1727052116046.jpeg",
+        "recorded_at": "2024-10-01T11:40:56.051Z",
+        "user_id": 1
+      },
+      {
+        "id": 18,
         "label": "한손운전",
         "score": -10,
         "location_x": 31.4,
         "location_y": 31.4,
         "capture": "http://localhost:8080/action/capture/1727052116046.jpeg",
-        "recorded_at": "2024-09-23T00:41:56.051Z",
+        "recorded_at": "2024-10-02T00:50:56.051Z",
+        "user_id": 1
+      },
+      {
+        "id": 19,
+        "label": "안전운전 5분 유지",
+        "score": 5.0,
+        "location_x": 31.4,
+        "location_y": 31.4,
+        "capture": "http://localhost:8080/action/capture/1727052116046.jpeg",
+        "recorded_at": "2024-10-02T01:14:56.051Z",
+        "user_id": 1
+      },
+      {
+        "id": 20,
+        "label": "안전운전 10분 유지",
+        "score": 10.0,
+        "location_x": 31.4,
+        "location_y": 31.4,
+        "capture": "http://localhost:8080/action/capture/1727052116046.jpeg",
+        "recorded_at": "2024-10-02T01:20:56.051Z",
+        "user_id": 1
+      }
+    ]
+  },
+  "get-recent-seven-days-score": {
+    "response": [
+      {
+        "id": 13,
+        "label": "안전운전 5분 유지",
+        "score": 5.0,
+        "location_x": 31.4,
+        "location_y": 31.4,
+        "capture": "http://localhost:8080/action/capture/1727052113372.jpeg",
+        "recorded_at": "2024-10-01T10:10:53.379Z",
+        "user_id": 1
+      },
+      {
+        "id": 14,
+        "label": "한손운전",
+        "score": -10,
+        "location_x": 31.4,
+        "location_y": 31.4,
+        "capture": "http://localhost:8080/action/capture/1727052114230.jpeg",
+        "recorded_at": "2024-10-01T10:41:54.237Z",
+        "user_id": 1
+      },
+      {
+        "id": 15,
+        "label": "안전운전 5분 유지",
+        "score": 5.0,
+        "location_x": 31.4,
+        "location_y": 31.4,
+        "capture": "http://localhost:8080/action/capture/1727052116046.jpeg",
+        "recorded_at": "2024-10-01T11:24:56.051Z",
+        "user_id": 1
+      },
+      {
+        "id": 16,
+        "label": "안전운전 10분 유지",
+        "score": 10.0,
+        "location_x": 31.4,
+        "location_y": 31.4,
+        "capture": "http://localhost:8080/action/capture/1727052116046.jpeg",
+        "recorded_at": "2024-10-01T11:29:56.051Z",
+        "user_id": 1
+      },
+      {
+        "id": 17,
+        "label": "안전운전 15분 유지",
+        "score": 15.0,
+        "location_x": 31.4,
+        "location_y": 31.4,
+        "capture": "http://localhost:8080/action/capture/1727052116046.jpeg",
+        "recorded_at": "2024-10-01T11:40:56.051Z",
+        "user_id": 1
+      },
+      {
+        "id": 18,
+        "label": "한손운전",
+        "score": -10,
+        "location_x": 31.4,
+        "location_y": 31.4,
+        "capture": "http://localhost:8080/action/capture/1727052116046.jpeg",
+        "recorded_at": "2024-10-02T00:50:56.051Z",
+        "user_id": 1
+      },
+      {
+        "id": 19,
+        "label": "안전운전 5분 유지",
+        "score": 5.0,
+        "location_x": 31.4,
+        "location_y": 31.4,
+        "capture": "http://localhost:8080/action/capture/1727052116046.jpeg",
+        "recorded_at": "2024-10-02T01:14:56.051Z",
+        "user_id": 1
+      },
+      {
+        "id": 20,
+        "label": "안전운전 10분 유지",
+        "score": 10.0,
+        "location_x": 31.4,
+        "location_y": 31.4,
+        "capture": "http://localhost:8080/action/capture/1727052116046.jpeg",
+        "recorded_at": "2024-10-02T01:20:56.051Z",
         "user_id": 1
       }
     ]
