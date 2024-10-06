@@ -7,7 +7,7 @@ import { IPersonalInfo } from "../(routes)/profile/types/types";
 export const useGetPersonalInfo = () => {
   //   return useQuery<IProfileInfo>({
   return useQuery<AxiosResponse, AxiosError, IPersonalInfo>({
-    queryKey: ["profile-info"],
+    queryKey: ["self-info"],
     queryFn: async () => {
       const myProfileURL = `/api/self`;
       return await axios.get(myProfileURL).then((res) => {
@@ -23,7 +23,7 @@ export const useEditPersonalInfo = () => {
   //   const queryClient = useQueryClient();
   return useMutation<AxiosResponse, AxiosError, FormData>({
     mutationFn: async (newProfileData) => {
-      const profileEditURL = `api/self`;
+      const profileEditURL = `/api/self`;
       return await axios.put(profileEditURL, newProfileData, {
         headers: {
           "Content-Type": "multipart/form-data",
