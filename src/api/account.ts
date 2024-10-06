@@ -8,7 +8,6 @@ import {
 } from "../(routes)/(account)/types/type";
 import isServerError from "../error/is-server-error";
 
-/** REACT-QUERY: 계정 관련 */
 // POST: 임시등록(이메일 인증코드 발송)
 export const useRegisterEmail = () => {
   return useMutation<
@@ -23,6 +22,9 @@ export const useRegisterEmail = () => {
           "Content-Type": "application/json",
         },
       });
+    },
+    onSuccess: (response) => {
+      // console.log(response.data);
     },
     onError: (err) => {
       if (!isServerError(err)) {
