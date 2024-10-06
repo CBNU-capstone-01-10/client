@@ -100,16 +100,20 @@ export const setupMockForActions = () => {
     }
 
     // 모든 조건이 만족되었을 때 성공 응답
-    const newId = uuidv4();
-    successResponseData["post-actions"].response.id = newId;
-    successResponseData["post-actions"].response.location_x =
-      parseFloat(location_x);
-    successResponseData["post-actions"].response.location_y =
-      parseFloat(location_y);
-    successResponseData["post-actions"].response.recorded_at =
-      new Date().toISOString();
+    // response 배열에서 랜덤한 인덱스 선택
+    const responseArray = successResponseData["post-actions"].response;
+    const randomIndex = Math.floor(Math.random() * responseArray.length);
+    const randomResponse = { ...responseArray[randomIndex] };
 
-    return [201, successResponseData["post-actions"].response];
+    // 랜덤하게 선택된 원소의 값 수정
+    const newId = uuidv4();
+    randomResponse.id = newId;
+    randomResponse.location_x = parseFloat(location_x);
+    randomResponse.location_y = parseFloat(location_y);
+    randomResponse.recorded_at = new Date().toISOString();
+
+    // 성공 응답으로 랜덤한 원소 반환
+    return [201, randomResponse];
   });
 
   console.log(

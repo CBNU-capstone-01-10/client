@@ -178,15 +178,27 @@
     ]
   },
   "post-actions": {
-    "response": {
-      "id": "",
-      "label": "한손운전",
-      "score": -10,
-      "location_x": 0,
-      "location_y": 0,
-      "capture": "",
-      "recorded_at": "",
-      "user_id": 1
-    }
+    "response": [
+      {
+        "id": "",
+        "label": "한손운전",
+        "score": -10,
+        "location_x": 0,
+        "location_y": 0,
+        "capture": "",
+        "recorded_at": "",
+        "user_id": 1
+      },
+      {
+        "id": "",
+        "label": "안전운전 5분 유지",
+        "score": 5.0,
+        "location_x": 0,
+        "location_y": 0,
+        "capture": "",
+        "recorded_at": "",
+        "user_id": 1
+      }
+    ]
   }
 }
