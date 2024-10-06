@@ -3,7 +3,7 @@ interface WrapperProps {
   height?: string;
 }
 
-export const Wrapper = styled.div<WrapperProps>`
+export const Wrapper = styled.section<WrapperProps>`
   width: 100%;
   height: ${(props) => props.height || "5rem"};
   margin-bottom: 1.2rem;
