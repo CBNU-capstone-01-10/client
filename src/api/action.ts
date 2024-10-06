@@ -8,7 +8,11 @@ import dayjs from "dayjs";
 // POST: 운전자 행위 데이터 전송
 export const usePostDriverAction = () => {
   // const queryClient = useQueryClient();
-  return useMutation<AxiosResponse, AxiosError, FormData>({
+  return useMutation<
+    AxiosResponse<IDriverActionResponse>,
+    AxiosError,
+    FormData
+  >({
     mutationFn: async (driverActionData) => {
       const driverActionURL = `/api/actions`;
       return await axios.post(driverActionURL, driverActionData, {
@@ -18,7 +22,8 @@ export const usePostDriverAction = () => {
       });
     },
     onSuccess: (res) => {
-      // console.log("🚀 ~ usePostDriverAction ~ res:", res.data);
+      console.log("🚀 ~ usePostDriverAction ~ res:", res.data);
+      return res.data;
     },
     onError: (err) => {
       if (!isServerError(err)) {
