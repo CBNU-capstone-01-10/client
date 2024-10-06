@@ -2,8 +2,9 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   position: relative;
+  z-index: 100;
 `;
-export const TodayScoreWrapper = styled.div`
+export const MyScoreWrapper = styled.div`
   height: fit-content;
   display: flex;
   flex-direction: column;
@@ -11,11 +12,11 @@ export const TodayScoreWrapper = styled.div`
   padding: 1rem;
   gap: 0.5rem;
 `;
-export const TodayScoreTitle = styled.div`
+export const MyScoreTitle = styled.div`
   color: black;
   font-weight: 600;
 `;
-export const TodayScore = styled.div`
+export const MyScore = styled.div`
   color: ${({ theme }) => theme.primaryColor};
   font-size: 1.8rem;
   font-weight: 600;
