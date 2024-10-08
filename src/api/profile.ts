@@ -5,8 +5,7 @@ import { IPersonalInfo } from "../(routes)/profile/types/types";
 
 // GET: 내 개인정보 조회
 export const useGetPersonalInfo = () => {
-  //   return useQuery<IProfileInfo>({
-  return useQuery<AxiosResponse, AxiosError, IPersonalInfo>({
+  return useQuery<AxiosResponse<IPersonalInfo>, AxiosError, IPersonalInfo>({
     queryKey: ["self-info"],
     queryFn: async () => {
       const myProfileURL = `/api/self`;
@@ -30,7 +29,9 @@ export const useEditPersonalInfo = () => {
         },
       });
     },
-    onSuccess: () => {},
+    onSuccess: (res) => {
+      console.log("🚀 ~ useEditPersonalInfo ~ res:", res);
+    },
     onError: (err) => {
       if (!isServerError(err)) {
         alert("에러가 발생했습니다. 관리자에게 문의해주세요.");

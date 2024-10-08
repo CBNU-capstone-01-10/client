@@ -7,12 +7,13 @@ import ContentBlockWrapper from "../../../../_components/block/content-block-wra
 import LineDivider from "../../../../_components/divider/line-divider";
 import OvalLoadingSpinner from "../../../../_components/loading-spinner/oval-loading-spinner";
 
-// COMPONENT: 사용자 개인정보
+// COMPONENT: 사용자 개인정보를 담은 컨테이너
 export default function PersonalInfo() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
+  // GET: 사용자 개인정보
   const {
     data: personalInfoData,
     isLoading,
