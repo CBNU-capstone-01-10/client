@@ -3,7 +3,7 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import isServerError from "../error/is-server-error";
 import { IPersonalInfo } from "../(routes)/profile/types/types";
 
-// GET: 내 개인정보 조회
+// GET: 사용자 개인정보
 export const useGetPersonalInfo = () => {
   return useQuery<AxiosResponse<IPersonalInfo>, AxiosError, IPersonalInfo>({
     queryKey: ["self-info"],
@@ -17,7 +17,7 @@ export const useGetPersonalInfo = () => {
   });
 };
 
-// PUT: 내 개인정보 편집
+// PUT: 사용자 개인정보
 export const useEditPersonalInfo = () => {
   //   const queryClient = useQueryClient();
   return useMutation<AxiosResponse, AxiosError, FormData>({
@@ -29,9 +29,7 @@ export const useEditPersonalInfo = () => {
         },
       });
     },
-    onSuccess: (res) => {
-      console.log("🚀 ~ useEditPersonalInfo ~ res:", res);
-    },
+    onSuccess: (res) => {},
     onError: (err) => {
       if (!isServerError(err)) {
         alert("에러가 발생했습니다. 관리자에게 문의해주세요.");

@@ -1,5 +1,5 @@
 import * as S from "../personal-info/personal-info.style";
-import { useGetPersonalInfo } from "../../../../api/profile";
+import { useGetPersonalInfo } from "../../../../api/user";
 import LoadingErrorIcon from "../../../../_components/icon/loading-error-icon";
 import PersonalInfoForm from "../personal-info-form/personal-info-form";
 import { useState } from "react";
