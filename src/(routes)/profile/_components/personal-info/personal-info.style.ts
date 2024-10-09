@@ -38,6 +38,7 @@ export const EditButton = styled.button`
 export const ProfilePicture = styled.img`
   width: 5rem;
   height: 5rem;
+  border-radius: 0.6rem;
 `;
 export const UserName = styled.div`
   font-weight: bold;
