@@ -1,5 +1,4 @@
-// import { io } from "socket.io-client";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useWatchLocation from "../../hooks/useWatchLocation";
 import drawVideoSnapshot from "./_utils/drawVideoSnapshot";
 import useInterval from "../../hooks/useInterval";
@@ -10,7 +9,6 @@ import { usePostDriverAction } from "../../api/action";
 import { convertDataURLToFile } from "../../_utils/convertor";
 import { SEND_DRIVER_IMAGE_INTERVAL_TIME } from "../../constants/constants";
 import { getCameraPermission } from "../../_utils/camera";
-import { IDriverActionResponse } from "./types/type";
 
 const geoOptions = {
   // enableHighAccuracy: false,
@@ -20,7 +18,6 @@ const geoOptions = {
 
 // 운전자 녹화 페이지
 export default function Page() {
-  // const socket = io();
   const [stream, setStream] = useState<MediaStream>();
   const [driverImage, setDriverImage] = useState<File>();
   const { location, cancelLocationWatch, errorMessage } =
@@ -28,7 +25,7 @@ export default function Page() {
 
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const { mutate: createDriverAction, isSuccess, data } = usePostDriverAction();
+  const { mutate: createDriverAction, data } = usePostDriverAction();
   // POST: 일정 주기마다 운전자 행위를 캡처한 이미지와 위치 정보 전송
   useInterval(() => {
     if (videoRef.current) {
