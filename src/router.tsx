@@ -1,28 +1,15 @@
 import { createBrowserRouter } from "react-router-dom";
 import NotFoundErrorPage from "./(routes)/_errors/_components/NotFoundErrorPage";
-
-import RecordPage from "./(routes)/record/page";
-
-import StatisticsPage from "./(routes)/statistics/page";
-
-import Profile from "./(routes)/profile/page";
-
-// import SignupPage from "./(routes)/(account)/signup/page";
 import SignupPage from "./(routes)/(account)/signup/signup-page";
 import SigninPage from "./(routes)/(account)/signin/page";
-
-import SplashLayout from "./(routes)/SplashLayout";
 import MainLayout from "./(routes)/MainLayout";
 import SignupLayout from "./(routes)/signup-layout";
+import SplashLayout from "./(routes)/SplashLayout";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    errorElement: (
-      <>
-        <NotFoundErrorPage />
-      </>
-    ),
+    errorElement: <NotFoundErrorPage />,
     // loader: async () => {},
     children: [
       {
@@ -33,23 +20,8 @@ const router = createBrowserRouter([
         children: [{ path: "/signup", element: <SignupPage /> }],
       },
       {
-        path: "/",
+        path: "/home",
         element: <MainLayout />,
-        children: [
-          {
-            index: true,
-            path: "record",
-            element: <RecordPage />,
-          },
-          {
-            path: "statistics",
-            element: <StatisticsPage />,
-          },
-          {
-            path: "profile",
-            element: <Profile />,
-          },
-        ],
       },
     ],
   },
