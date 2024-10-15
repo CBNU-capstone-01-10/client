@@ -1,48 +1,68 @@
+import { useEffect, useState } from "react";
 import OvalLoadingSpinner from "../../../_components/loading-spinner/oval-loading-spinner";
-import { useGetRecentDriverActions } from "../../../api/action";
-import useInterval from "../../../hooks/useInterval";
 import getElapsedTime from "../../../_utils/time";
 import * as S from "../style/LiveScoreLog.style";
+import { IDriverActionResponse } from "../types/type";
+import { useQueryClient } from "@tanstack/react-query";
 
-// COMPONENT: 최근 운전행위에 대한 운전점수를 실시간으로 표시하는 점수 로그
-export default function LiveScoreLog() {
-  const {
-    data: recentDriverActions,
-    isLoading,
-    isError,
-    refetch: refetchRecentDriverActions,
-  } = useGetRecentDriverActions();
+// COMPONENT: 실시간 안전 점수 로그
+interface ILiveScoreLogProps {
+  newDriverAction?: IDriverActionResponse;
+}
+export default function LiveScoreLog({ newDriverAction }: ILiveScoreLogProps) {
+  const [driverActions, setDriverActions] = useState<IDriverActionResponse[]>(
+    []
+  );
+  const queryClient = useQueryClient();
 
-  useInterval(() => {
-    refetchRecentDriverActions();
-  }, 10000);
+  // 안전 점수 로그 업데이트
+  useEffect(() => {
+    if (newDriverAction) {
+      setDriverActions((prevActions) => {
+        // 기존 데이터를 최신순으로 정렬
+        const sortedActions = [...prevActions].sort(
+          (a, b) =>
+            new Date(b.recorded_at).getTime() -
+            new Date(a.recorded_at).getTime()
+        );
 
-  if (isLoading)
-    return (
-      <S.LiveScoreLogWrapper>
-        <OvalLoadingSpinner />
-      </S.LiveScoreLogWrapper>
-    );
+        // 가장 최근 데이터와 newDriverAction의 label이 같은지 확인
+        if (newDriverAction.label === sortedActions[0]?.label) {
+          const recentAction = sortedActions[0];
 
-  if (isError)
-    return (
-      <S.LiveScoreLogWrapper>
-        최근 점수를 불러올 수 없습니다.
-      </S.LiveScoreLogWrapper>
-    );
+          // score가 양수면 +10, 음수면 -10 적용
+          const updatedScore =
+            recentAction.score > 0
+              ? recentAction.score + 10
+              : recentAction.score - 10;
+
+          // 기존 배열에서 가장 최근 데이터를 업데이트된 score로 변경
+          sortedActions[0] = { ...recentAction, score: updatedScore };
+
+          return sortedActions;
+        } else {
+          // label이 다르면 newDriverAction을 기존 로그에 추가
+          const updatedActions = [newDriverAction, ...sortedActions];
+
+          return updatedActions;
+        }
+      });
+    }
+  }, [newDriverAction, queryClient]);
 
   return (
     <S.LiveScoreLogWrapper>
-      {recentDriverActions?.map((recentDriverActionItem) => (
-        <S.LiveScoreLogItem key={recentDriverActionItem.id}>
+      {driverActions?.map((driverActionItem, idx) => (
+        // <S.LiveScoreLogItem key={driverActionItem.id}>
+        <S.LiveScoreLogItem key={idx}>
           <S.ContentWrapper>
-            <S.Content>{recentDriverActionItem.label}</S.Content>
+            <S.Content>{driverActionItem.label}</S.Content>
             <S.ElapsedTime>
-              {getElapsedTime(recentDriverActionItem.recorded_at)}
+              {getElapsedTime(driverActionItem.recorded_at)}
             </S.ElapsedTime>
           </S.ContentWrapper>
-          <S.ScoreWrapper score={recentDriverActionItem.score}>
-            {recentDriverActionItem.score}
+          <S.ScoreWrapper score={driverActionItem.score}>
+            {driverActionItem.score}
           </S.ScoreWrapper>
         </S.LiveScoreLogItem>
       ))}

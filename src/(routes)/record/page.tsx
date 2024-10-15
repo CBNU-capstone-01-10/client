@@ -10,6 +10,7 @@ import { usePostDriverAction } from "../../api/action";
 import { convertDataURLToFile } from "../../_utils/convertor";
 import { SEND_DRIVER_IMAGE_INTERVAL_TIME } from "../../constants/constants";
 import { getCameraPermission } from "../../_utils/camera";
+import { IDriverActionResponse } from "./types/type";
 
 const geoOptions = {
   // enableHighAccuracy: false,
@@ -27,8 +28,8 @@ export default function Page() {
 
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const { mutate: createDriverAction } = usePostDriverAction();
-
+  const { mutate: createDriverAction, isSuccess, data } = usePostDriverAction();
+  // POST: 일정 주기마다 운전자 행위를 캡처한 이미지와 위치 정보 전송
   useInterval(() => {
     if (videoRef.current) {
       const driverImageData = drawVideoSnapshot(videoRef.current);
@@ -37,7 +38,7 @@ export default function Page() {
         const filename = `snapshot_${new Date().toISOString()}.jpg`; // 파일 이름 설정
         setDriverImage(convertDataURLToFile(driverImageData, filename));
       }
-      // POST: 캡처한 이미지와 위치 정보가 존재할 경우 서버에 전송
+
       if (driverImage && location) {
         const { latitude, longitude } = location.coords;
 
@@ -45,7 +46,7 @@ export default function Page() {
         driverActionData.append("capture", driverImage);
         driverActionData.append("location_x", latitude.toString());
         driverActionData.append("location_y", longitude.toString());
-        // createDriverAction(driverActionData);
+        createDriverAction(driverActionData);
       }
     }
   }, SEND_DRIVER_IMAGE_INTERVAL_TIME);
@@ -68,7 +69,6 @@ export default function Page() {
     startCameraStream();
 
     return () => {
-      // socket.disconnect();  // 주석 처리된 소켓 연결 해제
       cancelLocationWatch(); // 위치 추적 해제
     };
   }, []);
@@ -88,7 +88,7 @@ export default function Page() {
           />
         </S.VideoWrapper>
         <div>{errorMessage}</div>
-        <LiveScoreLog />
+        <LiveScoreLog newDriverAction={data?.data} />
       </S.ContentWrapper>
     </S.Wrapper>
   );
