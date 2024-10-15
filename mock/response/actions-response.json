@@ -180,7 +180,7 @@
   "post-actions": {
     "response": [
       {
-        "id": "",
+        "id": "1",
         "label": "한손운전",
         "score": -10,
         "location_x": 0,
@@ -190,9 +190,29 @@
         "user_id": 1
       },
       {
-        "id": "",
-        "label": "안전운전 5분 유지",
-        "score": 5.0,
+        "id": "2",
+        "label": "안전운전 유지",
+        "score": 10.0,
+        "location_x": 0,
+        "location_y": 0,
+        "capture": "",
+        "recorded_at": "",
+        "user_id": 1
+      },
+      {
+        "id": "3",
+        "label": "차내 흡연 감지",
+        "score": -10.0,
+        "location_x": 0,
+        "location_y": 0,
+        "capture": "",
+        "recorded_at": "",
+        "user_id": 1
+      },
+      {
+        "id": "4",
+        "label": "졸음 운전 감지",
+        "score": -10.0,
         "location_x": 0,
         "location_y": 0,
         "capture": "",

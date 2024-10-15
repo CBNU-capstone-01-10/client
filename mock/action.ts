@@ -102,8 +102,8 @@ export const setupMockForActions = (mock: MockAdapter) => {
     const randomResponse = { ...responseArray[randomIndex] };
 
     // 랜덤하게 선택된 원소의 값 수정
-    const newId = uuidv4();
-    randomResponse.id = newId;
+    // const newId = uuidv4();
+    // randomResponse.id = newId;
     randomResponse.location_x = parseFloat(location_x);
     randomResponse.location_y = parseFloat(location_y);
     randomResponse.recorded_at = new Date().toISOString();
