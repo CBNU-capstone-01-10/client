@@ -5,7 +5,7 @@ import successResponseData from "./response/actions-response.json";
 // Actions 관련 목업
 export const setupMockForActions = (mock: MockAdapter) => {
   /**
-   * GET
+   * GET: 다건
    */
   mock.onGet("/api/actions").reply((config) => {
     const { before_m, date_start, date_end } = config.params;
@@ -50,6 +50,24 @@ export const setupMockForActions = (mock: MockAdapter) => {
       return [200, successResponseData["get-recent-actions"]];
     } else {
       return [200, successResponseData["get-recent-seven-days-score"]];
+    }
+  });
+
+  /**
+   * GET: 단건
+   */
+  mock.onGet(new RegExp("/api/actions/\\d+")).reply((config) => {
+    const actionId = parseInt(config.url.split("/").pop(), 10);
+    const action = successResponseData["get-action"].response.find(
+      (item) => item.id === actionId
+    );
+
+    if (action) {
+      // 요청에 해당하는 데이터가 있을 때
+      return [200, { response: action }];
+    } else {
+      // 요청에 해당하는 데이터가 없을 때
+      return [404, { message: "Action not found" }];
     }
   });
 
