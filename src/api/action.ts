@@ -61,6 +61,23 @@ export const useGetRecentDriverActions = () => {
   });
 };
 
+// GET: 운전자 행위 결과 단건 조회
+export const useGetDriverAction = (actionId: number) => {
+  return useQuery<IDriverActionResponse>({
+    queryKey: ["driver-action", actionId],
+    queryFn: async ({ queryKey }) => {
+      const [, actionId] = queryKey;
+      const recentDriverActionURL = `/api/actions/${actionId}`;
+
+      return await axios.get(recentDriverActionURL).then((res) => {
+        return res.data.response;
+      });
+    },
+    retry: 0,
+    enabled: !!actionId,
+  });
+};
+
 // GET: 최근 일주일 운전자 점수 조회
 export const useGetRecentSevenDaysDriverActions = () => {
   return useQuery<IDriverActionResponse[]>({
