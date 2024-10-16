@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import useWatchLocation from "../../hooks/useWatchLocation";
 import drawVideoSnapshot from "./_utils/drawVideoSnapshot";
 import useInterval from "../../hooks/useInterval";
-import LiveScoreLog from "./_components/LiveScoreLog";
+import LiveScoreLog from "./_components/live-score-log/LiveScoreLog";
 import * as S from "./page.style";
 import TodayScore from "./_components/today-score/today-score";
 import { usePostDriverAction } from "../../api/action";
