@@ -6,7 +6,6 @@ export const Header = styled.div`
   position: sticky;
   top: 0;
   background: white;
-  z-index: 10;
   border-radius: 2rem;
 `;
 
