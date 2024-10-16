@@ -1,8 +1,10 @@
+import { useState } from "react";
 import ContentBlockWrapper from "../../../../_components/block/content-block-wrapper";
 import OvalLoadingSpinner from "../../../../_components/loading-spinner/oval-loading-spinner";
 import { getFormattedDate } from "../../../../_utils/date";
 import { useGetRecentDriverActions } from "../../../../api/action";
 import * as S from "./recent-history.style";
+import DriverActionDetailModal from "../../../../_components/driver-action-detail/driver-action-detail-modal";
 
 // COMPONENT: 최근 안전점수 기록
 export default function RecentHistory() {
@@ -12,6 +14,15 @@ export default function RecentHistory() {
     isError,
     isSuccess,
   } = useGetRecentDriverActions();
+
+  const [selectedActionId, setSelectedActionId] = useState<number | null>(null);
+  const handleDriverActionDetailModalClick = (driverActionId: number) => {
+    setSelectedActionId(driverActionId);
+  };
+
+  const closeDriverActionDetailModal = () => {
+    setSelectedActionId(null);
+  };
 
   // 로딩 중일 때 스피너 표시
   if (isLoading)
@@ -40,7 +51,14 @@ export default function RecentHistory() {
                 recentDriverActionItem.recorded_at
               );
               return (
-                <S.HistoryItem key={recentDriverActionItem.id}>
+                <S.HistoryItem
+                  key={recentDriverActionItem.id}
+                  onClick={() =>
+                    handleDriverActionDetailModalClick(
+                      recentDriverActionItem.id
+                    )
+                  }
+                >
                   <S.HistoryIcon
                     color={
                       recentDriverActionItem.score >= 0.0
@@ -57,6 +75,12 @@ export default function RecentHistory() {
             })}
           </S.RecentHistoryWrapper>
         </S.RecentHistoryContainer>
+        {selectedActionId && (
+          <DriverActionDetailModal
+            actionId={selectedActionId}
+            onClose={closeDriverActionDetailModal}
+          />
+        )}
       </ContentBlockWrapper>
     );
   }
