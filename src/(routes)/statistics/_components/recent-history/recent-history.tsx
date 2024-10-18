@@ -59,13 +59,7 @@ export default function RecentHistory() {
                     )
                   }
                 >
-                  <S.HistoryIcon
-                    color={
-                      recentDriverActionItem.score >= 0.0
-                        ? "#2B6CB0"
-                        : "#FF0000"
-                    }
-                  />
+                  <S.HistoryIcon score={recentDriverActionItem.score} />
                   <S.RecordedAt>{recordedAt}</S.RecordedAt>
                   <S.ScoreWrapper score={recentDriverActionItem.score}>
                     {recentDriverActionItem.score}

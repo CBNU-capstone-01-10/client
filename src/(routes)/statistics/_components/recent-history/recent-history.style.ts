@@ -36,13 +36,17 @@ export const HistoryItem = styled.div`
   box-shadow: 0px 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
 `;
 
-// 왼쪽의 색상이 있는 원형 아이콘
-export const HistoryIcon = styled.div<{ color: string }>`
+interface IRecentDriverActionItemProps {
+  score: number;
+}
+// 색상이 있는 원형 도형
+export const HistoryIcon = styled.div<IRecentDriverActionItemProps>`
   width: 0.75rem;
   height: 0.75rem;
   border-radius: 50%;
-  background-color: ${({ color }) => color};
   margin-right: 3rem;
+  background-color: ${({ score, theme }) =>
+    score < 0 ? theme.primaryCautionBgColor : theme.primaryColor};
 `;
 
 // 날짜와 시간을 표시하는 텍스트
@@ -52,9 +56,10 @@ export const RecordedAt = styled.div`
 `;
 
 // 점수를 감싸는 래퍼
-export const ScoreWrapper = styled.div<{ score: number }>`
+export const ScoreWrapper = styled.div<IRecentDriverActionItemProps>`
   font-size: 1rem;
   font-weight: bold;
-  color: ${({ score }) => (score >= 0.0 ? "#2B6CB0" : "#FF0000")};
+  color: ${({ score, theme }) =>
+    score < 0 ? theme.primaryCautionBgColor : theme.primaryColor};
   margin-left: auto;
 `;
