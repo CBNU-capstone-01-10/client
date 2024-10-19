@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-  position: relative;
-  z-index: 100;
+  position: sticky;
+  top: 0;
 `;
 export const MyScoreWrapper = styled.div`
   height: fit-content;
