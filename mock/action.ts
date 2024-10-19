@@ -69,7 +69,7 @@ export const setupMockForActions = (mock: MockAdapter) => {
    */
   mock.onGet(new RegExp("/api/actions/\\d+")).reply((config) => {
     const actionId = parseInt(config.url.split("/").pop(), 10);
-    const action = successResponseData["get-action"].response.find(
+    const action = successResponseData["get-action"].find(
       (item) => item.id === actionId
     );
 
@@ -126,7 +126,7 @@ export const setupMockForActions = (mock: MockAdapter) => {
 
     // 모든 조건이 만족되었을 때 성공 응답
     // response 배열에서 랜덤한 인덱스 선택
-    const responseArray = successResponseData["post-actions"].response;
+    const responseArray = successResponseData["post-actions"];
     const randomIndex = Math.floor(Math.random() * responseArray.length);
     const randomResponse = { ...responseArray[randomIndex] };
 
@@ -138,6 +138,6 @@ export const setupMockForActions = (mock: MockAdapter) => {
     randomResponse.recorded_at = new Date().toISOString();
 
     // 성공 응답으로 랜덤한 원소 반환
-    return [201, randomResponse];
+    return [201, { response: randomResponse }];
   });
 };
