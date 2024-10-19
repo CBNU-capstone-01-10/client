@@ -1,4 +1,9 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  useInfiniteQuery,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import isServerError from "../error/is-server-error";
 import { IDriverActionResponse } from "../(routes)/record/types/type";
@@ -42,22 +47,25 @@ export const usePostDriverAction = () => {
   });
 };
 
-// GET: 최근 운전자 행위 결과 다건 조회
+// GET: 최근 운전자 행위 결과 다건 조회 (무한스크롤)
 export const useGetRecentDriverActions = () => {
-  return useQuery<IDriverActionResponse[]>({
+  return useInfiniteQuery({
     queryKey: ["recent-driver-actions"],
-    queryFn: async () => {
+    queryFn: async ({ pageParam }) => {
       const recentDriverActionsURL = `/api/actions`;
 
       return await axios
         .get(recentDriverActionsURL, {
-          params: { before_m: DESIRED_BEFORE_MINUTES },
+          params: { before_m: DESIRED_BEFORE_MINUTES, page: pageParam },
         })
         .then((res) => {
+          console.log("🚀 ~ .then ~ res.data.response:", res.data.response);
           return res.data.response;
         });
     },
-    retry: 0,
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, allPages) =>
+      lastPage.length ? allPages.length + 1 : undefined,
   });
 };
 
