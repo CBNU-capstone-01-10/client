@@ -1,6 +1,13 @@
 import styled from "styled-components";
 import { IIconProps } from "../../interface/IconInterface";
 
+export const IconContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 export const IconWrapper = styled.div<Omit<IIconProps, "icon">>`
   display: flex;
   flex-direction: column;
