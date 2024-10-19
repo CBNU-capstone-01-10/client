@@ -8,10 +8,10 @@ export const setupMockForActions = (mock: MockAdapter) => {
    * GET: 다건
    */
   mock.onGet("/api/actions").reply((config) => {
-    const { before_m, date_start, date_end } = config.params;
+    const { before_m, date_start, date_end, page } = config.params;
 
     // 올바른 쿼리 파라미터 조합 및 값인지 검증
-    if (before_m && (date_start || date_end)) {
+    if (before_m && (date_start || date_end) && page) {
       return [
         400,
         {
@@ -47,9 +47,20 @@ export const setupMockForActions = (mock: MockAdapter) => {
 
     // 올바른 요청일 때 성공 응답 반환
     if (before_m) {
-      return [200, successResponseData["get-recent-actions"]];
+      const allMockData = successResponseData["get-recent-actions"]; // 모든 데이터를 담고 있는 배열
+      const itemsPerPage = 10; // 페이지당 아이템 수
+      // const totalPages = Math.ceil(allMockData.length / itemsPerPage); // 전체 페이지 수
+      // 요청한 페이지에 해당하는 데이터 반환
+      const paginatedData = allMockData.slice(
+        (page - 1) * itemsPerPage,
+        page * itemsPerPage
+      );
+      return [200, { response: paginatedData }];
     } else {
-      return [200, successResponseData["get-recent-seven-days-score"]];
+      return [
+        200,
+        { response: successResponseData["get-recent-seven-days-score"] },
+      ];
     }
   });
 
