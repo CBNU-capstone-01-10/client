@@ -138,6 +138,6 @@ export const setupMockForActions = (mock: MockAdapter) => {
     randomResponse.recorded_at = new Date().toISOString();
 
     // 성공 응답으로 랜덤한 원소 반환
-    return [201, { response: randomResponse }];
+    return [201, { randomResponse }];
   });
 };
