@@ -25,7 +25,7 @@ export default function Page() {
 
   useEffect(() => {
     if (isLoginSuccess) {
-      navigate("/record");
+      navigate("/home");
     }
     if (isLoginError) {
       location.reload();
