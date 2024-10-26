@@ -7,10 +7,14 @@ export interface ILoginParams {
 // 회원가입시 입력 파라미터
 export interface ISignupParams {
   username: string;
+  alias: string;
+  address: string;
   email: string;
   password: string;
   password_confirm: string;
 }
+// 인증받기 위한 최소한의 필드
+export type IUnverifiedAccountData = Omit<ISignupParams, "password_confirm">;
 
 // 회원가입시 응답값
 export interface IRegisterResponseData {
