@@ -6,7 +6,11 @@ import {
   useConfirmVerificationToken,
   useRegisterEmail,
 } from "../../../../../api/account";
-import { ISignupParams, IVerificationParams } from "../../../types/type";
+import {
+  ISignupParams,
+  IUnverifiedAccountData,
+  IVerificationParams,
+} from "../../../types/type";
 import { useNavigate } from "react-router";
 
 type TFieldValues = ISignupParams &
@@ -34,11 +38,13 @@ export default function SetupEmail({ onPrevious }: ISetupEmailProps) {
 
   // HANDLER: 이메일 인증 요청
   const handleRegisterAccount = () => {
-    const { username, email, password } = getValues();
-    const unverifiedAccountData: Omit<ISignupParams, "password_confirm"> = {
+    const { username, email, password, alias, address } = getValues();
+    const unverifiedAccountData: IUnverifiedAccountData = {
       username,
       email,
       password,
+      alias,
+      address,
     };
     registerAccount(unverifiedAccountData);
   };

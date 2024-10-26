@@ -5,6 +5,7 @@ import {
   ILoginParams,
   IRegisterResponseData,
   IVerificationParams,
+  IUnverifiedAccountData,
 } from "../(routes)/(account)/types/type";
 import isServerError from "../error/is-server-error";
 
@@ -13,7 +14,7 @@ export const useRegisterEmail = () => {
   return useMutation<
     AxiosResponse<IRegisterResponseData>,
     AxiosError,
-    Omit<ISignupParams, "password_confirm">
+    IUnverifiedAccountData
   >({
     mutationFn: async (unverifiedAccountData) => {
       const registerURL = `api/register`;
