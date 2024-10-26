@@ -1,8 +1,8 @@
+// COMPONENT: 회원가입 이름 입력 단계
 import { useFormContext } from "react-hook-form";
 import * as S from "./setup-step.style";
 import { ISignupParams } from "../../../types/type";
 
-// STEP-PAGE: 이름 입력
 type IFieldValues = Pick<ISignupParams, "username">;
 interface ISetupUsernameProps {
   onNext: () => void;

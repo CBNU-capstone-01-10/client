@@ -1,3 +1,4 @@
+// COMPONENT: 계정 생성 단계들을 모아놓은 Funnel
 import React from "react";
 import { FunnelProps, StepProps } from "../../../../hooks/useFunnel";
 import SetupUsername from "./account-setup-step/setup-username";
@@ -11,7 +12,6 @@ export interface IAccountSetupProps {
   Funnel: React.ComponentType<FunnelProps>;
   Step: React.ComponentType<StepProps>;
 }
-
 export default function AccountSetup({
   steps,
   nextClickHandler,

@@ -1,3 +1,4 @@
+// COMPONENT: 실시간 안전 점수 로그
 import { useEffect } from "react";
 import OvalLoadingSpinner from "../../../../_components/loading-spinner/oval-loading-spinner";
 import getElapsedTime from "../../../../_utils/time";
@@ -5,9 +6,8 @@ import * as S from "./LiveScoreLog.style";
 import { IDriverActionResponse } from "../../types/type";
 import { useDriverActionsStore } from "../../../../store/use-driver-actions";
 
-// COMPONENT: 실시간 안전 점수 로그
 interface ILiveScoreLogProps {
-  newDriverAction?: IDriverActionResponse;
+  newDriverAction?: IDriverActionResponse | undefined;
 }
 export default function LiveScoreLog({ newDriverAction }: ILiveScoreLogProps) {
   const { driverActions, addDriverAction } = useDriverActionsStore();

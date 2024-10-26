@@ -1,3 +1,4 @@
+// COMPONENT: 회원가입 이메일 입력 단계
 import { useFormContext } from "react-hook-form";
 import * as S from "./setup-step.style";
 import { useEffect, useState } from "react";
@@ -8,12 +9,11 @@ import {
 import { ISignupParams, IVerificationParams } from "../../../types/type";
 import { useNavigate } from "react-router";
 
+type TFieldValues = ISignupParams &
+  Pick<IVerificationParams, "verificationToken">;
 interface ISetupEmailProps {
   onPrevious: () => void;
 }
-// STEP-PAGE: 이메일 인증
-type TFieldValues = ISignupParams &
-  Pick<IVerificationParams, "verificationToken">;
 export default function SetupEmail({ onPrevious }: ISetupEmailProps) {
   const [userId, setUserId] = useState<string>("");
   const navigate = useNavigate();
@@ -25,7 +25,6 @@ export default function SetupEmail({ onPrevious }: ISetupEmailProps) {
   } = useFormContext<TFieldValues>();
 
   // POST: 임시 등록 (이메일 인증 전)
-  // RQ
   const {
     data: responseData,
     mutate: registerAccount,
@@ -33,9 +32,8 @@ export default function SetupEmail({ onPrevious }: ISetupEmailProps) {
     isError: isRegisteredError,
   } = useRegisterEmail();
 
-  // HANDLER
+  // HANDLER: 이메일 인증 요청
   const handleRegisterAccount = () => {
-    // RHF
     const { username, email, password } = getValues();
     const unverifiedAccountData: Omit<ISignupParams, "password_confirm"> = {
       username,
@@ -57,7 +55,6 @@ export default function SetupEmail({ onPrevious }: ISetupEmailProps) {
   }, [isRegisteredSuccess, isRegisteredError, responseData]);
 
   // POST: 인증토큰 확인 (회원가입 완료)
-  // RQ
   const {
     mutate: confirmVerificationToken,
     isSuccess: isConfirmedSuccess,
@@ -67,7 +64,6 @@ export default function SetupEmail({ onPrevious }: ISetupEmailProps) {
 
   // HANDLER
   const handleConfirmVerificationToken = () => {
-    // RHF
     const verificationToken = getValues("verificationToken");
     const verificationData: IVerificationParams = { userId, verificationToken };
     confirmVerificationToken(verificationData);
@@ -104,7 +100,7 @@ export default function SetupEmail({ onPrevious }: ISetupEmailProps) {
         )}
         <S.InteractionBtn
           type="button"
-          onClick={handleSubmit(handleRegisterAccount)} // Use handleSubmit here
+          onClick={handleSubmit(handleRegisterAccount)}
           width="6rem"
         >
           메일 전송

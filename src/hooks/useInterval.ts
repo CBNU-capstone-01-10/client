@@ -1,3 +1,4 @@
+// HOOK: 콜백함수를 주기적으로 수행
 import { useEffect, useRef } from "react";
 
 export default function (callback: () => void, delay: number): void {

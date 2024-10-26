@@ -1,3 +1,4 @@
+// HOOK: 토스의 funnel 개념으로 step 관리를 할 수 있는 라이브러리
 import { ReactElement, ReactNode, useState } from "react";
 
 export interface StepProps {
@@ -9,7 +10,6 @@ export interface FunnelProps {
   children: Array<ReactElement<StepProps>>;
 }
 
-// HOOK: 토스의 funnel 개념으로 step 관리를 할 수 있는 라이브러리
 export const useFunnel = (defaultStep: string) => {
   // state를 통해 현재 스텝을 관리한다.
   // setStep 함수를 통해 현재 스텝을 변경할 수 있다.

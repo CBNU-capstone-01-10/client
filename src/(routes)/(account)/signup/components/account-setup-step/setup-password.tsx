@@ -1,8 +1,8 @@
+// COMPONENT: 회원가입 비밀번호 입력 단계
 import { useFormContext, useWatch } from "react-hook-form";
 import * as S from "./setup-step.style";
 import { ISignupParams } from "../../../types/type";
 
-// STEP-PAGE: 비밀번호 입력
 type IFieldValues = Pick<ISignupParams, "password" | "password_confirm">;
 interface ISetupPasswordProps {
   onNext: () => void;

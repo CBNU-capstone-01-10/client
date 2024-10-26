@@ -1,3 +1,4 @@
+// HOOK: 기기 위치정보 조회
 import { useState, useEffect, useRef } from "react";
 
 export default function useWatchLocation(geoOptions = {}) {
@@ -8,8 +9,6 @@ export default function useWatchLocation(geoOptions = {}) {
 
   // watchPosition 성공시 실행하는 핸들러
   const handleSuccess = (pos: GeolocationPosition) => {
-    console.log(pos);
-
     setLocation(pos);
   };
 
@@ -45,7 +44,7 @@ export default function useWatchLocation(geoOptions = {}) {
       geoOptions
     );
 
-    // Clear the location watch instance when React unmounts the used component
+    // UNMOUNT
     return cancelLocationWatch;
   }, [geoOptions]);
 
