@@ -9,34 +9,37 @@ import isServerError from "../error/is-server-error";
 import { IDriverActionResponse } from "../(routes)/record/types/type";
 import { DESIRED_BEFORE_MINUTES } from "../constants/constants";
 import dayjs from "dayjs";
+import { useState } from "react";
+import { IServerErrorResponse } from "../interface/error-interface";
 
 // POST: 운전자 행위 데이터 전송
 export const usePostDriverAction = () => {
   // const queryClient = useQueryClient();
-  return useMutation<AxiosResponse, AxiosError, FormData>({
+  return useMutation<
+    IDriverActionResponse,
+    AxiosError<IServerErrorResponse>,
+    FormData
+  >({
     mutationFn: async (driverActionData) => {
       const driverActionURL = `/api/actions`;
-      return await axios.post(driverActionURL, driverActionData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-    },
-    onSuccess: (res) => {
-      return res.data.response;
+      return await axios
+        .post<IDriverActionResponse, AxiosResponse<IDriverActionResponse>>(
+          driverActionURL,
+          driverActionData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        )
+        .then((res) => {
+          return res.data;
+        });
     },
     onError: (err) => {
       if (!isServerError(err)) {
         alert("에러가 발생했습니다. 관리자에게 문의해주세요.");
         return;
-      }
-      switch (err.response?.status) {
-        case 400:
-          alert(err.response.data.message);
-          break;
-        default:
-          alert("잠시후 다시 시도해주세요.");
-          break;
       }
     },
   });
@@ -54,7 +57,7 @@ export const useGetRecentDriverActions = () => {
           params: { before_m: DESIRED_BEFORE_MINUTES, page: pageParam },
         })
         .then((res) => {
-          return res.data.response;
+          return res.data;
         });
     },
     initialPageParam: 1,
@@ -95,7 +98,7 @@ export const useGetRecentSevenDaysDriverActions = () => {
           params: { date_start, date_end },
         })
         .then((res) => {
-          return res.data.response;
+          return res.data;
         });
     },
     retry: 0,
