@@ -17,7 +17,7 @@ export default function LogoutButton() {
   // ROUTE: 로그아웃 성공
   useEffect(() => {
     if (isLogoutSuccess) {
-      navigate("/signin");
+      navigate("/");
     }
   }, [isLogoutSuccess, navigate]);
 
