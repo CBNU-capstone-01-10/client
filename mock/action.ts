@@ -128,16 +128,16 @@ export const setupMockForActions = (mock: MockAdapter) => {
     // response 배열에서 랜덤한 인덱스 선택
     const responseArray = successResponseData["post-actions"];
     const randomIndex = Math.floor(Math.random() * responseArray.length);
-    const randomResponse = { ...responseArray[randomIndex] };
+    const response = { ...responseArray[randomIndex] };
 
     // 랜덤하게 선택된 원소의 값 수정
     // const newId = uuidv4();
-    // randomResponse.id = newId;
-    randomResponse.location_x = parseFloat(location_x);
-    randomResponse.location_y = parseFloat(location_y);
-    randomResponse.recorded_at = new Date().toISOString();
+    // response.id = newId;
+    response.location_x = parseFloat(location_x);
+    response.location_y = parseFloat(location_y);
+    response.recorded_at = new Date().toISOString();
 
     // 성공 응답으로 랜덤한 원소 반환
-    return [201, { randomResponse }];
+    return [201, response];
   });
 };
