@@ -4,6 +4,8 @@ import { FunnelProps, StepProps } from "../../../../hooks/useFunnel";
 import SetupUsername from "./account-setup-step/setup-username";
 import SetupPassword from "./account-setup-step/setup-password";
 import SetupEmail from "./account-setup-step/setup-email";
+import SetupAlias from "./account-setup-step/setup-alias";
+import SetupAddress from "./account-setup-step/setup-address";
 
 export interface IAccountSetupProps {
   steps: string[];
@@ -26,15 +28,29 @@ export default function AccountSetup({
           <SetupUsername onNext={() => nextClickHandler(steps[1])} />
         </Step>
 
+        <Step name="별명 설정">
+          <SetupAlias
+            onPrevious={() => prevClickHandler(steps[0])}
+            onNext={() => nextClickHandler(steps[2])}
+          />
+        </Step>
+
+        <Step name="주소 설정">
+          <SetupAddress
+            onPrevious={() => prevClickHandler(steps[1])}
+            onNext={() => nextClickHandler(steps[3])}
+          />
+        </Step>
+
         <Step name="비밀번호 설정">
           <SetupPassword
-            onNext={() => nextClickHandler(steps[2])}
-            onPrevious={() => prevClickHandler(steps[0])}
+            onPrevious={() => prevClickHandler(steps[2])}
+            onNext={() => nextClickHandler(steps[4])}
           />
         </Step>
 
         <Step name="이메일 인증">
-          <SetupEmail onPrevious={() => prevClickHandler(steps[1])} />
+          <SetupEmail onPrevious={() => prevClickHandler(steps[3])} />
         </Step>
       </Funnel>
     </>
