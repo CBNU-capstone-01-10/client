@@ -1,3 +1,4 @@
+// COMPONENT: 개인정보 수정 폼
 import * as S from "./personal-info-form.style";
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import { useEffect, useRef, useState } from "react";
@@ -5,7 +6,6 @@ import { useEditPersonalInfo } from "../../../../api/user";
 import { IPersonalInfo } from "../../types/types";
 import CustomModal from "../../../../_components/modal/custom-modal";
 
-// COMPONENT: 개인정보 수정 폼
 interface IPersonalInfoFormProps {
   existingPersonalInfo: IPersonalInfo;
   isModalOpen: boolean;
@@ -16,10 +16,15 @@ export default function PersonalInfoForm({
   isModalOpen,
   closeModal,
 }: IPersonalInfoFormProps) {
-  const { pfp, username, alias, email, address } = existingPersonalInfo;
+  const {
+    pfp: { user_id, curr, is_default },
+    username,
+    alias,
+    email,
+    address,
+  } = existingPersonalInfo;
   const methods = useForm<IPersonalInfo>({
     defaultValues: {
-      pfp,
       username,
       alias,
       email,
@@ -31,8 +36,7 @@ export default function PersonalInfoForm({
   const { register, handleSubmit } = methods;
 
   const [profilePicture, setProfilePicture] = useState<File | null>(null);
-  const [currentPfp, setCurrentPfp] = useState<string | null>(pfp || null);
-
+  const [currentPfp, setCurrentPfp] = useState<string | null>(curr || null);
   // HANDLER: 프로필 사진 파일 선택
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -42,7 +46,11 @@ export default function PersonalInfoForm({
   };
 
   // PUT: 사용자 개인정보
-  const { mutate: updatePersonalInfo, isSuccess } = useEditPersonalInfo();
+  const {
+    mutate: updatePersonalInfo,
+    isSuccess,
+    reset,
+  } = useEditPersonalInfo(user_id);
   const onSubmit: SubmitHandler<IPersonalInfo> = (data) => {
     const newPersonalInfoData = new FormData();
     if (profilePicture) {
@@ -58,13 +66,16 @@ export default function PersonalInfoForm({
   useEffect(() => {
     if (isSuccess) {
       alert("개인정보를 성공적으로 수정하였습니다!");
-      location.reload();
+      closeModal();
+      reset();
     }
-  }, [isSuccess]);
+  }, [isSuccess, closeModal, reset]);
 
   useEffect(() => {
-    setCurrentPfp(pfp || null);
-  }, [pfp]);
+    if (is_default) {
+      setCurrentPfp(curr || null);
+    }
+  }, [curr, is_default]);
 
   return (
     <CustomModal
@@ -124,7 +135,7 @@ export default function PersonalInfoForm({
               />
             </S.UserAddress>
           </S.PersonalInfoWrapper>
-          <S.CompleteButton type="submit">완료</S.CompleteButton>
+          <S.CompleteButton type="submit">수정 완료</S.CompleteButton>
         </S.Form>
       </FormProvider>
     </CustomModal>
