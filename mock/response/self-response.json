@@ -1,6 +1,10 @@
 {
   "get-self": {
-    "pfp": "https://via.placeholder.com/80",
+    "pfp": {
+      "user_id": 1,
+      "curr": "/public/assets/nestNet-image-logo.png",
+      "is_default": true
+    },
     "username": "허왕눈이",
     "alias": "방어운전의 고수",
     "email": "john.doe@example.com",
