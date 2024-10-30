@@ -83,13 +83,29 @@ export const UserAddress = styled.div`
   font-weight: 600;
   width: 100%;
 `;
-export const CompleteButton = styled.button`
-  width: 3.6rem;
-  margin-left: auto;
-  height: 2.2rem;
+export const BtnWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  gap: 1rem;
+`;
+export const CancelButton = styled.button`
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  height: 2.4rem;
   background-color: #f0f3fa;
   border-radius: 0.6rem;
   font-weight: 900;
-  color: ${({ theme }) => theme.primaryColor};
-  float: right;
+  font-size: 0.9rem;
+  color: ${({ theme }) => theme};
+`;
+export const CompleteButton = styled.button`
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  height: 2.4rem;
+  border-radius: 0.6rem;
+  font-size: 0.9rem;
+  font-weight: 900;
+  background-color: ${({ theme }) => theme.primaryColor};
+  color: #f0f3fa;
 `;

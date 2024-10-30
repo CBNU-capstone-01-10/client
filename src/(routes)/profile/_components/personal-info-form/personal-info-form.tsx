@@ -135,7 +135,12 @@ export default function PersonalInfoForm({
               />
             </S.UserAddress>
           </S.PersonalInfoWrapper>
-          <S.CompleteButton type="submit">수정 완료</S.CompleteButton>
+          <S.BtnWrapper>
+            <S.CancelButton type="button" onClick={() => closeModal()}>
+              취소
+            </S.CancelButton>
+            <S.CompleteButton type="submit">수정 완료</S.CompleteButton>
+          </S.BtnWrapper>
         </S.Form>
       </FormProvider>
     </CustomModal>
