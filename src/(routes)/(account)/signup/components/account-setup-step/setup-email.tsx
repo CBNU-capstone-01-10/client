@@ -78,7 +78,7 @@ export default function SetupEmail({ onPrevious }: ISetupEmailProps) {
   useEffect(() => {
     if (isConfirmedSuccess) {
       alert("이메일이 인증에 성공하였습니다. 생성한 계정으로 로그인해주세요.");
-      navigate("/signin");
+      navigate("/");
     }
     if (isConfirmedError) {
       alert(error.message);
