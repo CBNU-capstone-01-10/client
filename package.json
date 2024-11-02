@@ -21,6 +21,7 @@
     "dayjs": "^1.11.13",
     "happy-dom": "^15.0.0",
     "json-server": "^1.0.0-beta.3",
+    "lottie-react": "^2.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.52.1",
