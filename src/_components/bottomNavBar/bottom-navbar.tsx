@@ -2,7 +2,7 @@ import NavIcon from "../icon/navigation-icon";
 import { SlCamrecorder } from "react-icons/sl";
 import { FaRegUser } from "react-icons/fa";
 import { LuBarChart3 } from "react-icons/lu";
-import * as S from "./BottomNavBar.style";
+import * as S from "./bottom-navbar.style";
 import { SetStateAction } from "react";
 
 // COMPONENT: 하단 네비게이션 바
