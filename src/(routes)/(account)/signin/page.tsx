@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useLogin } from "../../../api/account";
 import { useEffect } from "react";
 import { ILoginParams } from "../types/type";
+import WangnooniLottieLogo from "../../../_components/wangnooni-logo/wangnooni-lottie-logo";
 
 // 로그인 페이지
 export default function Page() {
@@ -39,7 +40,9 @@ export default function Page() {
     >
       <S.FormContent>
         <S.Header>
-          <S.Title>로그인</S.Title>
+          <S.HeaderTitle>wang</S.HeaderTitle>
+          <WangnooniLottieLogo />
+          <S.HeaderTitle>ni</S.HeaderTitle>
         </S.Header>
         <S.Input
           id="email"

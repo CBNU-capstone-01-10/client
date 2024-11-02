@@ -20,8 +20,16 @@ export const FormContent = styled.div`
 `;
 
 export const Header = styled.header`
-  margin-bottom: 3rem;
+  width: 8rem;
+  /* height: fit-content; */
+  margin-bottom: 1.6rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   text-align: center;
+`;
+export const HeaderTitle = styled.h1`
+  font-size: 1.6rem;
 `;
 
 export const Title = styled.h3`
