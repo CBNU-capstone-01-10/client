@@ -9,13 +9,14 @@ export const Wrapper = styled.div`
   bottom: 0;
 `;
 export const Background = styled.nav`
-  width: 100%;
+  width: 94%;
   height: 100%;
   background-color: white;
   padding: 1.4rem 0;
+  margin: 0 auto 0.8rem;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  border-top-left-radius: 2rem;
-  border-top-right-radius: 2rem;
+  box-shadow: rgba(13, 38, 76, 0.19) 0px 9px 20px;
+  border-radius: 2rem;
 `;
