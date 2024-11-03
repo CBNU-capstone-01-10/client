@@ -1,3 +1,4 @@
+// COMPONENT: 커스텀 모달창
 import { ReactNode } from "react";
 import Modal from "react-modal";
 
@@ -14,7 +15,6 @@ const defaultStyles = {
   },
 };
 
-// COMPONENT: 커스텀 모달창
 interface ICustomModalProps {
   isOpen: boolean;
   onRequestClose: () => void;
@@ -32,7 +32,7 @@ export default function CustomModal({
   return (
     <Modal
       isOpen={isOpen}
-      onRequestClose={onRequestClose}
+      onRequestClose={() => onRequestClose()}
       style={customStyles}
       contentLabel={contentLabel}
       appElement={document.getElementById("root")!}

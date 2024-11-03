@@ -1,6 +1,6 @@
+// COMPONENT: 로딩스피너
 import { Oval } from "react-loader-spinner";
 
-// COMPONENT: 로딩스피너
 export default function OvalLoadingSpinner() {
   return (
     <Oval
