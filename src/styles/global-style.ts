@@ -1,9 +1,22 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle, keyframes } from "styled-components";
 import reset from "styled-reset";
 
 // Global Constants
 const TOP_NAVBAR_HEIGTH = "10rem";
 const BTM_NAVBAR_HEIGTH = "5.5rem";
+
+// KEYFRAMES: 펄스 효과
+export const pulsateFwd = keyframes`
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.01);
+  }
+  100% {
+    transform: scale(1);
+  }
+`;
 
 export const GlobalStyle = createGlobalStyle`
   ${reset}
