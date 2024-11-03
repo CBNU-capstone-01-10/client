@@ -17,14 +17,12 @@ export const useDriverActionsStore = create<IDriverActionsState>((set) => ({
 
       // 가장 최근 데이터와 newDriverAction의 label이 같은지 확인
       if (recentAction && newDriverAction.label === recentAction.label) {
-        // score가 양수면 +10, 음수면 -10 적용
-        const updatedScore =
-          recentAction.score > 0
-            ? recentAction.score + 10
-            : recentAction.score - 10;
-
+        // label이 같은 경우: recentAction의 score에 newDriverAction의 score를 더함
         // 기존 배열에서 가장 최근 데이터를 업데이트된 score로 변경
-        const updatedRecentAction = { ...recentAction, score: updatedScore };
+        const updatedRecentAction = {
+          ...recentAction,
+          score: recentAction.score + newDriverAction.score,
+        };
 
         return {
           driverActions: [updatedRecentAction, ...state.driverActions.slice(1)],
