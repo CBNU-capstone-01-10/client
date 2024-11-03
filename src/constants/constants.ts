@@ -4,3 +4,5 @@ export const DESIRED_BEFORE_MINUTES = 30;
 export const SEND_DRIVER_IMAGE_INTERVAL_TIME = 1000;
 // 실시간 점수 로그 최대 개수
 export const MAX_LIVE_SCORE_LOG_SIZE = 5;
+// 요일
+export const WEEK_DAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
