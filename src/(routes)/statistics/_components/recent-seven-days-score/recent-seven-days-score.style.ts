@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const RecentSevenDaysScoreWrapper = styled.div`
+  width: 100%;
+  height: 100%;
   padding: 1rem;
 `;
 export const ChartHeader = styled.div`
