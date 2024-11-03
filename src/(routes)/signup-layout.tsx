@@ -1,5 +1,5 @@
 import { Outlet } from "react-router";
-import TopNavBar from "../_components/topNavBar/TopNavBar";
+import TopNavBar from "../_components/topNavBar/top-navbar";
 import styled from "styled-components";
 import NavIcon from "../_components/icon/navigation-icon";
 import { MdHomeFilled } from "react-icons/md";

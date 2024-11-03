@@ -1,4 +1,4 @@
-import * as S from "./styles/TopNavBar.style";
+import * as S from "./top-navbar.style";
 
 // COMPONENT: 상단 네비게이션 바
 interface ITopNavBarProps {

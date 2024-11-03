@@ -9,15 +9,13 @@ export const Wrapper = styled.div<IWrapperProps>`
   right: 0;
   top: 0;
   width: 100%;
-  text-align: center;
   height: ${(props) => props.height || "var(--top-navbar-height)"};
+  text-align: center;
 `;
 export const Background = styled.nav`
   width: 100%;
   height: 100%;
-  background-color: ${({ theme }) => theme.primaryColor};
-  border-bottom-left-radius: 3rem;
-  border-bottom-right-radius: 3rem;
+  /* background-color: ${({ theme }) => theme.primaryColor}; */
   display: flex;
   flex-direction: column;
   justify-content: center;
