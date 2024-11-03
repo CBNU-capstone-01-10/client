@@ -2,13 +2,14 @@ import { useEffect, useRef, useState } from "react";
 import useWatchLocation from "../../hooks/useWatchLocation";
 import drawVideoSnapshot from "./_utils/drawVideoSnapshot";
 import useInterval from "../../hooks/useInterval";
-import LiveScoreLog from "./_components/live-score-log/LiveScoreLog";
-import * as S from "./page.style";
 import TodayScore from "./_components/today-score/today-score";
 import { usePostDriverAction } from "../../api/action";
 import { convertDataURLToFile } from "../../_utils/convertor";
 import { SEND_DRIVER_IMAGE_INTERVAL_TIME } from "../../constants/constants";
 import { getCameraPermission } from "../../_utils/camera";
+import ScoreGauge from "../../_components/score-gauge/score-gauge";
+import { useDriverActionsStore } from "../../store/use-driver-actions";
+import * as S from "./page.style";
 
 const geoOptions = {
   enableHighAccuracy: true,
@@ -22,6 +23,7 @@ export default function Page() {
   const [driverImage, setDriverImage] = useState<File>();
   const { location, cancelLocationWatch, errorMessage } =
     useWatchLocation(geoOptions);
+  const { addDriverAction } = useDriverActionsStore();
 
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -50,6 +52,12 @@ export default function Page() {
   }, SEND_DRIVER_IMAGE_INTERVAL_TIME);
 
   useEffect(() => {
+    if (newDriverActionFeedback) {
+      addDriverAction(newDriverActionFeedback);
+    }
+  }, [newDriverActionFeedback, addDriverAction]);
+
+  useEffect(() => {
     if (!videoRef.current) {
       return;
     }
@@ -72,21 +80,23 @@ export default function Page() {
   }, []);
 
   return (
-    <S.Wrapper>
-      <S.ContentWrapper>
-        <TodayScore />
-        <S.VideoWrapper>
-          <S.VideoElement
-            ref={videoRef}
-            id="local-video"
-            autoPlay
-            muted
-            loop
-            playsInline
-          />
-        </S.VideoWrapper>
-        <LiveScoreLog newDriverAction={newDriverActionFeedback} />
-      </S.ContentWrapper>
-    </S.Wrapper>
+    <>
+      <S.VideoWrapper>
+        <S.VideoElement
+          ref={videoRef}
+          id="local-video"
+          autoPlay
+          muted
+          loop
+          playsInline
+        />
+      </S.VideoWrapper>
+      <S.Wrapper>
+        <S.ContentWrapper>
+          <TodayScore />
+          <ScoreGauge />
+        </S.ContentWrapper>
+      </S.Wrapper>
+    </>
   );
 }
