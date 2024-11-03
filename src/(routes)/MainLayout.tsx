@@ -1,4 +1,4 @@
-import BottomNavBar from "../_components/bottomNavBar/BottomNavBar";
+import BottomNavBar from "../_components/bottomNavBar/bottom-navbar";
 import TopNavBar from "../_components/topNavBar/TopNavBar";
 import RecordPage from "../(routes)/record/page";
 import StatisticsPage from "../(routes)/statistics/page";
