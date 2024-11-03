@@ -55,12 +55,9 @@ export const setupMockForActions = (mock: MockAdapter) => {
         (page - 1) * itemsPerPage,
         page * itemsPerPage
       );
-      return [200, { response: paginatedData }];
+      return [200, paginatedData];
     } else {
-      return [
-        200,
-        { response: successResponseData["get-recent-seven-days-score"] },
-      ];
+      return [200, successResponseData["get-recent-seven-days-score"]];
     }
   });
 
@@ -75,7 +72,7 @@ export const setupMockForActions = (mock: MockAdapter) => {
 
     if (action) {
       // 요청에 해당하는 데이터가 있을 때
-      return [200, { response: action }];
+      return [200, action];
     } else {
       // 요청에 해당하는 데이터가 없을 때
       return [404, { message: "Action not found" }];
