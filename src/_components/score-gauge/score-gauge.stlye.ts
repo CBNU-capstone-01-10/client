@@ -18,14 +18,19 @@ interface IScoreBarProps {
 }
 export const ScoreBar = styled.div.attrs<IScoreBarProps>((props) => ({
   style: {
-    background: `conic-gradient(${props.score >= 0 ? "#007bff" : "#ff4d4d"} ${
-      props.$scoreStartValue * 3.6
-    }deg, #ededed 0deg)`,
+    background: `conic-gradient(
+      from 0deg,
+      ${props.score >= 0 ? `rgba(85,91,255,0.7)` : `rgba(240, 46, 170,0.7)`}
+      ,
+      ${props.score >= 0 ? `rgba(45,53,255,0.7)` : `rgba(240, 46, 170,0.8)`}
+      ,
+      ${props.score >= 0 ? `rgba(0,9,255,0.7)` : `rgba(240, 46, 170,0.9)`}
+    )`,
   },
 }))<IScoreBarProps>`
   position: relative;
-  width: 18.5rem;
-  height: 18.5rem;
+  width: 19rem;
+  height: 19rem;
   border-radius: 50%;
   transition: background 0.1s linear;
   display: flex;
@@ -35,26 +40,42 @@ export const ScoreBar = styled.div.attrs<IScoreBarProps>((props) => ({
   &:after {
     content: "";
     position: absolute;
-    width: 16.5rem;
-    height: 16.5rem;
+    width: 19rem;
+    height: 19rem;
     border-radius: 50%;
-    background-color: #fff;
+    background: conic-gradient(
+      transparent ${(props) => props.$scoreStartValue * 3.6}deg,
+      #ffffff 0deg
+    );
   }
 `;
 
-interface IScoreLabelProps {
-  label: string;
-}
-export const ScoreLabel = styled.span<IScoreLabelProps>`
+export const ScoreLabelWrapper = styled.div`
+  width: 18rem;
+  height: 18rem;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  background-image: url(${(props) => IMAGE_MAP[props.label]});
-  background-size: cover;
-  background-position: center;
-  width: 80%;
-  height: 80%;
   border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  z-index: 100;
+`;
+interface IScoreLabelProps {
+  label: string;
+  score: number;
+}
+export const ScoreLabel = styled.img.attrs<IScoreLabelProps>((props) => ({
+  src: IMAGE_MAP[props.label],
+}))<IScoreLabelProps>`
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  width: 70%;
+  height: 70%;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(
+    0 -1rem 4rem ${(props) => (props.score > 0 ? `rgba(8, 112, 184, 0.7)` : `rgba(240, 46, 170, 0.7)`)}
+  );
   z-index: 100;
 `;
