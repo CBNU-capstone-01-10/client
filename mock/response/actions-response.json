@@ -2,12 +2,12 @@
   "get-recent-actions": [
     {
       "id": 12,
-      "label": "한손운전",
+      "label": "졸음",
       "score": -10,
       "location_x": 31.4,
       "location_y": 31.4,
       "capture": "http://localhost:8080/action/capture/1727052112046.jpeg",
-      "recorded_at": "2024-09-30T00:41:52.057Z",
+      "recorded_at": "2024-10-27T00:41:52.057Z",
       "user_id": 1
     },
     {
@@ -17,17 +17,17 @@
       "location_x": 31.4,
       "location_y": 31.4,
       "capture": "http://localhost:8080/action/capture/1727052113372.jpeg",
-      "recorded_at": "2024-10-01T10:10:53.379Z",
+      "recorded_at": "2024-10-28T10:10:53.379Z",
       "user_id": 1
     },
     {
       "id": 14,
-      "label": "한손운전",
+      "label": "졸음",
       "score": -10,
       "location_x": 31.4,
       "location_y": 31.4,
       "capture": "http://localhost:8080/action/capture/1727052114230.jpeg",
-      "recorded_at": "2024-10-01T10:41:54.237Z",
+      "recorded_at": "2024-10-28T10:41:54.237Z",
       "user_id": 1
     },
     {
@@ -37,7 +37,7 @@
       "location_x": 31.4,
       "location_y": 31.4,
       "capture": "http://localhost:8080/action/capture/1727052116046.jpeg",
-      "recorded_at": "2024-10-01T11:24:56.051Z",
+      "recorded_at": "2024-10-29T11:24:56.051Z",
       "user_id": 1
     },
     {
@@ -47,7 +47,7 @@
       "location_x": 31.4,
       "location_y": 31.4,
       "capture": "http://localhost:8080/action/capture/1727052116046.jpeg",
-      "recorded_at": "2024-10-01T11:29:56.051Z",
+      "recorded_at": "2024-10-29T11:29:56.051Z",
       "user_id": 1
     },
     {
@@ -57,17 +57,17 @@
       "location_x": 31.4,
       "location_y": 31.4,
       "capture": "http://localhost:8080/action/capture/1727052116046.jpeg",
-      "recorded_at": "2024-10-01T11:40:56.051Z",
+      "recorded_at": "2024-10-30T11:40:56.051Z",
       "user_id": 1
     },
     {
       "id": 18,
-      "label": "한손운전",
+      "label": "졸음",
       "score": -10,
       "location_x": 31.4,
       "location_y": 31.4,
       "capture": "http://localhost:8080/action/capture/1727052116046.jpeg",
-      "recorded_at": "2024-10-02T00:50:56.051Z",
+      "recorded_at": "2024-10-30T00:50:56.051Z",
       "user_id": 1
     },
     {
@@ -77,7 +77,7 @@
       "location_x": 31.4,
       "location_y": 31.4,
       "capture": "http://localhost:8080/action/capture/1727052116046.jpeg",
-      "recorded_at": "2024-10-02T01:14:56.051Z",
+      "recorded_at": "2024-10-30T01:14:56.051Z",
       "user_id": 1
     },
     {
@@ -87,7 +87,7 @@
       "location_x": 31.4,
       "location_y": 31.4,
       "capture": "http://localhost:8080/action/capture/1727052116046.jpeg",
-      "recorded_at": "2024-10-02T01:20:56.051Z",
+      "recorded_at": "2024-10-30T01:20:56.051Z",
       "user_id": 1
     },
     {
@@ -97,7 +97,7 @@
       "location_x": 31.4,
       "location_y": 31.4,
       "capture": "http://localhost:8080/action/capture/1727052116046.jpeg",
-      "recorded_at": "2024-10-02T01:20:56.051Z",
+      "recorded_at": "2024-10-31T01:20:56.051Z",
       "user_id": 1
     },
     {
@@ -107,7 +107,7 @@
       "location_x": 31.4,
       "location_y": 31.4,
       "capture": "http://localhost:8080/action/capture/1727052116046.jpeg",
-      "recorded_at": "2024-10-02T01:20:56.051Z",
+      "recorded_at": "2024-10-31T01:20:56.051Z",
       "user_id": 1
     },
     {
@@ -117,7 +117,7 @@
       "location_x": 31.4,
       "location_y": 31.4,
       "capture": "http://localhost:8080/action/capture/1727052116046.jpeg",
-      "recorded_at": "2024-10-02T01:20:56.051Z",
+      "recorded_at": "2024-10-31T01:20:56.051Z",
       "user_id": 1
     },
     {
@@ -127,7 +127,7 @@
       "location_x": 31.4,
       "location_y": 31.4,
       "capture": "http://localhost:8080/action/capture/1727052116046.jpeg",
-      "recorded_at": "2024-10-02T01:20:56.051Z",
+      "recorded_at": "2024-10-31T01:20:56.051Z",
       "user_id": 1
     },
     {
@@ -137,11 +137,21 @@
       "location_x": 31.4,
       "location_y": 31.4,
       "capture": "http://localhost:8080/action/capture/1727052116046.jpeg",
-      "recorded_at": "2024-10-02T01:20:56.051Z",
+      "recorded_at": "2024-10-31T01:20:56.051Z",
       "user_id": 1
     }
   ],
   "get-recent-seven-days-score": [
+    {
+      "id": 12,
+      "label": "졸음",
+      "score": -10,
+      "location_x": 31.4,
+      "location_y": 31.4,
+      "capture": "http://localhost:8080/action/capture/1727052112046.jpeg",
+      "recorded_at": "2024-10-27T00:41:52.057Z",
+      "user_id": 1
+    },
     {
       "id": 13,
       "label": "안전운전 5분 유지",
@@ -149,17 +159,17 @@
       "location_x": 31.4,
       "location_y": 31.4,
       "capture": "http://localhost:8080/action/capture/1727052113372.jpeg",
-      "recorded_at": "2024-10-01T10:10:53.379Z",
+      "recorded_at": "2024-10-28T10:10:53.379Z",
       "user_id": 1
     },
     {
       "id": 14,
-      "label": "한손운전",
+      "label": "졸음",
       "score": -10,
       "location_x": 31.4,
       "location_y": 31.4,
       "capture": "http://localhost:8080/action/capture/1727052114230.jpeg",
-      "recorded_at": "2024-10-01T10:41:54.237Z",
+      "recorded_at": "2024-10-28T10:41:54.237Z",
       "user_id": 1
     },
     {
@@ -169,7 +179,7 @@
       "location_x": 31.4,
       "location_y": 31.4,
       "capture": "http://localhost:8080/action/capture/1727052116046.jpeg",
-      "recorded_at": "2024-10-01T11:24:56.051Z",
+      "recorded_at": "2024-10-29T11:24:56.051Z",
       "user_id": 1
     },
     {
@@ -179,7 +189,7 @@
       "location_x": 31.4,
       "location_y": 31.4,
       "capture": "http://localhost:8080/action/capture/1727052116046.jpeg",
-      "recorded_at": "2024-10-01T11:29:56.051Z",
+      "recorded_at": "2024-10-29T11:29:56.051Z",
       "user_id": 1
     },
     {
@@ -189,17 +199,17 @@
       "location_x": 31.4,
       "location_y": 31.4,
       "capture": "http://localhost:8080/action/capture/1727052116046.jpeg",
-      "recorded_at": "2024-10-01T11:40:56.051Z",
+      "recorded_at": "2024-10-30T11:40:56.051Z",
       "user_id": 1
     },
     {
       "id": 18,
-      "label": "한손운전",
+      "label": "졸음",
       "score": -10,
       "location_x": 31.4,
       "location_y": 31.4,
       "capture": "http://localhost:8080/action/capture/1727052116046.jpeg",
-      "recorded_at": "2024-10-02T00:50:56.051Z",
+      "recorded_at": "2024-10-30T00:50:56.051Z",
       "user_id": 1
     },
     {
@@ -209,7 +219,7 @@
       "location_x": 31.4,
       "location_y": 31.4,
       "capture": "http://localhost:8080/action/capture/1727052116046.jpeg",
-      "recorded_at": "2024-10-02T01:14:56.051Z",
+      "recorded_at": "2024-10-30T01:14:56.051Z",
       "user_id": 1
     },
     {
@@ -219,14 +229,64 @@
       "location_x": 31.4,
       "location_y": 31.4,
       "capture": "http://localhost:8080/action/capture/1727052116046.jpeg",
-      "recorded_at": "2024-10-02T01:20:56.051Z",
+      "recorded_at": "2024-10-30T01:20:56.051Z",
+      "user_id": 1
+    },
+    {
+      "id": 21,
+      "label": "안전운전 10분 유지",
+      "score": 10.0,
+      "location_x": 31.4,
+      "location_y": 31.4,
+      "capture": "http://localhost:8080/action/capture/1727052116046.jpeg",
+      "recorded_at": "2024-10-31T00:20:56.051Z",
+      "user_id": 1
+    },
+    {
+      "id": 22,
+      "label": "안전운전 10분 유지",
+      "score": 10.0,
+      "location_x": 31.4,
+      "location_y": 31.4,
+      "capture": "http://localhost:8080/action/capture/1727052116046.jpeg",
+      "recorded_at": "2024-10-31T00:20:56.051Z",
+      "user_id": 1
+    },
+    {
+      "id": 23,
+      "label": "안전운전 10분 유지",
+      "score": 10.0,
+      "location_x": 31.4,
+      "location_y": 31.4,
+      "capture": "http://localhost:8080/action/capture/1727052116046.jpeg",
+      "recorded_at": "2024-10-31T00:20:56.051Z",
+      "user_id": 1
+    },
+    {
+      "id": 24,
+      "label": "안전운전 10분 유지",
+      "score": 10.0,
+      "location_x": 31.4,
+      "location_y": 31.4,
+      "capture": "http://localhost:8080/action/capture/1727052116046.jpeg",
+      "recorded_at": "2024-10-31T00:20:56.051Z",
+      "user_id": 1
+    },
+    {
+      "id": 25,
+      "label": "안전운전 10분 유지",
+      "score": 10.0,
+      "location_x": 31.4,
+      "location_y": 31.4,
+      "capture": "http://localhost:8080/action/capture/1727052116046.jpeg",
+      "recorded_at": "2024-10-31T00:20:56.051Z",
       "user_id": 1
     }
   ],
   "post-actions": [
     {
       "id": "1",
-      "label": "한손운전",
+      "label": "졸음",
       "score": -10,
       "location_x": 0,
       "location_y": 0,
@@ -236,8 +296,8 @@
     },
     {
       "id": "2",
-      "label": "안전운전 유지",
-      "score": 10.0,
+      "label": "흡연",
+      "score": -10,
       "location_x": 0,
       "location_y": 0,
       "capture": "",
@@ -246,18 +306,8 @@
     },
     {
       "id": "3",
-      "label": "차내 흡연 감지",
-      "score": -10.0,
-      "location_x": 0,
-      "location_y": 0,
-      "capture": "",
-      "recorded_at": "",
-      "user_id": 1
-    },
-    {
-      "id": "4",
-      "label": "졸음 운전 감지",
-      "score": -10.0,
+      "label": "휴대폰",
+      "score": -10,
       "location_x": 0,
       "location_y": 0,
       "capture": "",
@@ -268,7 +318,7 @@
   "get-action": [
     {
       "id": 12,
-      "label": "한손운전",
+      "label": "졸음",
       "score": -10,
       "location_x": 31.4,
       "location_y": 31.4,
@@ -288,7 +338,7 @@
     },
     {
       "id": 14,
-      "label": "한손운전",
+      "label": "졸음",
       "score": -10,
       "location_x": 31.4,
       "location_y": 31.4,
@@ -328,7 +378,7 @@
     },
     {
       "id": 18,
-      "label": "한손운전",
+      "label": "졸음",
       "score": -10,
       "location_x": 31.4,
       "location_y": 31.4,
