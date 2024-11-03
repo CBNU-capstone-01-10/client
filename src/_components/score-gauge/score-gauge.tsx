@@ -33,10 +33,11 @@ export default function ScoreGauge() {
       >
         {/* 라벨 표시 */}
         <S.ScoreLabelWrapper>
-          <S.ScoreLabel
+          <S.ScoreLabelImage
             label={driverActions[0]?.label}
             score={driverActions[0]?.score}
           />
+          <S.ScoreLabelTitle>{driverActions[0]?.label} 감지</S.ScoreLabelTitle>
         </S.ScoreLabelWrapper>
       </S.ScoreBar>
     </S.Container>
