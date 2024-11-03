@@ -32,7 +32,12 @@ export default function ScoreGauge() {
         score={driverActions[0]?.score}
       >
         {/* 라벨 표시 */}
-        <S.ScoreLabel label={driverActions[0]?.label} />
+        <S.ScoreLabelWrapper>
+          <S.ScoreLabel
+            label={driverActions[0]?.label}
+            score={driverActions[0]?.score}
+          />
+        </S.ScoreLabelWrapper>
       </S.ScoreBar>
     </S.Container>
   );
