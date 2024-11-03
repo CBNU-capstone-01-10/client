@@ -1,3 +1,4 @@
+// COMPONENT: 막대 그래프
 import { useRef, useEffect } from "react";
 import { Chart } from "chart.js/auto";
 import styled from "styled-components";
@@ -9,16 +10,15 @@ const ChartCanvas = styled.canvas`
   width: 100%;
 `;
 
+interface IChartRef extends HTMLCanvasElement {
+  chart?: Chart;
+}
+
 interface IBarChartProps {
   labels: string[];
   label: string;
   data: number[];
 }
-interface IChartRef extends HTMLCanvasElement {
-  chart?: Chart; // chart.js 인스턴스를 저장하기 위한 속성 추가
-}
-
-// COMPONENT: 막대 그래프
 export default function BarChart({ labels, label, data }: IBarChartProps) {
   const chartRef = useRef<IChartRef | null>(null);
 
