@@ -13,7 +13,7 @@ export const Background = styled.nav`
   height: 100%;
   background-color: white;
   padding: 1.4rem 0;
-  margin: 0 auto 0.8rem;
+  margin: 0 auto 1.2rem;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
