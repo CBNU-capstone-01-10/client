@@ -1,30 +1,34 @@
 import styled from "styled-components";
+import { IoIosArrowBack } from "react-icons/io";
 
-interface IWrapperProps {
-  height?: string;
-}
-export const Wrapper = styled.div<IWrapperProps>`
+export const Wrapper = styled.div`
   position: fixed;
   left: 0;
   right: 0;
   top: 0;
   width: 100%;
-  height: ${(props) => props.height || "var(--top-navbar-height)"};
-  text-align: center;
-`;
-export const Background = styled.nav`
-  width: 100%;
-  height: 100%;
-  /* background-color: ${({ theme }) => theme.primaryColor}; */
+  height: var(--top-navbar-height);
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
   align-items: center;
+  justify-content: space-between;
+  padding: 0 1.6rem;
 `;
+
 export const HeaderTitle = styled.h1`
   font-size: 1.4rem;
-  color: white;
-  position: absolute;
+  color: ${({ theme }) => theme.primaryColor};
   font-weight: 600;
-  margin-top: 2rem;
+  flex: 1;
+  text-align: center;
+`;
+
+export const BackButton = styled.button`
+  color: ${({ theme }) => theme.primaryColor};
+  position: absolute;
+  margin-left: auto;
+`;
+export const BackIcon = styled(IoIosArrowBack)`
+  font-size: 1.8rem;
+  margin-right: 0.4rem;
 `;

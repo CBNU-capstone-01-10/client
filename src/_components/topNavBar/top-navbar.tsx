@@ -1,16 +1,17 @@
+// COMPONENT: 상단 네비게이션 바
 import * as S from "./top-navbar.style";
 
-// COMPONENT: 상단 네비게이션 바
 interface ITopNavBarProps {
   title?: string;
   height?: string;
 }
-export default function TopNavBar({ title, height }: ITopNavBarProps) {
+export default function TopNavBar({ title }: ITopNavBarProps) {
   return (
-    <S.Wrapper height={height}>
-      <S.Background>
-        <S.HeaderTitle>{title}</S.HeaderTitle>
-      </S.Background>
+    <S.Wrapper>
+      <S.BackButton>
+        <S.BackIcon />
+      </S.BackButton>
+      <S.HeaderTitle>{title}</S.HeaderTitle>
     </S.Wrapper>
   );
 }
