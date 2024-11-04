@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import * as S from "./score-gauge.stlye";
 import { useDriverActionsStore } from "../../store/use-driver-actions";
+import { ACTION_LABEL, ActionLabel } from "../../constants/constants";
 
 export default function ScoreGauge() {
   const { driverActions } = useDriverActionsStore();
@@ -36,8 +37,13 @@ export default function ScoreGauge() {
           <S.ScoreLabelImage
             label={driverActions[0]?.label}
             score={driverActions[0]?.score}
+            safeDriving={driverActions[0]?.safe_driving}
           />
-          <S.ScoreLabelTitle>{driverActions[0]?.label} 감지</S.ScoreLabelTitle>
+          <S.ScoreLabelTitle>
+            {driverActions[0]?.safe_driving
+              ? "안전운전"
+              : ACTION_LABEL[driverActions[0]?.label as ActionLabel]}
+          </S.ScoreLabelTitle>
         </S.ScoreLabelWrapper>
       </S.ScoreBar>
     </S.Container>
