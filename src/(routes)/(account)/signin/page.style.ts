@@ -16,13 +16,12 @@ export const FormContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 3rem;
+  padding-top: 1rem;
 `;
 
 export const Header = styled.header`
   width: 8rem;
-  /* height: fit-content; */
-  margin-bottom: 1.6rem;
+  margin-bottom: 1rem;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -39,16 +38,23 @@ export const Title = styled.h3`
   font-weight: 600;
 `;
 
+export const InputContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* gap: 1rem; */
+  margin-bottom: 2rem;
+`;
 export const Input = styled.input`
   width: 100%;
   height: 3rem;
-  margin-bottom: 1.25rem;
   padding: 0 2rem;
+  margin: 0.6rem 0;
   background-color: rgba(235, 235, 235, 0.5);
   border: none;
-  border-radius: 2rem;
+  border-radius: 1.4rem;
   &:focus {
-    outline-color: var(--primary-color);
+    outline-color: ${({ theme }) => theme.primaryColor};
   }
 `;
 
@@ -56,13 +62,13 @@ export const LoginButton = styled.button`
   width: 100%;
   height: 3rem;
   margin-bottom: 2rem;
-  background-color: var(--primary-color);
-  border-radius: 2rem;
+  background-color: ${({ theme }) => theme.primaryColor};
+  border-radius: 1.4rem;
   color: white;
-  font-size: 1.125rem;
-  letter-spacing: 0.05em;
+  font-size: 1rem;
+  letter-spacing: 0.2rem;
   &:focus {
-    outline-color: var(--primary-color);
+    outline-color: ${({ theme }) => theme.primaryColor};
   }
   &:disabled {
     background-color: rgba(77, 134, 156, 0.8);
@@ -72,7 +78,7 @@ export const LoginButton = styled.button`
 export const SignupHeader = styled.div`
   width: 100%;
   margin-top: 1.2rem;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   text-align: center;
 `;
 
@@ -80,5 +86,5 @@ export const SignupButton = styled.button`
   width: 100%;
   height: 3.5rem;
   letter-spacing: 0.05em;
-  color: var(--primary-color);
+  color: ${({ theme }) => theme.primaryColor};
 `;
