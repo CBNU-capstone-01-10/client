@@ -6,18 +6,25 @@ import { IServerErrorResponse } from "../../interface/error-interface";
 import * as S from "./alert-banner.style";
 
 interface IAlertProps {
-  error: AxiosError | AxiosError<IServerErrorResponse>;
+  error?: AxiosError | AxiosError<IServerErrorResponse>;
+  errorMessage?: string;
   width?: string;
   top?: string;
   left?: string;
 }
-export default function AlertBanner({ error, width, top, left }: IAlertProps) {
+export default function AlertBanner({
+  error,
+  errorMessage,
+  width,
+  top,
+  left,
+}: IAlertProps) {
   const [message, setMessage] = useState<string>("");
 
   useEffect(() => {
     // error.response?.data가 있고, IServerErrorResponse 형식인 경우 메시지 설정
     if (
-      error.response?.data &&
+      error?.response?.data &&
       (error.response.data as IServerErrorResponse).message
     ) {
       setMessage((error.response.data as IServerErrorResponse).message);
@@ -26,6 +33,12 @@ export default function AlertBanner({ error, width, top, left }: IAlertProps) {
       setMessage("잠시후 다시 시도해주세요.");
     }
   }, [error]);
+
+  useEffect(() => {
+    if (errorMessage) {
+      setMessage(errorMessage);
+    }
+  }, [errorMessage]);
 
   return (
     <S.Wrapper width={width} top={top} left={left}>
