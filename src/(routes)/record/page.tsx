@@ -1,3 +1,4 @@
+// PAGE: 운전자 녹화 페이지
 import { useEffect, useRef, useState } from "react";
 import useWatchLocation from "../../hooks/useWatchLocation";
 import drawVideoSnapshot from "./_utils/drawVideoSnapshot";
@@ -10,6 +11,7 @@ import { getCameraPermission } from "../../_utils/camera";
 import ScoreGauge from "../../_components/score-gauge/score-gauge";
 import { useDriverActionsStore } from "../../store/use-driver-actions";
 import * as S from "./page.style";
+import DriverVideo from "../../_components/driver-video/driver-video";
 
 const geoOptions = {
   enableHighAccuracy: true,
@@ -17,13 +19,12 @@ const geoOptions = {
   timeout: 15000,
 };
 
-// 운전자 녹화 페이지
 export default function Page() {
   const [stream, setStream] = useState<MediaStream>();
   const [driverImage, setDriverImage] = useState<File>();
   const { location, cancelLocationWatch, errorMessage } =
     useWatchLocation(geoOptions);
-  const { addDriverAction } = useDriverActionsStore();
+  const { driverActions, addDriverAction } = useDriverActionsStore();
 
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -81,16 +82,7 @@ export default function Page() {
 
   return (
     <>
-      <S.VideoWrapper>
-        <S.VideoElement
-          ref={videoRef}
-          id="local-video"
-          autoPlay
-          muted
-          loop
-          playsInline
-        />
-      </S.VideoWrapper>
+      <DriverVideo ref={videoRef} />
       <S.Wrapper>
         <S.ContentWrapper>
           <TodayScore />
