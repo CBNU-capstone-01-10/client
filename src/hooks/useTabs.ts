@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ITabContent } from "../(routes)/MainLayout";
+import { ITabContent } from "../(routes)/main-layout";
 
 export interface IReturnValue {
   currentItem: ITabContent;
