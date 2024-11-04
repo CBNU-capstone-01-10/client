@@ -12,6 +12,7 @@ import ScoreGauge from "../../_components/score-gauge/score-gauge";
 import { useDriverActionsStore } from "../../store/use-driver-actions";
 import * as S from "./page.style";
 import DriverVideo from "../../_components/driver-video/driver-video";
+import AlertBanner from "../../_components/alert-banner/alert-banner";
 
 const geoOptions = {
   enableHighAccuracy: true,
@@ -22,9 +23,9 @@ const geoOptions = {
 export default function Page() {
   const [stream, setStream] = useState<MediaStream>();
   const [driverImage, setDriverImage] = useState<File>();
-  const { location, cancelLocationWatch, errorMessage } =
+  const { location, cancelLocationWatch, locationErrorMessage } =
     useWatchLocation(geoOptions);
-  const { driverActions, addDriverAction } = useDriverActionsStore();
+  const { addDriverAction } = useDriverActionsStore();
 
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -88,6 +89,9 @@ export default function Page() {
           <TodayScore />
           <ScoreGauge />
         </S.ContentWrapper>
+        {locationErrorMessage && (
+          <AlertBanner errorMessage={locationErrorMessage} />
+        )}
       </S.Wrapper>
     </>
   );
