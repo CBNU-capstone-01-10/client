@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { IoIosArrowBack } from "react-icons/io";
 
 export const Wrapper = styled.div`
   position: fixed;
@@ -27,8 +26,4 @@ export const BackButton = styled.button`
   color: ${({ theme }) => theme.primaryColor};
   position: absolute;
   margin-left: auto;
-`;
-export const BackIcon = styled(IoIosArrowBack)`
-  font-size: 1.8rem;
-  margin-right: 0.4rem;
 `;

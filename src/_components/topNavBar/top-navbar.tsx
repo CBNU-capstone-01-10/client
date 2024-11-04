@@ -8,9 +8,6 @@ interface ITopNavBarProps {
 export default function TopNavBar({ title }: ITopNavBarProps) {
   return (
     <S.Wrapper>
-      <S.BackButton>
-        <S.BackIcon />
-      </S.BackButton>
       <S.HeaderTitle>{title}</S.HeaderTitle>
     </S.Wrapper>
   );
