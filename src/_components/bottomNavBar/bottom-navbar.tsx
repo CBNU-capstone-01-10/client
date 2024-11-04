@@ -4,6 +4,7 @@ import { FaRegUser } from "react-icons/fa";
 import { LuBarChart3 } from "react-icons/lu";
 import * as S from "./bottom-navbar.style";
 import { SetStateAction } from "react";
+import { TAB } from "../../constants/constants";
 
 // COMPONENT: 하단 네비게이션 바
 interface IBottomNavBarProps {
@@ -11,9 +12,9 @@ interface IBottomNavBarProps {
 }
 export default function BottomNavBar({ setActiveTab }: IBottomNavBarProps) {
   const content = [
-    { icon: SlCamrecorder, tab: "record", text: "녹화" },
-    { icon: LuBarChart3, tab: "statistics", text: "기록" },
-    { icon: FaRegUser, tab: "profile", text: "마이" },
+    { icon: SlCamrecorder, tab: TAB.RECORD, text: "녹화" },
+    { icon: LuBarChart3, tab: TAB.STATISTICS, text: "기록" },
+    { icon: FaRegUser, tab: TAB.PROFILE, text: "마이" },
   ];
 
   return (

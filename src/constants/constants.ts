@@ -8,7 +8,14 @@ export const MAX_LIVE_SCORE_LOG_SIZE = 5;
 export const WEEK_DAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 // 운전 중 행위 라벨에 대응하는 이미지 경로
 export const IMAGE_MAP: Record<string, string> = {
+  안전운전: "assets/safe.png",
   휴대폰: "assets/phone.png",
   졸음: "assets/drowsy.png",
-  흡연: "assets/cigarette.png",
+  cigarette: "assets/cigarette.png",
+};
+// 탭
+export const TAB = {
+  RECORD: "녹화 페이지",
+  STATISTICS: "나의 기록",
+  PROFILE: "나의 정보",
 };

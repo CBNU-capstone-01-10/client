@@ -4,18 +4,19 @@ import RecordPage from "./record/page";
 import StatisticsPage from "./statistics/page";
 import ProfilePage from "./profile/page";
 import { useState } from "react";
+import { TAB } from "../constants/constants";
 
 // Layout: 메인 레이아웃
 export default function MainLayout() {
-  const [activeTab, setActiveTab] = useState("record");
+  const [activeTab, setActiveTab] = useState(TAB.RECORD);
 
   const renderPage = () => {
     switch (activeTab) {
-      case "record":
+      case TAB.RECORD:
         return <RecordPage />;
-      case "statistics":
+      case TAB.STATISTICS:
         return <StatisticsPage />;
-      case "profile":
+      case TAB.PROFILE:
         return <ProfilePage />;
       default:
         return <RecordPage />;
@@ -24,7 +25,7 @@ export default function MainLayout() {
 
   return (
     <>
-      <TopNavBar />
+      <TopNavBar title={activeTab} />
       <main>{renderPage()}</main>
       <BottomNavBar setActiveTab={setActiveTab} />
     </>
