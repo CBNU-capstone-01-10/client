@@ -8,10 +8,11 @@
 export interface IDriverActionResponse {
   id: number;
   label: string;
-  score: number;
   location_x: string;
   location_y: string;
   capture: string;
   recorded_at: string;
+  safe_driving: boolean;
+  score: number;
   user_id: number;
 }
