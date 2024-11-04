@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const FormWrapper = styled.form`
   width: 100vw;
   height: 100vh;
-  background-color: var(--main-bg-color);
   transition: all 2s;
   padding: 3rem;
   padding-top: var(--top-navbar-height);
@@ -50,9 +49,9 @@ export const Input = styled.input`
   height: 3rem;
   padding: 0 2rem;
   margin: 0.6rem 0;
-  background-color: rgba(235, 235, 235, 0.5);
   border: none;
   border-radius: 1.4rem;
+  background-color: ${({ theme }) => theme.primaryBgColor};
   &:focus {
     outline-color: ${({ theme }) => theme.primaryColor};
   }
