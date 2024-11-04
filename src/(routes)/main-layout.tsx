@@ -1,8 +1,8 @@
 import BottomNavBar from "../_components/bottomNavBar/bottom-navbar";
 import TopNavBar from "../_components/topNavBar/top-navbar";
-import RecordPage from "../(routes)/record/page";
-import StatisticsPage from "../(routes)/statistics/page";
-import ProfilePage from "../(routes)/profile/page";
+import RecordPage from "./record/page";
+import StatisticsPage from "./statistics/page";
+import ProfilePage from "./profile/page";
 import { useState } from "react";
 
 // Layout: 메인 레이아웃
