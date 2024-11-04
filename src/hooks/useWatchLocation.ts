@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 
 export default function useWatchLocation(geoOptions = {}) {
   const [location, setLocation] = useState<GeolocationPosition>();
-  const [errorMessage, setErrorMessage] = useState<string>();
+  const [locationErrorMessage, setLocationErrorMessage] = useState<string>();
   // watchPosition의 반환 id 저장
   const locationWatchId = useRef<number>(0);
 
@@ -15,13 +15,13 @@ export default function useWatchLocation(geoOptions = {}) {
   // watchPosition 실패시 실행하는 핸들러
   const handleError = (error: GeolocationPositionError) => {
     if (error.code === error.PERMISSION_DENIED) {
-      setErrorMessage("요청거부");
+      setLocationErrorMessage("요청거부");
     }
     if (error.code === error.POSITION_UNAVAILABLE) {
-      setErrorMessage("위치정보 사용불가");
+      setLocationErrorMessage("위치정보 사용불가");
     }
     if (error.code === error.TIMEOUT) {
-      setErrorMessage("요청시간초과");
+      setLocationErrorMessage("요청시간초과");
     }
   };
 
@@ -48,5 +48,5 @@ export default function useWatchLocation(geoOptions = {}) {
     return cancelLocationWatch;
   }, [geoOptions]);
 
-  return { location, cancelLocationWatch, errorMessage };
+  return { location, cancelLocationWatch, locationErrorMessage };
 }
