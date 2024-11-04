@@ -2,13 +2,16 @@
 import { Alert } from "antd";
 import { AxiosError } from "axios";
 import { useState, useEffect } from "react";
-import { IServerErrorResponse } from "../interface/error-interface";
+import { IServerErrorResponse } from "../../interface/error-interface";
+import * as S from "./alert-banner.style";
 
 interface IAlertProps {
   error: AxiosError | AxiosError<IServerErrorResponse>;
+  width?: string;
+  top?: string;
+  left?: string;
 }
-
-export default function AlertBanner({ error }: IAlertProps) {
+export default function AlertBanner({ error, width, top, left }: IAlertProps) {
   const [message, setMessage] = useState<string>("");
 
   useEffect(() => {
@@ -24,5 +27,13 @@ export default function AlertBanner({ error }: IAlertProps) {
     }
   }, [error]);
 
-  return <Alert message={message} type="error" />;
+  return (
+    <S.Wrapper width={width} top={top} left={left}>
+      <Alert
+        message={message}
+        type="error"
+        style={{ padding: "0.5rem 3rem", color: "red" }}
+      />
+    </S.Wrapper>
+  );
 }
