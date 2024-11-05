@@ -13,7 +13,12 @@ export const Container = styled.div`
   align-items: center;
   box-shadow: rgba(13, 38, 76, 0.19) 0px 9px 20px;
 `;
-
+export const DefaultTitle = styled.span`
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 1rem 0;
+  height: 10%;
+`;
 interface IScoreBarProps {
   $scoreStartValue: number;
   score: number;
@@ -44,6 +49,7 @@ export const ScoreBar = styled.div.attrs<IScoreBarProps>((props) => ({
     width: 19rem;
     height: 19rem;
     border-radius: 50%;
+    transition: background 0.1s linear;
     background: ${(props) =>
       `conic-gradient(
         transparent ${props.$scoreStartValue * 3.6}deg,
@@ -69,12 +75,15 @@ export const ScoreLabelWrapper = styled.div`
 `;
 
 interface IScoreLabelProps {
-  label: string;
+  label: string | null;
   score: number;
+  safeDriving: boolean;
 }
 
 export const ScoreLabelImage = styled.img.attrs<IScoreLabelProps>((props) => ({
-  src: IMAGE_MAP[props.label],
+  src: props.safeDriving
+    ? IMAGE_MAP["safe_driving"]
+    : IMAGE_MAP[props.label || ""],
 }))<IScoreLabelProps>`
   width: 55%;
   height: 55%;
