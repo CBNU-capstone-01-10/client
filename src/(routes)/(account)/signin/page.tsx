@@ -7,7 +7,6 @@ import { ILoginParams } from "../types/type";
 import WangnooniLottieLogo from "../../../_components/wangnooni-logo/wangnooni-lottie-logo";
 import FormErrorMessage from "../../../_components/form-error-message/form-error-message";
 import * as S from "./page.style";
-import AlertBanner from "../../../_components/alert-banner/alert-banner";
 
 export default function Page() {
   const navigate = useNavigate();
@@ -19,7 +18,6 @@ export default function Page() {
   const {
     mutate: login,
     isSuccess: isLoginSuccess,
-    isError: isLoginError,
     error: loginError,
   } = useLogin();
   // POST: 로그인
@@ -31,14 +29,13 @@ export default function Page() {
     if (isLoginSuccess) {
       navigate("/home");
     }
-  }, [isLoginSuccess, isLoginError, navigate]);
+  }, [isLoginSuccess, navigate]);
 
   return (
     <S.FormWrapper
       onClick={(e) => e.stopPropagation()}
       onSubmit={handleSubmit(onSubmit)}
     >
-      {isLoginError && <AlertBanner error={loginError} />}
       <S.FormContent>
         <S.Header>
           <S.HeaderTitle>wang</S.HeaderTitle>
@@ -75,10 +72,13 @@ export default function Page() {
               required: "Please enter your password.",
             })}
           />
+          {/* 에러 메시지 */}
           <FormErrorMessage message={errors.password?.message} />
+          <FormErrorMessage message={loginError?.response?.data.message} />
         </S.InputContainer>
         <S.LoginButton>LOGIN</S.LoginButton>
         <S.SignupHeader>Don't you have an account yet?</S.SignupHeader>
+        {/* 회원가입 버튼 */}
         <S.SignupButton disabled={isSubmitting}>
           <Link to={"/signup"}>Sign Up &rarr;</Link>
         </S.SignupButton>
