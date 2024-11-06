@@ -1,5 +1,5 @@
 export interface IServerErrorResponse {
-  message: string;
+  message: string | undefined;
   status: number;
-  statusText: string;
+  statusText: string | undefined;
 }
