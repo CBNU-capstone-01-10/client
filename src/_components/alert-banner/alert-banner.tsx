@@ -19,7 +19,7 @@ export default function AlertBanner({
   top,
   left,
 }: IAlertProps) {
-  const [message, setMessage] = useState<string>("");
+  const [message, setMessage] = useState<string | undefined>("");
 
   useEffect(() => {
     // error.response?.data가 있고, IServerErrorResponse 형식인 경우 메시지 설정
