@@ -1,20 +1,13 @@
-import {
-  useInfiniteQuery,
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from "@tanstack/react-query";
-import axios, { AxiosError, AxiosResponse } from "axios";
-import isServerError from "../error/is-server-error";
+import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query";
+import { AxiosError, AxiosResponse } from "axios";
 import { IDriverActionResponse } from "../(routes)/record/types/type";
 import { DESIRED_BEFORE_MINUTES } from "../constants/constants";
 import dayjs from "dayjs";
-import { useState } from "react";
 import { IServerErrorResponse } from "../interface/error-interface";
+import { axiosInstance } from "./axios-instance";
 
 // POST: 운전자 행위 데이터 전송
 export const usePostDriverAction = () => {
-  // const queryClient = useQueryClient();
   return useMutation<
     IDriverActionResponse,
     AxiosError<IServerErrorResponse>,
@@ -22,7 +15,7 @@ export const usePostDriverAction = () => {
   >({
     mutationFn: async (driverActionData) => {
       const driverActionURL = `/api/actions`;
-      return await axios
+      return await axiosInstance
         .post<IDriverActionResponse, AxiosResponse<IDriverActionResponse>>(
           driverActionURL,
           driverActionData,
@@ -36,12 +29,6 @@ export const usePostDriverAction = () => {
           return res.data;
         });
     },
-    onError: (err) => {
-      if (!isServerError(err)) {
-        alert("에러가 발생했습니다. 관리자에게 문의해주세요.");
-        return;
-      }
-    },
   });
 };
 
@@ -52,9 +39,13 @@ export const useGetRecentDriverActions = () => {
     queryFn: async ({ pageParam }) => {
       const recentDriverActionsURL = `/api/actions`;
 
-      return await axios
+      return await axiosInstance
         .get(recentDriverActionsURL, {
-          params: { before_m: DESIRED_BEFORE_MINUTES, page: pageParam },
+          params: {
+            before_m: DESIRED_BEFORE_MINUTES,
+            page: pageParam,
+            per_page: 10,
+          },
         })
         .then((res) => {
           return res.data;
@@ -74,8 +65,8 @@ export const useGetDriverAction = (actionId: number) => {
       const [, actionId] = queryKey;
       const recentDriverActionURL = `/api/actions/${actionId}`;
 
-      return await axios.get(recentDriverActionURL).then((res) => {
-        return res.data.response;
+      return await axiosInstance.get(recentDriverActionURL).then((res) => {
+        return res.data;
       });
     },
     retry: 0,
@@ -85,21 +76,29 @@ export const useGetDriverAction = (actionId: number) => {
 
 // GET: 최근 일주일 운전자 점수 조회
 export const useGetRecentSevenDaysDriverActions = () => {
-  return useQuery<IDriverActionResponse[]>({
+  return useQuery<number[]>({
     queryKey: ["recent-seven-days-score"],
     queryFn: async () => {
-      const recentDriverActionsURL = `/api/actions`;
-      // 날짜 계산: 최근 일주일의 시작일과 종료일
-      const date_end = dayjs().format("YYYY-MM-DD");
-      const date_start = dayjs().subtract(6, "day").format("YYYY-MM-DD");
+      const recentDriverActionsURL = `/api/actions/scores/sum`;
+      const recentSevenDaysScore = [];
 
-      return await axios
-        .get(recentDriverActionsURL, {
-          params: { date_start, date_end },
-        })
-        .then((res) => {
-          return res.data;
-        });
+      // 최근 7일의 각 날짜의 합산을 구하기 위한 요청 생성
+      for (let i = 6; 0 <= i; i--) {
+        const date_start = dayjs().subtract(i, "day").format("YYYY-MM-DD");
+        const date_end = dayjs()
+          .subtract(i - 1, "day")
+          .format("YYYY-MM-DD");
+
+        const score = axiosInstance
+          .get(recentDriverActionsURL, {
+            params: { date_start, date_end },
+          })
+          .then((res) => res.data._sum.score);
+        recentSevenDaysScore.push(score);
+      }
+
+      // 모든 날짜의 요청이 완료될 때까지 기다리고, 결과를 배열로 반환
+      return await Promise.all(recentSevenDaysScore);
     },
     retry: 0,
   });
