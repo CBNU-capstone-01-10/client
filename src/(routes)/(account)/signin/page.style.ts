@@ -4,9 +4,7 @@ export const FormWrapper = styled.form`
   width: 100vw;
   height: 100vh;
   transition: all 2s;
-  padding: 3rem;
-  padding-top: var(--top-navbar-height);
-  padding-bottom: var(--btm-navbar-height);
+  padding: var(--top-navbar-height) 3rem var(--btm-navbar-height) 3rem;
 `;
 
 export const FormContent = styled.div`
@@ -20,7 +18,7 @@ export const FormContent = styled.div`
 
 export const Header = styled.header`
   width: 8rem;
-  margin-bottom: 1rem;
+  margin: 3.6rem 0 1rem;
   display: flex;
   flex-direction: row;
   align-items: center;

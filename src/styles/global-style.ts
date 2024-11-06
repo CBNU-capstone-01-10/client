@@ -2,7 +2,7 @@ import { createGlobalStyle, keyframes } from "styled-components";
 import reset from "styled-reset";
 
 // Global Constants
-const TOP_NAVBAR_HEIGTH = "10rem";
+const TOP_NAVBAR_HEIGTH = "6rem";
 const BTM_NAVBAR_HEIGTH = "5.5rem";
 
 // KEYFRAMES: 펄스 효과
