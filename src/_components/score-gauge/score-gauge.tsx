@@ -33,7 +33,7 @@ export default function ScoreGauge() {
       {driverActions.length === 0 ? (
         <>
           <WangnooniLottieLogo height="12rem" />
-          <S.DefaultTitle>오늘 하루도 안전하게 운전하세요!</S.DefaultTitle>
+          <S.DefaultTitle>오늘 하루도 안전운전하세요!</S.DefaultTitle>
         </>
       ) : (
         <S.ScoreBar
