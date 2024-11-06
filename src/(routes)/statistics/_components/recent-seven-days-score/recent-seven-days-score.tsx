@@ -5,8 +5,6 @@ import { useGetRecentSevenDaysDriverActions } from "../../../../api/action";
 import * as S from "./recent-seven-days-score.style";
 import BarChart from "../../../../_components/chart/bar-chart.js";
 import { getRecentSevenDays } from "../../../../_utils/day.js";
-import { getScoresPerDay } from "../../_utils/get-scores-per-day.js";
-import { WEEK_DAYS } from "../../../../constants/constants.js";
 
 export default function RecentSevenDaysScore() {
   const {
@@ -34,10 +32,6 @@ export default function RecentSevenDaysScore() {
 
   if (isSuccess) {
     const recentSevenDays = getRecentSevenDays();
-    const scoresPerDay = getScoresPerDay(recentSevenDaysDriverActions);
-    const scoresPerDayReordered = recentSevenDays.map(
-      (day) => scoresPerDay[WEEK_DAYS.indexOf(day)]
-    );
 
     return (
       <ContentBlockWrapper height={"content-fit"}>
@@ -49,7 +43,7 @@ export default function RecentSevenDaysScore() {
           <BarChart
             labels={recentSevenDays}
             label={"안전점수"}
-            data={scoresPerDayReordered}
+            data={recentSevenDaysDriverActions}
           />
         </S.RecentSevenDaysScoreWrapper>
       </ContentBlockWrapper>
