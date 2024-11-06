@@ -7,6 +7,7 @@ export const Wrapper = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 200;
 `;
 export const Background = styled.nav`
   width: 94%;
