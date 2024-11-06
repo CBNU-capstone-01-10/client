@@ -1,6 +1,5 @@
 // COMPONENT: 회원가입 이메일 입력 단계
 import { useFormContext } from "react-hook-form";
-import * as S from "./setup-step.style";
 import { useEffect, useState } from "react";
 import {
   useConfirmVerificationToken,
@@ -12,6 +11,7 @@ import {
   IVerificationParams,
 } from "../../../types/type";
 import { useNavigate } from "react-router";
+import * as S from "./setup-step.style";
 
 type TFieldValues = ISignupParams &
   Pick<IVerificationParams, "verificationToken">;
@@ -25,17 +25,20 @@ export default function SetupEmail({ onPrevious }: ISetupEmailProps) {
     register,
     handleSubmit,
     getValues,
+    setError,
+    clearErrors,
     formState: { errors },
   } = useFormContext<TFieldValues>();
+
+  const [successMessage, setSuccessMessage] = useState("");
 
   // POST: 임시 등록 (이메일 인증 전)
   const {
     data: responseData,
     mutate: registerAccount,
     isSuccess: isRegisteredSuccess,
-    isError: isRegisteredError,
+    error: registerError,
   } = useRegisterEmail();
-
   // HANDLER: 이메일 인증 요청
   const handleRegisterAccount = () => {
     const { username, email, password, alias, address } = getValues();
@@ -48,42 +51,48 @@ export default function SetupEmail({ onPrevious }: ISetupEmailProps) {
     };
     registerAccount(unverifiedAccountData);
   };
-
+  // 이메일 코드 전송 처리
   useEffect(() => {
     if (isRegisteredSuccess) {
+      clearErrors();
       const { data } = responseData;
       setUserId(data.id.toString());
-      alert("인증코드가 이메일로 전송되었습니다. 이메일을 확인해주세요.");
+      setSuccessMessage("인증코드가 이메일로 전송되었습니다.");
     }
-    if (isRegisteredError) {
-      location.reload();
+    if (registerError) {
+      setSuccessMessage("");
+      setError("email", {
+        type: "manual",
+        message: registerError.response?.data.message,
+      });
     }
-  }, [isRegisteredSuccess, isRegisteredError, responseData]);
+  }, [isRegisteredSuccess, registerError, responseData, setError, clearErrors]);
 
   // POST: 인증토큰 확인 (회원가입 완료)
   const {
     mutate: confirmVerificationToken,
     isSuccess: isConfirmedSuccess,
-    isError: isConfirmedError,
-    error,
+    error: confirmedError,
   } = useConfirmVerificationToken();
-
   // HANDLER
   const handleConfirmVerificationToken = () => {
     const verificationToken = getValues("verificationToken");
     const verificationData: IVerificationParams = { userId, verificationToken };
     confirmVerificationToken(verificationData);
   };
-
+  // 이메일 인증 처리
   useEffect(() => {
     if (isConfirmedSuccess) {
-      alert("이메일이 인증에 성공하였습니다. 생성한 계정으로 로그인해주세요.");
-      navigate("/");
+      setSuccessMessage("이메일이 인증에 성공했습니다.");
+      setTimeout(() => navigate("/"), 2000);
     }
-    if (isConfirmedError) {
-      alert(error.message);
+    if (confirmedError) {
+      setError("verificationToken", {
+        type: "manual",
+        message: confirmedError.response?.data.message,
+      });
     }
-  }, [isConfirmedSuccess, isConfirmedError, navigate, error]);
+  }, [isConfirmedSuccess, confirmedError, setError, navigate]);
 
   return (
     <S.SetupPageWrapper>
@@ -101,6 +110,9 @@ export default function SetupEmail({ onPrevious }: ISetupEmailProps) {
             },
           })}
         />
+        {successMessage && (
+          <S.SuccessMessage>{successMessage}</S.SuccessMessage>
+        )}
         {errors.email && (
           <S.ErrorMessage>{errors.email.message}</S.ErrorMessage>
         )}
@@ -128,10 +140,10 @@ export default function SetupEmail({ onPrevious }: ISetupEmailProps) {
         >
           인증 확인
         </S.InteractionBtn>
+        {errors.verificationToken && (
+          <S.ErrorMessage>{errors.verificationToken.message}</S.ErrorMessage>
+        )}
       </S.InputContainer>
-      {errors.verificationToken && (
-        <S.ErrorMessage>{errors.verificationToken.message}</S.ErrorMessage>
-      )}
       <S.BtnWrapper>
         <S.PrevBtn onClick={() => onPrevious()}>이전</S.PrevBtn>
       </S.BtnWrapper>

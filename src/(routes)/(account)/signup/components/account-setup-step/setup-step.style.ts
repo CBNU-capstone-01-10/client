@@ -38,7 +38,7 @@ export const BtnWrapper = styled.div`
   gap: 1rem;
 `;
 // 다음 버튼
-export const NextBtn = styled.button<{ disabled: boolean }>`
+export const NextBtn = styled.button<{ disabled?: boolean }>`
   width: 100%;
   height: 3.6rem;
   border-radius: 1rem;
@@ -82,6 +82,11 @@ export const InteractionBtn = styled.button<IInteractionBtnProps>`
     cursor: not-allowed;
     opacity: 0.5;
   }
+`;
+// 성공 메시지
+export const SuccessMessage = styled.small`
+  padding: 1rem;
+  color: blue;
 `;
 // 오류 메시지
 export const ErrorMessage = styled.small`
