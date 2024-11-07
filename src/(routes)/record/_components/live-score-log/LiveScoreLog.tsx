@@ -1,41 +1,32 @@
 // COMPONENT: 실시간 안전 점수 로그
-import { useEffect } from "react";
-import OvalLoadingSpinner from "../../../../_components/loading-spinner/oval-loading-spinner";
 import getElapsedTime from "../../../../_utils/time";
-import * as S from "./LiveScoreLog.style";
 import { IDriverActionResponse } from "../../types/type";
-import { useDriverActionsStore } from "../../../../store/use-driver-actions";
+import { ACTION_LABEL, ActionLabel } from "../../../../constants/constants";
+import * as S from "./LiveScoreLog.style";
 
 interface ILiveScoreLogProps {
-  newDriverAction?: IDriverActionResponse | undefined;
+  driverActions?: IDriverActionResponse[] | undefined;
 }
-export default function LiveScoreLog({ newDriverAction }: ILiveScoreLogProps) {
-  const { driverActions, addDriverAction } = useDriverActionsStore();
-
-  // 안전 점수 로그 업데이트
-  useEffect(() => {
-    if (newDriverAction) {
-      addDriverAction(newDriverAction);
-    }
-  }, [newDriverAction, addDriverAction]);
-
+export default function LiveScoreLog({ driverActions }: ILiveScoreLogProps) {
   return (
     <S.LiveScoreLogWrapper>
-      {driverActions.length === 0 ? (
+      {driverActions?.length === 0 ? (
         <div>최근 기록 없음</div>
       ) : (
-        driverActions?.map((driverActionItem, idx) => (
-          // <S.LiveScoreLogItem key={driverActionItem.id}>
-          <S.LiveScoreLogItem key={idx}>
+        driverActions?.map((actionItem) => (
+          <S.LiveScoreLogItem key={actionItem.id}>
+            <S.ScoreWrapper score={actionItem.score}>
+              {actionItem.score}
+            </S.ScoreWrapper>
             <S.ContentWrapper>
-              <S.Content>{driverActionItem.label}</S.Content>
+              <S.Label>
+                {ACTION_LABEL[actionItem.label as ActionLabel] ||
+                  "안전 운전 유지"}
+              </S.Label>
               <S.ElapsedTime>
-                {getElapsedTime(driverActionItem.recorded_at)}
+                {getElapsedTime(actionItem.recorded_at)}
               </S.ElapsedTime>
             </S.ContentWrapper>
-            <S.ScoreWrapper score={driverActionItem.score}>
-              {driverActionItem.score}
-            </S.ScoreWrapper>
           </S.LiveScoreLogItem>
         ))
       )}
