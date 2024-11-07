@@ -3,7 +3,6 @@ import { IMAGE_MAP } from "../../constants/constants";
 
 export const Container = styled.section`
   width: 100%;
-  /* height: 100%; */
   display: grid;
   grid-template-rows: repeat(3, 1fr);
   grid-template-columns: repeat(2, 1fr);
@@ -17,6 +16,7 @@ export const DefaultTitle = styled.span`
 `;
 export const ActionBanner = styled.div`
   width: 100%;
+  aspect-ratio: 1/1;
   border-radius: 2rem;
   background-color: #fff;
   box-shadow: rgba(13, 38, 76, 0.19) 0px 9px 20px;
@@ -24,13 +24,13 @@ export const ActionBanner = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 1rem;
   &:first-child {
     grid-column: 1 / span 2;
     grid-row: 1 / span 2;
   }
   &:not(first-child) {
     padding: 0.8rem;
-    gap: 1rem;
   }
 `;
 interface IScoreLabelProps {
