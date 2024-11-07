@@ -2,19 +2,19 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   width: 100%;
-  height: var(--bottom-navbar-height);
+  height: calc(var(--btm-navbar-height) + 0.8rem);
   position: fixed;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: 0.8rem;
   z-index: 200;
 `;
-export const Background = styled.nav`
+export const Container = styled.nav`
   width: 94%;
-  height: 100%;
+  height: fit-content;
   background-color: white;
   padding: 1.4rem 0;
-  margin: 0 auto 1.2rem;
+  margin: 0 auto 2rem;
   display: flex;
   flex-direction: row;
   justify-content: space-around;

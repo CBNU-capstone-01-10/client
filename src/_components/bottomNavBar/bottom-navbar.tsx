@@ -19,7 +19,7 @@ export default function BottomNavBar({ setActiveTab }: IBottomNavBarProps) {
 
   return (
     <S.Wrapper>
-      <S.Background>
+      <S.Container>
         {content.map((section, idx) => (
           <div key={section.text} onClick={() => setActiveTab(section.tab)}>
             <NavIcon
@@ -31,7 +31,7 @@ export default function BottomNavBar({ setActiveTab }: IBottomNavBarProps) {
             />
           </div>
         ))}
-      </S.Background>
+      </S.Container>
     </S.Wrapper>
   );
 }
