@@ -1,15 +1,33 @@
 import { useDriverActionsStore } from "../../store/use-driver-actions";
 import ScoreGauge from "../score-gauge/score-gauge";
-import { ScoreLabelImage } from "../score-gauge/score-gauge.stlye";
 import WangnooniLottieLogo from "../wangnooni-logo/wangnooni-lottie-logo";
 import * as S from "./recent-action-banners.style";
 import getElapsedTime from "../../_utils/time";
+import beepSoundFile from "../../../public/assets/sounds/beep-warning.ogg";
+import { useEffect, useRef } from "react";
 
 export default function RecentActionBanners() {
   const { driverActions } = useDriverActionsStore();
 
-  // 첫 번째 요소와 나머지 요소들로 분리
+  // 첫 번째 action과 나머지 action들로 분리
   const [mostRecentAction, ...restActions] = driverActions;
+
+  // 이전 action의 id를 저장하기 위한 ref
+  const previousActionIdRef = useRef(-1);
+
+  useEffect(() => {
+    // 가장 최근의 action이 있고, 이전 id와 다를 경우에만 소리 재생
+    if (
+      mostRecentAction?.label &&
+      mostRecentAction.id !== previousActionIdRef.current
+    ) {
+      const audio = new Audio(beepSoundFile);
+      audio.play();
+
+      // 현재 action의 id를 ref에 저장하여 다음 비교에 사용
+      previousActionIdRef.current = mostRecentAction.id;
+    }
+  }, [mostRecentAction]); // mostRecentAction이 변경될 때마다 실행
 
   return (
     <S.Container>
