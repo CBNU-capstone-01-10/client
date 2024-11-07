@@ -13,6 +13,7 @@ import { useDriverActionsStore } from "../../store/use-driver-actions";
 import * as S from "./page.style";
 import DriverVideo from "../../_components/driver-video/driver-video";
 import AlertBanner from "../../_components/alert-banner/alert-banner";
+import RecentActionBanners from "../../_components/recent-action-banners/recent-action-banners";
 
 const geoOptions = {
   enableHighAccuracy: true,
@@ -82,17 +83,13 @@ export default function Page() {
   }, []);
 
   return (
-    <>
+    <S.Wrapper>
       <DriverVideo ref={videoRef} />
-      <S.Wrapper>
-        <S.ContentWrapper>
-          <TodayScore />
-          <ScoreGauge />
-        </S.ContentWrapper>
-        {locationErrorMessage && (
-          <AlertBanner errorMessage={locationErrorMessage} />
-        )}
-      </S.Wrapper>
-    </>
+      {/* <TodayScore /> */}
+      <RecentActionBanners />
+      {locationErrorMessage && (
+        <AlertBanner errorMessage={locationErrorMessage} />
+      )}
+    </S.Wrapper>
   );
 }
