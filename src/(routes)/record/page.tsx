@@ -3,17 +3,17 @@ import { useEffect, useRef, useState } from "react";
 import useWatchLocation from "../../hooks/useWatchLocation";
 import drawVideoSnapshot from "./_utils/drawVideoSnapshot";
 import useInterval from "../../hooks/useInterval";
-import TodayScore from "./_components/today-score/today-score";
 import { usePostDriverAction } from "../../api/action";
 import { convertDataURLToFile } from "../../_utils/convertor";
 import { SEND_DRIVER_IMAGE_INTERVAL_TIME } from "../../constants/constants";
 import { getCameraPermission } from "../../_utils/camera";
-import ScoreGauge from "../../_components/score-gauge/score-gauge";
 import { useDriverActionsStore } from "../../store/use-driver-actions";
 import * as S from "./page.style";
 import DriverVideo from "../../_components/driver-video/driver-video";
 import AlertBanner from "../../_components/alert-banner/alert-banner";
 import RecentActionBanners from "../../_components/recent-action-banners/recent-action-banners";
+import ContentBlockWrapper from "../../_components/block/content-block-wrapper";
+import getElapsedTime from "../../_utils/time";
 
 const geoOptions = {
   enableHighAccuracy: true,
@@ -85,7 +85,14 @@ export default function Page() {
   return (
     <S.Wrapper>
       <DriverVideo ref={videoRef} />
-      {/* <TodayScore /> */}
+      {/* <ContentBlockWrapper height={"5rem"} margin={"0 0 0.8rem 0"}>
+        <S.Header>
+          <S.TodayScoreWrapper>
+            <TodayScore />
+            </S.TodayScoreWrapper>
+        </S.Header>
+      </ContentBlockWrapper> */}
+
       <RecentActionBanners />
       {locationErrorMessage && (
         <AlertBanner errorMessage={locationErrorMessage} />
