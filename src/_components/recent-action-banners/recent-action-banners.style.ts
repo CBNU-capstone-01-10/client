@@ -1,3 +1,4 @@
+import { swingInLeftFwd } from "./../../styles/global-style";
 import styled from "styled-components";
 import { IMAGE_MAP } from "../../constants/constants";
 
@@ -29,8 +30,11 @@ export const ActionBanner = styled.div`
     grid-column: 1 / span 2;
     grid-row: 1 / span 2;
   }
-  &:not(first-child) {
+  &:not(:first-child) {
     padding: 0.8rem;
+    filter: grayscale(50%);
+    animation: ${swingInLeftFwd} 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+      both;
   }
 `;
 interface IScoreLabelProps {
@@ -49,7 +53,7 @@ export const ActionBannerImage = styled.img.attrs<IScoreLabelProps>(
   height: 55%;
   display: block;
 
-  filter: drop-shadow(0 -1rem 2.5rem rgba(0, 0, 0, 0.7));
+  filter: drop-shadow(0 1rem 2.5rem rgba(0, 0, 0, 0.7));
   z-index: 100;
 `;
 
