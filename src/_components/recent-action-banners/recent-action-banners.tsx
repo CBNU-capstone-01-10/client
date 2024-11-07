@@ -2,9 +2,9 @@ import { useDriverActionsStore } from "../../store/use-driver-actions";
 import ScoreGauge from "../score-gauge/score-gauge";
 import WangnooniLottieLogo from "../wangnooni-logo/wangnooni-lottie-logo";
 import * as S from "./recent-action-banners.style";
-import getElapsedTime from "../../_utils/time";
 import beepSoundFile from "../../../public/assets/sounds/beep-warning.ogg";
 import { useEffect, useRef } from "react";
+import LiveScoreLog from "../../(routes)/record/_components/live-score-log/LiveScoreLog";
 
 export default function RecentActionBanners() {
   const { driverActions } = useDriverActionsStore();
@@ -30,31 +30,23 @@ export default function RecentActionBanners() {
   }, [mostRecentAction]); // mostRecentAction이 변경될 때마다 실행
 
   return (
-    <S.Container>
-      <S.ActionBanner>
-        {driverActions.length === 0 ? (
-          <>
-            <WangnooniLottieLogo height="12rem" />
-            <S.DefaultTitle>오늘 하루도 안전운전하세요!</S.DefaultTitle>
-          </>
-        ) : (
-          <>
-            <ScoreGauge driverAction={mostRecentAction} />
-          </>
-        )}
-      </S.ActionBanner>
-      {restActions.map((actionItem) => (
-        <S.ActionBanner key={actionItem?.id}>
-          <S.ActionBannerImage
-            label={actionItem?.label}
-            score={actionItem?.score}
-            safeDriving={actionItem?.safe_driving}
-          />
-          <S.ActionBannerMetadata>
-            {getElapsedTime(actionItem?.recorded_at)}
-          </S.ActionBannerMetadata>
+    <>
+      <S.ActionBannerWrapper>
+        <S.ActionBanner>
+          {driverActions.length === 0 ? (
+            <>
+              <WangnooniLottieLogo height="12rem" />
+              <S.DefaultTitle>오늘 하루도 안전운전하세요!</S.DefaultTitle>
+            </>
+          ) : (
+            <>
+              <ScoreGauge driverAction={mostRecentAction} />
+            </>
+          )}
         </S.ActionBanner>
-      ))}
-    </S.Container>
+      </S.ActionBannerWrapper>
+      {/* 실시간 점수 히스토리 */}
+      <LiveScoreLog driverActions={restActions} />
+    </>
   );
 }
