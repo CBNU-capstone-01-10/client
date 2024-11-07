@@ -2,17 +2,6 @@ import styled from "styled-components";
 import { IMAGE_MAP } from "../../constants/constants";
 import { pulsateFwd } from "../../styles/global-style";
 
-export const Container = styled.div`
-  display: flex;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  border-radius: 2rem;
-  background-color: #fff;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  box-shadow: rgba(13, 38, 76, 0.19) 0px 9px 20px;
-`;
 export const DefaultTitle = styled.span`
   font-size: 1.4rem;
   font-weight: 600;
