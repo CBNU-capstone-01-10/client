@@ -1,11 +1,12 @@
 // COMPONENT: 점수 게이지
 import { useEffect, useState } from "react";
 import * as S from "./score-gauge.stlye";
-import { useDriverActionsStore } from "../../store/use-driver-actions";
 import { ACTION_LABEL, ActionLabel } from "../../constants/constants";
-import WangnooniLottieLogo from "../wangnooni-logo/wangnooni-lottie-logo";
-
-export default function ScoreGauge({ driverAction }) {
+import { IDriverActionResponse } from "../../(routes)/record/types/type";
+interface ScoreGaugeProps {
+  driverAction: IDriverActionResponse; // driverAction의 타입 명시
+}
+export default function ScoreGauge({ driverAction }: ScoreGaugeProps) {
   // const { driverActions } = useDriverActionsStore();
   const latestScore = Math.abs(driverAction?.score || 0);
 
