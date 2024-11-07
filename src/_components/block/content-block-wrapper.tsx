@@ -5,10 +5,16 @@ import * as S from "./content-block-wrapper.style";
 interface IContentBlockWrapperProps {
   children: ReactNode;
   height: string;
+  margin: string;
 }
 export default function ContentBlockWrapper({
   children,
   height,
+  margin,
 }: IContentBlockWrapperProps) {
-  return <S.Wrapper height={height}>{children}</S.Wrapper>;
+  return (
+    <S.Wrapper height={height} margin={margin}>
+      {children}
+    </S.Wrapper>
+  );
 }
