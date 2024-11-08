@@ -9,7 +9,7 @@ import { calculateNumberSum } from "../../../../_utils/number.js";
 
 export default function RecentSevenDaysScore() {
   const {
-    data: recentSevenDaysDriverActions,
+    data: recentSevenDaysDriverActionScores,
     isLoading,
     isError,
     isSuccess,
@@ -32,8 +32,8 @@ export default function RecentSevenDaysScore() {
     );
 
   if (isSuccess) {
-    const recentsevenDaysScoreSum = calculateNumberSum(
-      recentSevenDaysDriverActions
+    const recentSevenDaysScoreSum = calculateNumberSum(
+      recentSevenDaysDriverActionScores
     );
     const recentSevenDays = getRecentSevenDays();
 
@@ -43,28 +43,16 @@ export default function RecentSevenDaysScore() {
           <S.ChartHeader>
             <S.Title>최근 일주일 점수 통계</S.Title>
             <S.TotalScore>
-              총 {recentsevenDaysScoreSum.toLocaleString("ko-KR")}점
+              총 {recentSevenDaysScoreSum.toLocaleString("ko-KR")}점
             </S.TotalScore>
           </S.ChartHeader>
           <BarChart
             labels={recentSevenDays}
             label={"안전점수"}
-            data={recentSevenDaysDriverActions}
+            data={recentSevenDaysDriverActionScores}
           />
         </S.RecentSevenDaysScoreWrapper>
       </ContentBlockWrapper>
     );
   }
-  console.log(
-    "🚀 ~ RecentSevenDaysScore ~ recentSevenDaysDriverActions:",
-    recentSevenDaysDriverActions
-  );
-  console.log(
-    "🚀 ~ RecentSevenDaysScore ~ recentSevenDaysDriverActions:",
-    recentSevenDaysDriverActions
-  );
-  console.log(
-    "🚀 ~ RecentSevenDaysScore ~ recentSevenDaysDriverActions:",
-    recentSevenDaysDriverActions
-  );
 }
