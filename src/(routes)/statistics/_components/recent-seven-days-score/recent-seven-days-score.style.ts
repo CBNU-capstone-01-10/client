@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const RecentSevenDaysScoreWrapper = styled.div`
   width: 100%;
   height: 100%;
-  padding: 1rem;
+  margin-bottom: 1rem;
 `;
 export const ChartHeader = styled.div`
   padding: 0.4rem;
@@ -11,10 +11,10 @@ export const ChartHeader = styled.div`
   flex-direction: column;
   gap: 0.8rem;
 `;
-export const Title = styled.div`
-  font-size: 1rem;
-  letter-spacing: -0.05rem;
-`;
+// export const Title = styled.div`
+//   font-size: 1rem;
+//   letter-spacing: -0.05rem;
+// `;
 export const TotalScore = styled.div`
   color: ${({ theme }) => theme.primaryColor};
   font-size: 1.4rem;

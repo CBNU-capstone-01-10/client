@@ -81,6 +81,7 @@ export default function DoughnutChart({
               datalabels: {
                 font: {
                   size: 16,
+                  weight: 600,
                 },
                 color: "#fff",
                 anchor: "center",

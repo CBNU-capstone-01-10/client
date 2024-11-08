@@ -38,21 +38,18 @@ export default function RecentSevenDaysScore() {
     const recentSevenDays = getRecentSevenDays();
 
     return (
-      <ContentBlockWrapper height={"content-fit"}>
-        <S.RecentSevenDaysScoreWrapper>
-          <S.ChartHeader>
-            <S.Title>최근 일주일 점수 통계</S.Title>
-            <S.TotalScore>
-              총 {recentSevenDaysScoreSum.toLocaleString("ko-KR")}점
-            </S.TotalScore>
-          </S.ChartHeader>
-          <BarChart
-            labels={recentSevenDays}
-            label={"안전점수"}
-            data={recentSevenDaysDriverActionScores}
-          />
-        </S.RecentSevenDaysScoreWrapper>
-      </ContentBlockWrapper>
+      <S.RecentSevenDaysScoreWrapper>
+        <S.ChartHeader>
+          <S.TotalScore>
+            총 {recentSevenDaysScoreSum.toLocaleString("ko-KR")}점
+          </S.TotalScore>
+        </S.ChartHeader>
+        <BarChart
+          labels={recentSevenDays}
+          label={"안전점수"}
+          data={recentSevenDaysDriverActionScores}
+        />
+      </S.RecentSevenDaysScoreWrapper>
     );
   }
 }

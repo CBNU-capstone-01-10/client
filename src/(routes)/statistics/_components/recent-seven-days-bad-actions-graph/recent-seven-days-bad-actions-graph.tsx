@@ -1,12 +1,19 @@
 // COMPONENT: 최근 위험 운전 분석 그래프
 import { useGetRecentSevenDaysBadDriverActions } from "../../../../api/action";
 import DoughnutChart from "../../../../_components/chart/doughnut-chart";
-import ContentBlockWrapper from "../../../../_components/block/content-block-wrapper";
+import { ACTION_LABEL, ActionLabel } from "../../../../constants/constants";
+import OvalLoadingSpinner from "../../../../_components/loading-spinner/oval-loading-spinner";
 
 export default function RecentSevenDaysBadActionsGraph() {
-  const { data: recentSevenDaysBadDriveActionsData, isSuccess } =
-    useGetRecentSevenDaysBadDriverActions();
+  const {
+    data: recentSevenDaysBadDriveActionsData,
+    isLoading,
+    isSuccess,
+  } = useGetRecentSevenDaysBadDriverActions();
 
+  if (isLoading) {
+    return <OvalLoadingSpinner />;
+  }
   if (isSuccess) {
     const scoreByLabel = recentSevenDaysBadDriveActionsData.reduce(
       (acc, curr) => {
@@ -21,17 +28,14 @@ export default function RecentSevenDaysBadActionsGraph() {
     );
 
     // 키(차트의 라벨), 값(차트의 값) 추출
-    const labels = Object.keys(scoreByLabel);
+    // 영어 라벨을 한글 라벨로 변환
+    const labels = Object.keys(scoreByLabel).map(
+      (label) => ACTION_LABEL[label as ActionLabel] || label
+    );
     const chartData = Object.values(scoreByLabel);
 
     return (
-      <ContentBlockWrapper height={"fit-content"} padding={"1rem"}>
-        <DoughnutChart
-          data={chartData}
-          label={"위험운전 분석"}
-          labels={labels}
-        />
-      </ContentBlockWrapper>
+      <DoughnutChart data={chartData} label={"위험운전 분석"} labels={labels} />
     );
   }
 }

@@ -12,3 +12,9 @@ export const ContentWrapper = styled.div`
   height: fit-content;
   padding-bottom: calc(var(--btm-navbar-height) + 3rem);
 `;
+export const Title = styled.div`
+  padding: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.05rem;
+`;
