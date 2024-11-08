@@ -79,7 +79,7 @@ export const useGetRecentSevenDaysDriverActions = () => {
   return useQuery<number[]>({
     queryKey: ["recent-seven-days-score"],
     queryFn: async () => {
-      const recentDriverActionsURL = `/api/actions/scores/sum`;
+      const recentSevenDaysDriverActionsURL = `/api/actions/scores/sum`;
       const recentSevenDaysScore = [];
 
       // 최근 7일의 각 날짜의 합산을 구하기 위한 요청 생성
@@ -90,7 +90,7 @@ export const useGetRecentSevenDaysDriverActions = () => {
           .format("YYYY-MM-DD");
 
         const score = axiosInstance
-          .get(recentDriverActionsURL, {
+          .get(recentSevenDaysDriverActionsURL, {
             params: { date_start, date_end },
           })
           .then((res) => res.data._sum.score);
@@ -99,6 +99,50 @@ export const useGetRecentSevenDaysDriverActions = () => {
 
       // 모든 날짜의 요청이 완료될 때까지 기다리고, 결과를 배열로 반환
       return await Promise.all(recentSevenDaysScore);
+    },
+    retry: 0,
+  });
+};
+
+// GET: 최근 일주일 위험 운전 조회
+export const useGetRecentSevenDaysBadDriverActions = () => {
+  return useQuery<IDriverActionResponse[]>({
+    queryKey: ["recent-seven-days-bad-actions"],
+    queryFn: async () => {
+      const recentSevenDaysBadDriverActionsURL = `/api/actions`;
+      const per_page = 10;
+      const safe_driving = "false";
+
+      const date_start = dayjs().subtract(6, "day").format("YYYY-MM-DD");
+      const date_end = dayjs().format("YYYY-MM-DD");
+
+      let recentSevenDaysBadDriverActions: IDriverActionResponse[] = [];
+      let page = 1;
+      let hasMorePage = true;
+
+      while (hasMorePage) {
+        const response = await axiosInstance.get(
+          recentSevenDaysBadDriverActionsURL,
+          {
+            params: { date_start, date_end, page, per_page, safe_driving },
+          }
+        );
+
+        const data = response.data;
+
+        if (data.length > 0) {
+          recentSevenDaysBadDriverActions = [
+            ...recentSevenDaysBadDriverActions,
+            ...data,
+          ];
+          page += 1;
+        } else {
+          // 데이터가 없으면 반복 종료
+          hasMorePage = false;
+        }
+      }
+
+      return recentSevenDaysBadDriverActions;
     },
     retry: 0,
   });
