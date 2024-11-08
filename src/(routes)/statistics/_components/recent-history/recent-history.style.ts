@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Header = styled.div`
   height: fit-content;
-  padding: 1.2rem;
+  padding: 0.6rem;
   position: sticky;
   top: 0;
   background: white;
@@ -11,11 +11,9 @@ export const Header = styled.div`
 
 // 최근 점수 기록 컴포넌트의 전체 래퍼
 export const RecentHistoryContainer = styled.div`
-  padding: 0 1rem;
   width: 100%;
   height: calc(100% - 3rem);
   overflow: auto;
-  border-radius: 2rem;
 `;
 
 // 최근 점수 기록 컴포넌트의 전체 래퍼

@@ -45,7 +45,7 @@ export default function RecentHistory() {
     );
 
   return (
-    <ContentBlockWrapper height={"16rem"}>
+    <ContentBlockWrapper height={"16rem"} padding={"1rem"}>
       <S.Header>최근점수</S.Header>
       <S.RecentHistoryContainer>
         <S.RecentHistoryWrapper>
