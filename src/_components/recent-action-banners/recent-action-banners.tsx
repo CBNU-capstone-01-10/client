@@ -4,7 +4,7 @@ import WangnooniLottieLogo from "../wangnooni-logo/wangnooni-lottie-logo";
 import * as S from "./recent-action-banners.style";
 import beepSoundFile from "../../../public/assets/sounds/beep-warning.ogg";
 import { useEffect, useRef } from "react";
-import LiveScoreLog from "../../(routes)/record/_components/live-score-log/LiveScoreLog";
+import LiveScoreLog from "../../(routes)/record/_components/live-score-log/live-score-log";
 
 export default function RecentActionBanners() {
   const { driverActions } = useDriverActionsStore();
