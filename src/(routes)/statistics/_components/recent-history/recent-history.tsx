@@ -46,7 +46,7 @@ export default function RecentHistory() {
 
   return (
     <ContentBlockWrapper height={"16rem"} padding={"1rem"}>
-      <S.Header>최근점수</S.Header>
+      <S.Header>최근 기록</S.Header>
       <S.RecentHistoryContainer>
         <S.RecentHistoryWrapper>
           {/* 무한스크롤로 데이터 페칭: page[]>page>item 구조 */}

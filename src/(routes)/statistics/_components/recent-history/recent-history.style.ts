@@ -7,6 +7,7 @@ export const Header = styled.div`
   top: 0;
   background: white;
   border-radius: 2rem;
+  font-weight: 600;
 `;
 
 // 최근 점수 기록 컴포넌트의 전체 래퍼
