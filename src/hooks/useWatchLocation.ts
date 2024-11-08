@@ -21,7 +21,7 @@ export default function useWatchLocation(geoOptions = {}) {
       setLocationErrorMessage("위치정보 사용불가");
     }
     if (error.code === error.TIMEOUT) {
-      setLocationErrorMessage("요청시간초과");
+      setLocationErrorMessage("위치 정보를 확인하는 데 실패했습니다.");
     }
   };
 
