@@ -2,7 +2,7 @@
 import getElapsedTime from "../../../../_utils/time";
 import { IDriverActionResponse } from "../../types/type";
 import { ACTION_LABEL, ActionLabel } from "../../../../constants/constants";
-import * as S from "./LiveScoreLog.style";
+import * as S from "./live-score-log.style";
 
 interface ILiveScoreLogProps {
   driverActions?: IDriverActionResponse[] | undefined;
