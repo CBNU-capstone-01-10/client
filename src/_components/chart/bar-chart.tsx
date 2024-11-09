@@ -18,8 +18,16 @@ interface IBarChartProps {
   labels: string[];
   label: string;
   data: number[];
+  isHorizontal?: boolean;
+  barBgColor?: string;
 }
-export default function BarChart({ labels, label, data }: IBarChartProps) {
+export default function BarChart({
+  labels,
+  label,
+  data,
+  isHorizontal = false,
+  barBgColor = "rgba(31, 135, 254, 1)",
+}: IBarChartProps) {
   const chartRef = useRef<IChartRef | null>(null);
 
   useEffect(() => {
@@ -43,21 +51,22 @@ export default function BarChart({ labels, label, data }: IBarChartProps) {
               {
                 label: label,
                 data: data,
-                backgroundColor: "rgba(31, 135, 254, 100)",
+                backgroundColor: barBgColor,
                 barThickness: 12,
                 borderRadius: 6,
               },
             ],
           },
           options: {
+            indexAxis: isHorizontal ? "y" : "x",
             responsive: true,
             scales: {
-              x: {
-                type: "category",
-              },
-              y: {
-                beginAtZero: false,
-              },
+              // x: {
+              //   type: "category",
+              // },
+              // y: {
+              //   beginAtZero: false,
+              // },
             },
           },
         });
@@ -66,7 +75,7 @@ export default function BarChart({ labels, label, data }: IBarChartProps) {
         chartRef.current.chart = newChart;
       }
     }
-  }, [labels, label, data]);
+  }, [labels, label, data, isHorizontal, barBgColor]);
 
   return (
     <BarChartWrapper>
