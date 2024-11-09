@@ -26,3 +26,5 @@ export const TAB = {
   STATISTICS: "나의 운전 기록",
   PROFILE: "내 정보",
 };
+// 1초에 회전하는 각도
+export const DEG_ROTATE_PER_SEC = 6;
