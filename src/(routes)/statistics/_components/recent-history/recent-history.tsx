@@ -90,7 +90,7 @@ export default function RecentHistory() {
               )}
             </>
           )}
-          {!isFetchingNextPage && (
+          {isFetchingNextPage && (
             <div>
               <OvalLoadingSpinner />
             </div>
