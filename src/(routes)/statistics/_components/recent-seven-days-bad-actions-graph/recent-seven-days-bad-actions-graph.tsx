@@ -3,13 +3,22 @@ import { useGetRecentSevenDaysBadDriverActions } from "../../../../api/action";
 import DoughnutChart from "../../../../_components/chart/doughnut-chart";
 import { ACTION_LABEL, ActionLabel } from "../../../../constants/constants";
 import OvalLoadingSpinner from "../../../../_components/loading-spinner/oval-loading-spinner";
+import BarChart from "../../../../_components/chart/bar-chart";
+import styled, { useTheme } from "styled-components";
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
 export default function RecentSevenDaysBadActionsGraph() {
   const {
     data: recentSevenDaysBadDriveActionsData,
     isLoading,
     isSuccess,
   } = useGetRecentSevenDaysBadDriverActions();
+
+  const theme = useTheme();
 
   if (isLoading) {
     return <OvalLoadingSpinner />;
@@ -35,7 +44,16 @@ export default function RecentSevenDaysBadActionsGraph() {
     const chartData = Object.values(scoreByLabel);
 
     return (
-      <DoughnutChart data={chartData} label={"위험운전 분석"} labels={labels} />
+      <Wrapper>
+        <DoughnutChart data={chartData} label={"경고 횟수"} labels={labels} />
+        <BarChart
+          data={chartData}
+          label={"경고 횟수"}
+          labels={labels}
+          isHorizontal={true}
+          barBgColor={theme.primaryCautionBgColor}
+        />
+      </Wrapper>
     );
   }
 }
