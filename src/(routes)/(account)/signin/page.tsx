@@ -38,8 +38,8 @@ export default function Page() {
     >
       <S.FormContent>
         <S.Header>
-          <S.HeaderTitle>wang</S.HeaderTitle>
-          <WangnooniLottieLogo />
+          <S.HeaderTitle>wangn</S.HeaderTitle>
+          <WangnooniLottieLogo height={"3rem"} />
           <S.HeaderTitle>ni</S.HeaderTitle>
         </S.Header>
         <S.InputContainer>
@@ -49,10 +49,10 @@ export default function Page() {
             type="email"
             placeholder="wangnooni@email.com"
             {...register("email", {
-              required: "Please enter your e-mail.",
+              required: "이메일을 입력해주세요",
               pattern: {
                 value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                message: "This is not a valid email format.",
+                message: "이메일 형식이 올바르지 않습니다",
               },
             })}
             aria-invalid={
@@ -69,18 +69,18 @@ export default function Page() {
               isSubmitted ? (errors.password ? "true" : "false") : undefined
             }
             {...register("password", {
-              required: "Please enter your password.",
+              required: "비밀번호를 입력해주세요",
             })}
           />
           {/* 에러 메시지 */}
           <FormErrorMessage message={errors.password?.message} />
           <FormErrorMessage message={loginError?.response?.data.message} />
         </S.InputContainer>
-        <S.LoginButton>LOGIN</S.LoginButton>
-        <S.SignupHeader>Don't you have an account yet?</S.SignupHeader>
+        <S.LoginButton>로그인</S.LoginButton>
+        <S.SignupHeader>아직 계정이 없으신가요?</S.SignupHeader>
         {/* 회원가입 버튼 */}
         <S.SignupButton disabled={isSubmitting}>
-          <Link to={"/signup"}>Sign Up &rarr;</Link>
+          <Link to={"/signup"}>회원가입 하러가기 &rarr;</Link>
         </S.SignupButton>
       </S.FormContent>
     </S.FormWrapper>
