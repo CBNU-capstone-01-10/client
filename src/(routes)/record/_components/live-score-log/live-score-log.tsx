@@ -1,7 +1,11 @@
 // COMPONENT: 실시간 안전 점수 로그
 import getElapsedTime from "../../../../_utils/time";
 import { IDriverActionResponse } from "../../types/type";
-import { ACTION_LABEL, ActionLabel } from "../../../../constants/constants";
+import {
+  ACTION_LABEL,
+  ActionLabel,
+  MAX_LIVE_SCORE_LOG_SIZE,
+} from "../../../../constants/constants";
 import * as S from "./live-score-log.style";
 
 interface ILiveScoreLogProps {
@@ -11,7 +15,7 @@ export default function LiveScoreLog({ driverActions }: ILiveScoreLogProps) {
   return (
     <S.LiveScoreLogWrapper>
       {driverActions?.length === 0 ? (
-        <div>최근 기록 없음</div>
+        <div>최대 {MAX_LIVE_SCORE_LOG_SIZE} 건의 최근 기록이 표시됩니다</div>
       ) : (
         driverActions?.map((actionItem) => (
           <S.LiveScoreLogItem key={actionItem.id}>
