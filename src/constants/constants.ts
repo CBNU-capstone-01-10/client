@@ -22,7 +22,7 @@ export const ACTION_LABEL: Record<ActionLabel, string> = {
 };
 // 탭
 export const TAB = {
-  RECORD: "Recording",
-  STATISTICS: "Statistics",
-  PROFILE: "My Profile",
+  RECORD: "녹화 화면",
+  STATISTICS: "나의 운전 기록",
+  PROFILE: "내 정보",
 };

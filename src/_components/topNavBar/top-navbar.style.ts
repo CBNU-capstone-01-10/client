@@ -20,6 +20,7 @@ export const HeaderTitle = styled.h1`
   font-weight: 600;
   flex: 1;
   text-align: center;
+  letter-spacing: 0.08rem;
 `;
 
 export const BackButton = styled.button`
