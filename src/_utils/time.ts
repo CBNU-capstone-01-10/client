@@ -14,4 +14,7 @@ export const getElapsedTime = (recordedAt: string): string => {
   return `${diffInDays}일 전`;
 };
 
-export default getElapsedTime;
+// 시간을 초에서 분 단위(초 단위 버림)로 변환하는 함수
+export const convertSecondsToMinutes = (seconds: number): number => {
+  return Math.floor(seconds / 60);
+};
