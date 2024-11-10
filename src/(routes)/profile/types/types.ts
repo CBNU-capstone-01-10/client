@@ -6,7 +6,11 @@ export interface IPersonalInfo {
     user_id: number;
   };
   username: string;
+  encrypted_password: string;
   alias: string | null;
   email: string;
   address: string | null;
+  id: number;
+  created_at: string;
+  updated_at: string;
 }
