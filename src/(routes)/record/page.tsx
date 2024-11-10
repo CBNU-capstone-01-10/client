@@ -11,9 +11,8 @@ import { useDriverActionsStore } from "../../store/use-driver-actions";
 import * as S from "./page.style";
 import DriverVideo from "../../_components/driver-video/driver-video";
 import AlertBanner from "../../_components/alert-banner/alert-banner";
-import RecentActionBanners from "../../_components/recent-action-banners/recent-action-banners";
-import ContentBlockWrapper from "../../_components/block/content-block-wrapper";
-import getElapsedTime from "../../_utils/time";
+import RecentActionBanners from "./_components/recent-action-banners/recent-action-banners";
+import { useUserStore } from "../../store/use-user-store";
 
 const geoOptions = {
   enableHighAccuracy: true,
@@ -27,6 +26,7 @@ export default function Page() {
   const { location, cancelLocationWatch, locationErrorMessage } =
     useWatchLocation(geoOptions);
   const { addDriverAction } = useDriverActionsStore();
+  const { userId, keepUserId } = useUserStore();
 
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -58,7 +58,10 @@ export default function Page() {
     if (newDriverActionFeedback) {
       addDriverAction(newDriverActionFeedback);
     }
-  }, [newDriverActionFeedback, addDriverAction]);
+    if (!userId) {
+      keepUserId(newDriverActionFeedback?.user_id);
+    }
+  }, [newDriverActionFeedback, addDriverAction, userId, keepUserId]);
 
   useEffect(() => {
     if (!videoRef.current) {
@@ -85,14 +88,6 @@ export default function Page() {
   return (
     <S.Wrapper>
       <DriverVideo ref={videoRef} />
-      {/* <ContentBlockWrapper height={"5rem"} margin={"0 0 0.8rem 0"}>
-        <S.Header>
-          <S.TodayScoreWrapper>
-            <TodayScore />
-            </S.TodayScoreWrapper>
-        </S.Header>
-      </ContentBlockWrapper> */}
-
       <RecentActionBanners />
       {locationErrorMessage && (
         <AlertBanner errorMessage={locationErrorMessage} />
