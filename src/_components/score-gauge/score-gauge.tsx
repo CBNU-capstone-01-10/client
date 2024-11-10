@@ -6,6 +6,7 @@ import {
   DEG_ROTATE_PER_SEC,
 } from "../../constants/constants";
 import { IDriverActionResponse } from "../../(routes)/record/types/type";
+import { usePostCoin } from "../../api/coin";
 import * as S from "./score-gauge.stlye";
 
 const MAX_GAUGE = 360 / DEG_ROTATE_PER_SEC;
@@ -15,6 +16,7 @@ interface ScoreGaugeProps {
 export default function ScoreGauge({ driverAction }: ScoreGaugeProps) {
   const [prevId, setPrevActionId] = useState(0);
   const [displayedScore, setDisplayedScore] = useState<number>(0); // 게이지가 채워지는 정도
+  const { mutate: requestCoin } = usePostCoin();
 
   // 피드백이 바뀌면 게이지 및 이전 id 초기화
   useEffect(() => {
@@ -36,7 +38,10 @@ export default function ScoreGauge({ driverAction }: ScoreGaugeProps) {
     if (displayedScore !== latestScore) {
       setDisplayedScore(latestScore);
     }
-  }, [driverAction.safe_driving, driverAction.score, displayedScore]);
+    if (displayedScore === MAX_GAUGE - 1) {
+      requestCoin();
+    }
+  }, [driverAction.score]);
 
   return (
     <S.ScoreBar $scoreStartValue={displayedScore} score={driverAction?.score}>
