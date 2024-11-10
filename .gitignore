@@ -1,6 +1,7 @@
 # Env
 .env.*
-
+# Certificate
+*.pem
 # Test
 db.json
 
