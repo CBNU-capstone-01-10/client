@@ -1,5 +1,8 @@
 // COMPONENT: 실시간 안전 점수 로그
-import getElapsedTime from "../../../../_utils/time";
+import {
+  getElapsedTime,
+  convertSecondsToMinutes,
+} from "../../../../_utils/time";
 import { IDriverActionResponse } from "../../types/type";
 import {
   ACTION_LABEL,
@@ -20,7 +23,9 @@ export default function LiveScoreLog({ driverActions }: ILiveScoreLogProps) {
         driverActions?.map((actionItem) => (
           <S.LiveScoreLogItem key={actionItem.id}>
             <S.ScoreWrapper score={actionItem.score}>
-              {actionItem.score}
+              {actionItem.safe_driving
+                ? `${convertSecondsToMinutes(actionItem.score)}분`
+                : actionItem.score}
             </S.ScoreWrapper>
             <S.ContentWrapper>
               <S.Label>
