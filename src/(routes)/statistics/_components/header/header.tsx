@@ -1,12 +1,22 @@
 import ContentBlockWrapper from "../../../../_components/block/content-block-wrapper";
+import { useGetCoin } from "../../../../api/coin";
 import * as S from "./header.style";
 
 export default function Header() {
+  const { data: coinSum } = useGetCoin();
+
   return (
     <ContentBlockWrapper height={"7rem"}>
       <S.MyScoreWrapper>
-        <S.MyScoreTitle>나의 안전점수 지수</S.MyScoreTitle>
-        <S.MyScore>128.0</S.MyScore>
+        <S.MyScoreTitle>획득한 코인 갯수</S.MyScoreTitle>
+        {coinSum ? (
+          <S.MyScore>{coinSum}</S.MyScore>
+        ) : (
+          <S.Message>
+            아직 획득한 코인이 없어요 <br />
+            안전운전하고 코인을 모아보세요!
+          </S.Message>
+        )}
         <S.Divider />
         <S.MetadataWrapper>1h</S.MetadataWrapper>
       </S.MyScoreWrapper>

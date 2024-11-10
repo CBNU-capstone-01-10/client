@@ -12,6 +12,11 @@ export const MyScoreTitle = styled.div`
   color: black;
   font-weight: 600;
 `;
+export const Message = styled.h3`
+  font-size: 0.9rem;
+  text-align: center;
+  line-height: 120%;
+`;
 export const MyScore = styled.div`
   color: ${({ theme }) => theme.primaryColor};
   font-size: 1.8rem;
