@@ -1,5 +1,5 @@
 import { AxiosError, AxiosResponse } from "axios";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import {
   ILoginParams,
   IRegisterResponseData,
@@ -46,8 +46,6 @@ export const useConfirmVerificationToken = () => {
 
 // POST: 로그인
 export const useLogin = () => {
-  const queryClient = useQueryClient();
-
   return useMutation<
     AxiosResponse,
     AxiosError<IServerErrorResponse>,
@@ -61,27 +59,15 @@ export const useLogin = () => {
         },
       });
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["loggedInUser"],
-      });
-    },
   });
 };
 
 // DELETE: 로그아웃
 export const useLogout = () => {
-  const queryClient = useQueryClient();
-
   return useMutation<AxiosResponse, AxiosError>({
     mutationFn: async () => {
       const logoutURL = `api/logout`;
       return await axiosInstance.delete(logoutURL);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["loggedInUser"],
-      });
     },
   });
 };
