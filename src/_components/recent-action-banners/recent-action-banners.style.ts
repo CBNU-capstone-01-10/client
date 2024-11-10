@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { IMAGE_MAP } from "../../constants/constants";
 
 // export const Container = styled.section`
 //   width: 100%;
@@ -28,25 +27,6 @@ export const ActionBanner = styled.div`
   align-items: center;
   background-color: #fff;
   box-shadow: rgba(13, 38, 76, 0.19) 0px 9px 20px;
-`;
-interface IScoreLabelProps {
-  label: string | null;
-  score: number;
-  safeDriving: boolean;
-}
-export const ActionBannerImage = styled.img.attrs<IScoreLabelProps>(
-  (props) => ({
-    src: props.safeDriving
-      ? IMAGE_MAP["safe_driving"]
-      : IMAGE_MAP[props.label || ""],
-  })
-)<IScoreLabelProps>`
-  width: 55%;
-  height: 55%;
-  display: block;
-
-  filter: drop-shadow(0 1rem 2.5rem rgba(0, 0, 0, 0.7));
-  z-index: 100;
 `;
 
 export const ActionBannerMetadata = styled.span`
