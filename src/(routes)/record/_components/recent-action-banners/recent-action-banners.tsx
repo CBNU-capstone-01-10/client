@@ -39,9 +39,7 @@ export default function RecentActionBanners() {
               <S.DefaultTitle>오늘 하루도 안전운전하세요!</S.DefaultTitle>
             </>
           ) : (
-            <>
-              <ScoreGauge driverAction={mostRecentAction} />
-            </>
+            <ScoreGauge driverAction={mostRecentAction} />
           )}
         </S.ActionBanner>
       </S.ActionBannerWrapper>

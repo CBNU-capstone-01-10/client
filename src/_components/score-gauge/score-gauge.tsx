@@ -7,6 +7,7 @@ import {
 } from "../../constants/constants";
 import { IDriverActionResponse } from "../../(routes)/record/types/type";
 import { usePostCoin } from "../../api/coin";
+import CoinLottieLogo from "../coin/coin-lottie-logo";
 import * as S from "./score-gauge.stlye";
 
 const MAX_GAUGE = 360 / DEG_ROTATE_PER_SEC;
@@ -44,19 +45,27 @@ export default function ScoreGauge({ driverAction }: ScoreGaugeProps) {
   }, [driverAction.score]);
 
   return (
-    <S.ScoreBar $scoreStartValue={displayedScore} score={driverAction?.score}>
-      <S.ScoreLabelWrapper>
-        <S.ScoreLabelImage
-          label={driverAction?.label}
-          score={driverAction?.score}
-          safeDriving={driverAction?.safe_driving}
-        />
-        <S.ScoreLabelTitle>
-          {driverAction?.safe_driving
-            ? "안전운전"
-            : ACTION_LABEL[driverAction?.label as ActionLabel]}
-        </S.ScoreLabelTitle>
-      </S.ScoreLabelWrapper>
-    </S.ScoreBar>
+    <>
+      <S.ScoreBar $scoreStartValue={displayedScore} score={driverAction?.score}>
+        <S.ScoreLabelWrapper>
+          {displayedScore === MAX_GAUGE - 1 ? (
+            <CoinLottieLogo />
+          ) : (
+            <>
+              <S.ScoreLabelImage
+                label={driverAction?.label}
+                score={driverAction?.score}
+                safeDriving={driverAction?.safe_driving}
+              />
+              <S.ScoreLabelTitle>
+                {driverAction?.safe_driving
+                  ? "안전운전"
+                  : ACTION_LABEL[driverAction?.label as ActionLabel]}
+              </S.ScoreLabelTitle>
+            </>
+          )}
+        </S.ScoreLabelWrapper>
+      </S.ScoreBar>
+    </>
   );
 }
