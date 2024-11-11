@@ -7,7 +7,7 @@ import { IDriverActionResponse } from "../../record/types/type";
  * @return scoresPerDay
  */
 export const getScoresPerDay = (
-  recentSevenDaysDriverActions: IDriverActionResponse[]
+  recentSevenDaysDriverActions: IDriverActionResponse["action"][]
 ) => {
   const scoresPerDay: number[] = Array(7).fill(0);
 

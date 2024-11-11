@@ -55,10 +55,10 @@ export default function RecentHistory() {
           ) : (
             <>
               {recentDriverActionsPages?.pages.map(
-                (recentDriverActionsPage: IDriverActionResponse[]) =>
+                (recentDriverActionsPage: IDriverActionResponse["action"][]) =>
                   recentDriverActionsPage?.map(
                     (
-                      recentDriverActionItem: IDriverActionResponse,
+                      recentDriverActionItem: IDriverActionResponse["action"],
                       idx: number
                     ) => {
                       const recordedAt = getFormattedDate(

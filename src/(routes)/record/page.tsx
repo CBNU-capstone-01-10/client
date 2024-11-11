@@ -57,7 +57,7 @@ export default function Page() {
 
   useEffect(() => {
     if (newDriverActionFeedback) {
-      addDriverAction(newDriverActionFeedback);
+      addDriverAction(newDriverActionFeedback.action);
     }
   }, [newDriverActionFeedback, addDriverAction]);
 

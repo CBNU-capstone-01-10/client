@@ -4,14 +4,14 @@ import { IDriverActionResponse } from "../(routes)/record/types/type";
 import { MAX_LIVE_SCORE_LOG_SIZE } from "../constants/constants";
 
 interface IDriverActionsState {
-  driverActions: IDriverActionResponse[];
-  addDriverAction: (driverAction: IDriverActionResponse) => void;
+  driverActions: IDriverActionResponse["action"][];
+  addDriverAction: (driverAction: IDriverActionResponse["action"]) => void;
 }
 export const useDriverActionsStore = create<IDriverActionsState>((set) => ({
   driverActions: [],
 
   // 새로 받은 score 추가
-  addDriverAction: (newDriverAction: IDriverActionResponse) => {
+  addDriverAction: (newDriverAction: IDriverActionResponse["action"]) => {
     set((state) => {
       const recentAction = state.driverActions[0]; // 가장 최근 데이터를 가져옴
 

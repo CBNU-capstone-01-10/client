@@ -16,15 +16,11 @@ export const usePostDriverAction = () => {
     mutationFn: async (driverActionData) => {
       const driverActionURL = `/api/actions`;
       return await axiosInstance
-        .post<IDriverActionResponse, AxiosResponse<IDriverActionResponse>>(
-          driverActionURL,
-          driverActionData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        )
+        .post<IDriverActionResponse>(driverActionURL, driverActionData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
         .then((res) => {
           return res.data;
         });

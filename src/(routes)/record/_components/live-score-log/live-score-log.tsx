@@ -12,7 +12,7 @@ import {
 import * as S from "./live-score-log.style";
 
 interface ILiveScoreLogProps {
-  driverActions?: IDriverActionResponse[] | undefined;
+  driverActions?: IDriverActionResponse["action"][] | undefined;
 }
 export default function LiveScoreLog({ driverActions }: ILiveScoreLogProps) {
   return (
