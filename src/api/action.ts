@@ -26,7 +26,6 @@ export const usePostDriverAction = () => {
           }
         )
         .then((res) => {
-          console.log("🚀 ~ .then ~ res:", res.data);
           return res.data;
         });
     },
