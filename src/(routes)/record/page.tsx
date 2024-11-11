@@ -28,8 +28,11 @@ export default function Page() {
 
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const { mutate: createDriverAction, data: newDriverActionFeedback } =
-    usePostDriverAction();
+  const {
+    mutate: createDriverAction,
+    data: newDriverActionFeedback,
+    error,
+  } = usePostDriverAction();
   // POST: 일정 주기마다 운전자 행위를 캡처한 이미지와 위치 정보 전송
   useInterval(() => {
     if (videoRef.current) {
@@ -87,6 +90,7 @@ export default function Page() {
       {locationErrorMessage && (
         <AlertBanner errorMessage={locationErrorMessage} />
       )}
+      {error && <AlertBanner error={error} />}
     </S.Wrapper>
   );
 }
