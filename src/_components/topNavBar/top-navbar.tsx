@@ -6,9 +6,5 @@ interface ITopNavBarProps {
   height?: string;
 }
 export default function TopNavBar({ title }: ITopNavBarProps) {
-  return (
-    <S.Wrapper>
-      <S.HeaderTitle>{title}</S.HeaderTitle>
-    </S.Wrapper>
-  );
+  return <S.Wrapper>{/* <S.HeaderTitle>{title}</S.HeaderTitle> */}</S.Wrapper>;
 }
