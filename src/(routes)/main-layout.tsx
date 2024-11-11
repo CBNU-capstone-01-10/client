@@ -29,7 +29,7 @@ export default function MainLayout() {
   const { keepUserId } = useUserStore();
 
   useEffect(() => {
-    keepUserId(userData?.id);
+    keepUserId(userData?.pfp.user_id);
   }, []);
 
   return (
