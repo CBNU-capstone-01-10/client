@@ -1,5 +1,9 @@
-# Env
+# Ignore all .env files
+.env
 .env.*
+
+# Allow .env.example
+!.env.example
 # Certificate
 *.pem
 # Test
