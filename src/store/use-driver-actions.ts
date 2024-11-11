@@ -6,6 +6,7 @@ import { MAX_LIVE_SCORE_LOG_SIZE } from "../constants/constants";
 interface IDriverActionsState {
   driverActions: IDriverActionResponse["action"][];
   addDriverAction: (driverAction: IDriverActionResponse["action"]) => void;
+  resetDriverActions: () => void;
 }
 export const useDriverActionsStore = create<IDriverActionsState>((set) => ({
   driverActions: [],
@@ -35,4 +36,6 @@ export const useDriverActionsStore = create<IDriverActionsState>((set) => ({
       }
     });
   },
+  // 상태 초기화 함수
+  resetDriverActions: () => set({ driverActions: [] }),
 }));

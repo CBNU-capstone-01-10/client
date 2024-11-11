@@ -4,6 +4,7 @@ import { create } from "zustand";
 interface IUserState {
   userId: number | undefined;
   keepUserId: (userId: IUserState["userId"]) => void;
+  clearUserId: () => void;
 }
 export const useUserStore = create<IUserState>((set) => ({
   userId: undefined,
