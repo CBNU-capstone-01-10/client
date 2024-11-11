@@ -55,7 +55,7 @@ export default function ScoreGauge({ driverAction }: ScoreGaugeProps) {
               <S.ScoreLabelImage
                 label={driverAction?.label}
                 score={driverAction?.score}
-                safeDriving={driverAction?.safe_driving}
+                safe_driving={driverAction?.safe_driving}
               />
               <S.ScoreLabelTitle>
                 {driverAction?.safe_driving

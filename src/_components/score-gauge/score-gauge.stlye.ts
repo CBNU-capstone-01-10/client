@@ -66,11 +66,11 @@ export const ScoreLabelWrapper = styled.div`
 interface IScoreLabelProps {
   label: string | null;
   score: number;
-  safeDriving: boolean;
+  safe_driving: boolean;
 }
 
 export const ScoreLabelImage = styled.img.attrs<IScoreLabelProps>((props) => ({
-  src: props.safeDriving
+  src: props.safe_driving
     ? IMAGE_MAP["safe_driving"]
     : IMAGE_MAP[props.label || ""],
 }))<IScoreLabelProps>`
