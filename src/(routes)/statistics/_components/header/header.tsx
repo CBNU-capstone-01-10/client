@@ -6,7 +6,7 @@ export default function Header() {
   const { data: coinSum } = useGetCoin();
 
   return (
-    <ContentBlockWrapper height={"7rem"}>
+    <ContentBlockWrapper height={"fit-content"}>
       <S.MyScoreWrapper>
         <S.MyScoreTitle>획득한 코인 갯수</S.MyScoreTitle>
         {coinSum ? (
@@ -17,8 +17,6 @@ export default function Header() {
             안전운전하고 코인을 모아보세요!
           </S.Message>
         )}
-        <S.Divider />
-        <S.MetadataWrapper>1h</S.MetadataWrapper>
       </S.MyScoreWrapper>
     </ContentBlockWrapper>
   );
