@@ -30,7 +30,7 @@ export default function MainLayout() {
 
   useEffect(() => {
     keepUserId(userData?.pfp.user_id);
-  }, []);
+  }, [keepUserId, userData]);
 
   return (
     <>
