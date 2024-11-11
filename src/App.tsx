@@ -8,21 +8,21 @@ import { setupMockForRegister } from "../mock/account";
 import { setupMockForActions } from "../mock/action";
 import { setupMockForUser } from "../mock/user";
 
-// 개발용: MOCKUP
-const mock = new MockAdapter(axios);
-// 환경 변수 기반 목업 활성화
-if (import.meta.env.VITE_ENABLE_MOCK === "true") {
-  // 목업 설정 활성화
-  setupMockForRegister(mock);
-  setupMockForActions(mock);
-  setupMockForUser(mock);
-  console.log(
-    "Axios Mock Adapter가 활성화되어 axios 요청을 가로챌 준비가 되었습니다."
-  );
-} else {
-  mock.restore();
-  console.log("Axios Mock Adapter가 비활성화 되었습니다.");
-}
+// // 개발용: MOCKUP
+// const mock = new MockAdapter(axios);
+// // 환경 변수 기반 목업 활성화
+// if (import.meta.env.VITE_ENABLE_MOCK === "true") {
+//   // 목업 설정 활성화
+//   setupMockForRegister(mock);
+//   setupMockForActions(mock);
+//   setupMockForUser(mock);
+//   console.log(
+//     "Axios Mock Adapter가 활성화되어 axios 요청을 가로챌 준비가 되었습니다."
+//   );
+// } else {
+//   mock.restore();
+//   console.log("Axios Mock Adapter가 비활성화 되었습니다.");
+// }
 
 const queryClient = new QueryClient({
   defaultOptions: {
