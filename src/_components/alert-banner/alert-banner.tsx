@@ -11,6 +11,7 @@ interface IAlertProps {
   width?: string;
   top?: string;
   left?: string;
+  type?: "error" | "success" | "info" | "warning" | undefined;
 }
 export default function AlertBanner({
   error,
@@ -18,6 +19,7 @@ export default function AlertBanner({
   width,
   top,
   left,
+  type,
 }: IAlertProps) {
   const [message, setMessage] = useState<string | undefined>("");
 
@@ -44,7 +46,7 @@ export default function AlertBanner({
     <S.Wrapper width={width} top={top} left={left}>
       <Alert
         message={message}
-        type="error"
+        type={type || "error"}
         style={{ padding: "0.5rem 3rem", color: "red" }}
       />
     </S.Wrapper>
