@@ -1,10 +1,11 @@
-// COMPONENT: 최근 위험 운전 분석 그래프
+// COMPONENT: 최근 일주일 위험 운전 분석 그래프
 import { useGetRecentSevenDaysBadDriverActions } from "../../../../api/action";
 import DoughnutChart from "../../../../_components/chart/doughnut-chart";
 import { ACTION_LABEL, ActionLabel } from "../../../../constants/constants";
 import OvalLoadingSpinner from "../../../../_components/loading-spinner/oval-loading-spinner";
 import BarChart from "../../../../_components/chart/bar-chart";
 import styled, { useTheme } from "styled-components";
+import * as S from "../recent-seven-days-score/recent-seven-days-score.style";
 
 const Wrapper = styled.div`
   display: flex;
@@ -45,6 +46,9 @@ export default function RecentSevenDaysBadActionsGraph() {
 
     return (
       <Wrapper>
+        <S.ChartHeader>
+          <S.TotalScore>위험운전 분석</S.TotalScore>
+        </S.ChartHeader>
         <DoughnutChart data={chartData} label={"차감 점수"} labels={labels} />
         <BarChart
           data={chartData}
