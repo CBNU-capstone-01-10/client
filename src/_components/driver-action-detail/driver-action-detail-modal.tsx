@@ -29,7 +29,11 @@ export default function DriverActionDetailModal({
           <>
             <S.ImageWrapper>
               <S.CapturedImage
-                src={driverActionDetail?.capture}
+                src={`${import.meta.env.VITE_API_PROTOCOL}://${
+                  import.meta.env.VITE_API_HOST
+                }:${import.meta.env.VITE_API_PORT}${
+                  driverActionDetail?.capture
+                }`}
                 alt="촬영된 모습"
               />
             </S.ImageWrapper>
