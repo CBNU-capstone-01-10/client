@@ -37,9 +37,9 @@ export default function ScoreGauge({ driverAction }: ScoreGaugeProps) {
       latestScore = driverAction?.score % MAX_GAUGE;
     }
 
-    console.log("Current score:", driverAction.score);
-    console.log("Displayed score:", displayedScore);
-    console.log("Latest score:", latestScore);
+    // console.log("Current score:", driverAction.score);
+    // console.log("Displayed score:", displayedScore);
+    // console.log("Latest score:", latestScore);
 
     if (displayedScore !== latestScore) {
       setDisplayedScore(latestScore);
