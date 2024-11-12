@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { DEG_ROTATE_PER_SEC, IMAGE_MAP } from "../../constants/constants";
 import { pulsateFwd } from "../../styles/global-style";
 
+const MAX_GAUGE = 360 / DEG_ROTATE_PER_SEC;
+
 export const DefaultTitle = styled.span`
   font-size: 1.4rem;
   font-weight: 600;
@@ -17,9 +19,27 @@ export const ScoreBar = styled.div.attrs<IScoreBarProps>((props) => ({
   style: {
     background: `conic-gradient(
       from 0deg,
-      ${props.score >= 0 ? `rgba(85,91,255,0.7)` : `rgba(240, 46, 170,1)`},
-      ${props.score >= 0 ? `rgba(45,53,255,0.7)` : `rgba(240, 46, 170,1)`},
-      ${props.score >= 0 ? `rgba(0,9,255,0.7)` : `rgba(240, 46, 170,1)`}
+      ${
+        props.score >= 0
+          ? props.score === 0
+            ? "rgba(255, 215, 0, 1)"
+            : "rgba(85, 91, 255, 0.7)"
+          : "rgba(240, 46, 170,1)"
+      },
+      ${
+        props.score >= 0
+          ? props.score === 0
+            ? "rgba(255, 215, 0, 1)"
+            : "rgba(45, 53, 255, 0.7)"
+          : "rgba(240, 46, 170, 1)"
+      },
+      ${
+        props.score >= 0
+          ? props.score === 0
+            ? "rgba(255, 215, 0, 1)"
+            : "rgba(0, 9, 255, 0.7)"
+          : "rgba(240, 46, 170,1)"
+      }
     )`,
   },
 }))<IScoreBarProps>`

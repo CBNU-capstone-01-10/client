@@ -12,7 +12,7 @@ import * as S from "./score-gauge.stlye";
 
 const MAX_GAUGE = 360 / DEG_ROTATE_PER_SEC;
 interface ScoreGaugeProps {
-  driverAction: IDriverActionResponse;
+  driverAction: IDriverActionResponse["action"];
 }
 export default function ScoreGauge({ driverAction }: ScoreGaugeProps) {
   const [prevId, setPrevActionId] = useState(0);
@@ -36,19 +36,28 @@ export default function ScoreGauge({ driverAction }: ScoreGaugeProps) {
     } else {
       latestScore = driverAction?.score % MAX_GAUGE;
     }
+
+    console.log("Current score:", driverAction.score);
+    console.log("Displayed score:", displayedScore);
+    console.log("Latest score:", latestScore);
+
     if (displayedScore !== latestScore) {
       setDisplayedScore(latestScore);
     }
     if (displayedScore === MAX_GAUGE - 1) {
+      setDisplayedScore(MAX_GAUGE);
       requestCoin();
     }
   }, [driverAction.score]);
 
   return (
     <>
-      <S.ScoreBar $scoreStartValue={displayedScore} score={driverAction?.score}>
+      <S.ScoreBar
+        $scoreStartValue={displayedScore}
+        score={driverAction?.score % MAX_GAUGE}
+      >
         <S.ScoreLabelWrapper>
-          {displayedScore === MAX_GAUGE - 1 ? (
+          {displayedScore === MAX_GAUGE ? (
             <CoinLottieLogo />
           ) : (
             <>
