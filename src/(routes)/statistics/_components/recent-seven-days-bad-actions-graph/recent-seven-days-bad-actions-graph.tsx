@@ -45,10 +45,10 @@ export default function RecentSevenDaysBadActionsGraph() {
 
     return (
       <Wrapper>
-        <DoughnutChart data={chartData} label={"경고 횟수"} labels={labels} />
+        <DoughnutChart data={chartData} label={"차감 점수"} labels={labels} />
         <BarChart
           data={chartData}
-          label={"경고 횟수"}
+          label={"차감 점수"}
           labels={labels}
           isHorizontal={true}
           barBgColor={theme.primaryCautionBgColor}
