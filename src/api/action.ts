@@ -1,5 +1,5 @@
 import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query";
-import { AxiosError, AxiosResponse } from "axios";
+import { AxiosError } from "axios";
 import { IDriverActionResponse } from "../(routes)/record/types/type";
 import { DESIRED_BEFORE_MINUTES } from "../constants/constants";
 import dayjs from "dayjs";
@@ -55,7 +55,7 @@ export const useGetRecentDriverActions = () => {
 
 // GET: 운전자 행위 결과 단건 조회
 export const useGetDriverAction = (actionId: number) => {
-  return useQuery<IDriverActionResponse>({
+  return useQuery<IDriverActionResponse["action"]>({
     queryKey: ["driver-action", actionId],
     queryFn: async ({ queryKey }) => {
       const [, actionId] = queryKey;
@@ -102,7 +102,7 @@ export const useGetRecentSevenDaysDriverActions = () => {
 
 // GET: 최근 일주일 위험 운전 조회
 export const useGetRecentSevenDaysBadDriverActions = () => {
-  return useQuery<IDriverActionResponse[]>({
+  return useQuery<IDriverActionResponse["action"][]>({
     queryKey: ["recent-seven-days-bad-actions"],
     queryFn: async () => {
       const recentSevenDaysBadDriverActionsURL = `/api/actions`;
@@ -112,7 +112,8 @@ export const useGetRecentSevenDaysBadDriverActions = () => {
       const date_start = dayjs().subtract(6, "day").format("YYYY-MM-DD");
       const date_end = dayjs().format("YYYY-MM-DD");
 
-      let recentSevenDaysBadDriverActions: IDriverActionResponse[] = [];
+      let recentSevenDaysBadDriverActions: IDriverActionResponse["action"][] =
+        [];
       let page = 1;
       let hasMorePage = true;
 
