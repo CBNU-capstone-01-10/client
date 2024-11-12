@@ -2,8 +2,6 @@ import styled from "styled-components";
 import { DEG_ROTATE_PER_SEC, IMAGE_MAP } from "../../constants/constants";
 import { pulsateFwd } from "../../styles/global-style";
 
-const MAX_GAUGE = 360 / DEG_ROTATE_PER_SEC;
-
 export const DefaultTitle = styled.span`
   font-size: 1.4rem;
   font-weight: 600;
@@ -46,6 +44,11 @@ export const ScoreBar = styled.div.attrs<IScoreBarProps>((props) => ({
   position: relative;
   width: 18.9rem;
   height: 18.9rem;
+  @media (min-width: 1070px) and (min-height: 1785px) {
+    width: 45rem;
+    height: 45rem;
+  }
+
   border-radius: 50%;
   transition: background 0.1s linear;
   display: flex;
@@ -57,6 +60,10 @@ export const ScoreBar = styled.div.attrs<IScoreBarProps>((props) => ({
     position: absolute;
     width: 19rem;
     height: 19rem;
+    @media (min-width: 1070px) and (min-height: 1785px) {
+      width: 45.1rem;
+      height: 45.1rem;
+    }
     border-radius: 50%;
     transition: background 0.1s linear;
     background: ${(props) =>
@@ -70,6 +77,10 @@ export const ScoreBar = styled.div.attrs<IScoreBarProps>((props) => ({
 export const ScoreLabelWrapper = styled.div`
   width: 18rem;
   height: 18rem;
+  @media (min-width: 1070px) and (min-height: 1785px) {
+    width: 44.1rem;
+    height: 44.1rem;
+  }
   position: absolute;
   top: 50%;
   left: 50%;

@@ -12,6 +12,9 @@ export const ContentWrapper = styled.div`
 export const ImageWrapper = styled.div`
   width: 100%;
   height: 16rem;
+  @media (min-width: 1070px) and (min-height: 1785px) {
+    height: fit-content;
+  }
 `;
 export const CapturedImage = styled.img`
   width: 100%;

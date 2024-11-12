@@ -11,6 +11,9 @@ export const VideoWrapper = styled.div`
 
 export const VideoElement = styled.video`
   visibility: hidden;
+  @media (min-width: 1070px) and (min-height: 1785px) {
+    visibility: visible;
+  }
   border-radius: 0.2rem;
   width: 100%;
   display: block;
