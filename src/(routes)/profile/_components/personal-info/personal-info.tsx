@@ -9,7 +9,7 @@ import OvalLoadingSpinner from "../../../../_components/loading-spinner/oval-loa
 
 // COMPONENT: 사용자 개인정보를 담은 컨테이너
 export default function PersonalInfo() {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>();
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   // const [userId, setUserId] = useState<number>();
   const openModal = () => {
     setIsModalOpen(true);
@@ -54,7 +54,6 @@ export default function PersonalInfo() {
       email,
       address,
     } = personalInfoData;
-    // setUserId(user_id);
 
     return (
       <S.ComponentWrapper>
@@ -62,7 +61,9 @@ export default function PersonalInfo() {
           <S.PersonalInfoWrapper>
             <S.MainContentWrapper>
               <S.ProfilePicture
-                src={`${import.meta.env.VITE_SERVER_IMAGE_URL}${curr}`}
+                src={`${import.meta.env.VITE_API_PROTOCOL}://${
+                  import.meta.env.VITE_API_HOST
+                }:${import.meta.env.VITE_API_PORT}${curr}`}
                 alt="프로필 사진"
               />
               {/* 닉네임, 별명 */}
@@ -89,19 +90,19 @@ export default function PersonalInfo() {
               {address}
             </S.UserAddress>
             <LineDivider />
-            <PersonalInfoForm
-              existingPersonalInfo={{
-                pfp: { user_id, curr, is_default },
-                username,
-                alias,
-                email,
-                address,
-              }}
-              isModalOpen={isModalOpen}
-              closeModal={closeModal}
-            />
           </S.PersonalInfoWrapper>
         </ContentBlockWrapper>
+        <PersonalInfoForm
+          existingPersonalInfo={{
+            pfp: { user_id, curr, is_default },
+            username,
+            alias,
+            email,
+            address,
+          }}
+          isModalOpen={isModalOpen}
+          closeModal={closeModal}
+        />
       </S.ComponentWrapper>
     );
   }
