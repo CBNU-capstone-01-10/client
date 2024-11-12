@@ -4,14 +4,9 @@ import DoughnutChart from "../../../../_components/chart/doughnut-chart";
 import { ACTION_LABEL, ActionLabel } from "../../../../constants/constants";
 import OvalLoadingSpinner from "../../../../_components/loading-spinner/oval-loading-spinner";
 import BarChart from "../../../../_components/chart/bar-chart";
-import styled, { useTheme } from "styled-components";
+import { useTheme } from "styled-components";
 import * as S from "../recent-seven-days-score/recent-seven-days-score.style";
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
 export default function RecentSevenDaysBadActionsGraph() {
   const {
     data: recentSevenDaysBadDriveActionsData,
@@ -45,19 +40,21 @@ export default function RecentSevenDaysBadActionsGraph() {
     const chartData = Object.values(scoreByLabel);
 
     return (
-      <Wrapper>
+      <>
         <S.ChartHeader>
           <S.TotalScore>위험운전 분석</S.TotalScore>
         </S.ChartHeader>
-        <DoughnutChart data={chartData} label={"차감 점수"} labels={labels} />
-        <BarChart
-          data={chartData}
-          label={"차감 점수"}
-          labels={labels}
-          isHorizontal={true}
-          barBgColor={theme.primaryCautionBgColor}
-        />
-      </Wrapper>
+        <S.Wrapper>
+          <DoughnutChart data={chartData} label={"차감 점수"} labels={labels} />
+          <BarChart
+            data={chartData}
+            label={"차감 점수"}
+            labels={labels}
+            isHorizontal={true}
+            barBgColor={theme.primaryCautionBgColor}
+          />
+        </S.Wrapper>
+      </>
     );
   }
 }
