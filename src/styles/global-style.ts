@@ -3,7 +3,7 @@ import reset from "styled-reset";
 
 // Global Constants
 const TOP_NAVBAR_HEIGTH = "6rem";
-const BTM_NAVBAR_HEIGTH = "5.5rem";
+const BTM_NAVBAR_HEIGTH = "5rem";
 
 // KEYFRAMES
 // 펄스 효과
