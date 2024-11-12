@@ -17,7 +17,7 @@ export const CapturedImage = styled.img`
   width: 100%;
   height: fit-content;
   background-color: black;
-  border-radius: 0.1rem;
+  border-radius: 0.5rem;
 `;
 export const LabelScoreWrapper = styled.div`
   width: 100%;

@@ -2,8 +2,9 @@
 import { useGetDriverAction } from "../../api/action";
 import OvalLoadingSpinner from "../loading-spinner/oval-loading-spinner";
 import CustomModal from "../modal/custom-modal";
-import * as S from "./driver-action-detail-modal.style";
 import LineDivider from "../divider/line-divider";
+import { ACTION_LABEL, ActionLabel } from "../../constants/constants";
+import * as S from "./driver-action-detail-modal.style";
 
 interface IDriverActionDetailModalProps {
   actionId: number;
@@ -38,7 +39,12 @@ export default function DriverActionDetailModal({
               />
             </S.ImageWrapper>
             <S.LabelScoreWrapper>
-              <S.Label>{driverActionDetail?.label}</S.Label>
+              <S.Label>
+                {driverActionDetail?.label &&
+                (driverActionDetail.label as ActionLabel) in ACTION_LABEL
+                  ? ACTION_LABEL[driverActionDetail.label as ActionLabel]
+                  : "안전운전"}
+              </S.Label>
               <S.Score score={driverActionDetail?.score}>
                 {driverActionDetail?.score}
               </S.Score>
