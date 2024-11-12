@@ -8,6 +8,7 @@ import DriverActionDetailModal from "../../../../_components/driver-action-detai
 import { useInView } from "react-intersection-observer";
 import { IDriverActionResponse } from "../../../record/types/type";
 import LoadingErrorIcon from "../../../../_components/icon/loading-error-icon";
+import { formatTime } from "../../../../_utils/time";
 
 // COMPONENT: 최근 안전점수 기록
 export default function RecentHistory() {
@@ -81,7 +82,9 @@ export default function RecentHistory() {
                           <S.HistoryIcon score={recentDriverActionItem.score} />
                           <S.RecordedAt>{recordedAt}</S.RecordedAt>
                           <S.ScoreWrapper score={recentDriverActionItem.score}>
-                            {recentDriverActionItem.score}
+                            {recentDriverActionItem.score >= 0
+                              ? formatTime(recentDriverActionItem.score)
+                              : recentDriverActionItem.score}
                           </S.ScoreWrapper>
                         </S.HistoryItem>
                       );
