@@ -18,3 +18,14 @@ export const getElapsedTime = (recordedAt: string): string => {
 export const convertSecondsToMinutes = (seconds: number): number => {
   return Math.floor(seconds / 60);
 };
+// 시간을 초에서 분초 단위로 변환하는 함수
+export const formatTime = (seconds: number) => {
+  if (seconds < 60) {
+    return `${seconds}초`;
+  }
+
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = seconds % 60;
+
+  return `${minutes}분 ${remainingSeconds}초`;
+};
