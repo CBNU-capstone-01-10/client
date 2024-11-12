@@ -46,7 +46,9 @@ export default function ScoreGauge({ driverAction }: ScoreGaugeProps) {
     }
     if (displayedScore === MAX_GAUGE - 1) {
       setDisplayedScore(MAX_GAUGE);
-      requestCoin();
+      if (driverAction.score % MAX_GAUGE === 0) {
+        requestCoin();
+      }
     }
   }, [driverAction.score]);
 
