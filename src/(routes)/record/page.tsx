@@ -1,21 +1,25 @@
-// PAGE: 운전자 녹화 페이지
 import { useEffect, useRef, useState } from "react";
 import useWatchLocation from "../../hooks/useWatchLocation";
 import drawVideoSnapshot from "./_utils/drawVideoSnapshot";
 import useInterval from "../../hooks/useInterval";
 import { usePostDriverAction } from "../../api/action";
 import { convertDataURLToFile } from "../../_utils/convertor";
-import { SEND_DRIVER_IMAGE_INTERVAL_TIME } from "../../constants/constants";
+import {
+  ACTION_LABEL,
+  ActionLabel,
+  SEND_DRIVER_IMAGE_INTERVAL_TIME,
+} from "../../constants/constants";
 import { getCameraPermission } from "../../_utils/camera";
 import { useDriverActionsStore } from "../../store/use-driver-actions";
 import * as S from "./page.style";
 import DriverVideo from "../../_components/driver-video/driver-video";
 import AlertBanner from "../../_components/alert-banner/alert-banner";
 import RecentActionBanners from "./_components/recent-action-banners/recent-action-banners";
+import Notification from "../../_components/notification/notification";
 
 const geoOptions = {
   enableHighAccuracy: false,
-  maximumAge: 3000,
+  maximumAge: 15000,
   timeout: 5000,
 };
 
@@ -27,12 +31,20 @@ export default function Page() {
   const { addDriverAction } = useDriverActionsStore();
 
   const videoRef = useRef<HTMLVideoElement>(null);
+  const lastNotificationIdRef = useRef<number | null>(null);
+
+  const [notificationData, setNotificationData] = useState({
+    key: "",
+    message: "",
+    description: "",
+  });
 
   const {
     mutate: createDriverAction,
     data: newDriverActionFeedback,
     error,
   } = usePostDriverAction();
+
   // POST: 일정 주기마다 운전자 행위를 캡처한 이미지와 위치 정보 전송
   useInterval(() => {
     if (videoRef.current) {
@@ -57,14 +69,26 @@ export default function Page() {
 
   useEffect(() => {
     if (newDriverActionFeedback) {
-      console.log(
-        "🚀 ~ useEffect ~ newDriverActionFeedback:",
-        newDriverActionFeedback.nearUnsafeActions
-      );
-      addDriverAction(newDriverActionFeedback.action);
+      addDriverAction(newDriverActionFeedback.action); // 전역 action(최신 action 로그 저장 용도)에 추가
+      const latestNearDriverUnsafeAction =
+        newDriverActionFeedback.nearUnsafeActions?.[0];
+      if (
+        latestNearDriverUnsafeAction?.id &&
+        latestNearDriverUnsafeAction.id !== lastNotificationIdRef.current
+      ) {
+        lastNotificationIdRef.current = latestNearDriverUnsafeAction.id;
+        setNotificationData({
+          key: latestNearDriverUnsafeAction.id.toString(),
+          message: `근처 운전자의 위험운전 행위 감지`,
+          description: `${
+            ACTION_LABEL[latestNearDriverUnsafeAction.label as ActionLabel]
+          }`,
+        });
+      }
     }
   }, [newDriverActionFeedback, addDriverAction]);
 
+  // 녹화 화면 초기화
   useEffect(() => {
     if (!videoRef.current) {
       return;
@@ -74,6 +98,7 @@ export default function Page() {
     }
   }, [stream]);
 
+  // MOUNT: 녹화 허용 요청과 스트림 등록
   useEffect(() => {
     const startCameraStream = async () => {
       const driverStream = await getCameraPermission();
@@ -95,6 +120,11 @@ export default function Page() {
         <AlertBanner errorMessage={locationErrorMessage} />
       )}
       {error && <AlertBanner error={error} />}
+      <Notification
+        key={notificationData.key}
+        message={notificationData.message}
+        description={notificationData.description}
+      />
     </S.Wrapper>
   );
 }
