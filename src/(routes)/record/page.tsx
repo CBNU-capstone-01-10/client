@@ -14,9 +14,9 @@ import AlertBanner from "../../_components/alert-banner/alert-banner";
 import RecentActionBanners from "./_components/recent-action-banners/recent-action-banners";
 
 const geoOptions = {
-  enableHighAccuracy: true,
-  // maximumAge: 0,
-  timeout: 15000,
+  enableHighAccuracy: false,
+  maximumAge: 3000,
+  timeout: 5000,
 };
 
 export default function Page() {
@@ -57,6 +57,10 @@ export default function Page() {
 
   useEffect(() => {
     if (newDriverActionFeedback) {
+      console.log(
+        "🚀 ~ useEffect ~ newDriverActionFeedback:",
+        newDriverActionFeedback.nearUnsafeActions
+      );
       addDriverAction(newDriverActionFeedback.action);
     }
   }, [newDriverActionFeedback, addDriverAction]);
