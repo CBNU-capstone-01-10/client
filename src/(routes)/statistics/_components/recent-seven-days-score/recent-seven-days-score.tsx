@@ -33,12 +33,10 @@ export default function RecentSevenDaysScore() {
     );
 
   if (isSuccess) {
-    const recentSevenDaysScoreSum = calculateNumberSum(
-      recentSevenDaysDriverActionScores
+    const continuousSafeDrivingTime = recentSevenDaysDriverActionScores.map(
+      (score) => (score > 0 ? convertSecondsToMinutes(score) : 0)
     );
-    const continuousSafeDrivingTime = recentSevenDaysDriverActionScores
-      .filter((score) => score > 0)
-      .map(convertSecondsToMinutes);
+
     const recentSevenDays = getRecentSevenDays();
 
     return (
