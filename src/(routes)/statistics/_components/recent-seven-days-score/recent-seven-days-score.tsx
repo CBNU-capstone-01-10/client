@@ -6,6 +6,7 @@ import * as S from "./recent-seven-days-score.style";
 import BarChart from "../../../../_components/chart/bar-chart.js";
 import { getRecentSevenDays } from "../../../../_utils/day.js";
 import { calculateNumberSum } from "../../../../_utils/number.js";
+import { convertSecondsToMinutes } from "../../../../_utils/time.js";
 
 export default function RecentSevenDaysScore() {
   const {
@@ -35,19 +36,20 @@ export default function RecentSevenDaysScore() {
     const recentSevenDaysScoreSum = calculateNumberSum(
       recentSevenDaysDriverActionScores
     );
+    const continuousSafeDrivingTime = recentSevenDaysDriverActionScores
+      .filter((score) => score > 0)
+      .map(convertSecondsToMinutes);
     const recentSevenDays = getRecentSevenDays();
 
     return (
       <S.RecentSevenDaysScoreWrapper>
         <S.ChartHeader>
-          <S.TotalScore>
-            총 {recentSevenDaysScoreSum.toLocaleString("ko-KR")}점
-          </S.TotalScore>
+          <S.TotalScore>요일별 안전운전 지속시간 </S.TotalScore>
         </S.ChartHeader>
         <BarChart
           labels={recentSevenDays}
-          label={"안전점수"}
-          data={recentSevenDaysDriverActionScores}
+          label={"지속 시간 (분)"}
+          data={continuousSafeDrivingTime}
         />
       </S.RecentSevenDaysScoreWrapper>
     );
