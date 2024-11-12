@@ -26,7 +26,7 @@ export default function BarChart({
   label,
   data,
   isHorizontal = false,
-  barBgColor = "rgba(31, 135, 254, 1)",
+  barBgColor = "rgba(0 ,102 ,204,1)",
 }: IBarChartProps) {
   const chartRef = useRef<IChartRef | null>(null);
 
