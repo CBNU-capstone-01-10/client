@@ -7,7 +7,10 @@ import { IPersonalInfo } from "../../types/types";
 import CustomModal from "../../../../_components/modal/custom-modal";
 
 interface IPersonalInfoFormProps {
-  existingPersonalInfo: IPersonalInfo;
+  existingPersonalInfo: Pick<
+    IPersonalInfo,
+    "pfp" | "username" | "alias" | "email" | "address"
+  >;
   isModalOpen: boolean;
   closeModal: () => void;
 }
@@ -72,10 +75,12 @@ export default function PersonalInfoForm({
   }, [isSuccess, closeModal, reset]);
 
   useEffect(() => {
-    if (is_default) {
-      setCurrentPfp(curr || null);
-    }
-  }, [curr, is_default]);
+    setCurrentPfp(
+      `${import.meta.env.VITE_API_PROTOCOL}://${
+        import.meta.env.VITE_API_HOST
+      }:${import.meta.env.VITE_API_PORT}${curr}` || null
+    );
+  }, [curr]);
 
   return (
     <CustomModal
@@ -88,11 +93,11 @@ export default function PersonalInfoForm({
           <S.PersonalInfoWrapper>
             <S.PfpWrapper>
               <S.PfpImgWrapper>
-                {currentPfp ? (
-                  <S.Pfp src={currentPfp} alt="프로필 이미지" />
-                ) : (
-                  <S.Pfp src="/default-profile.png" alt="기본 프로필 이미지" />
-                )}
+                {/* {currentPfp ? ( */}
+                <S.Pfp src={currentPfp} alt="프로필 이미지" />
+                {/* ) : (
+                  <S.Pfp src={} alt="기본 프로필 이미지" />
+                )} */}
               </S.PfpImgWrapper>
               <S.HiddenUploadBtn
                 onClick={() => fileInputRef.current?.click()}
@@ -102,8 +107,16 @@ export default function PersonalInfoForm({
               type="button"
               onClick={() => {
                 fileInputRef.current.value = null;
-                setProfilePicture(null);
-                setCurrentPfp(null);
+                setProfilePicture(
+                  `${import.meta.env.VITE_API_PROTOCOL}://${
+                    import.meta.env.VITE_API_HOST
+                  }:${import.meta.env.VITE_API_PORT}/default/pfp.png`
+                );
+                setCurrentPfp(
+                  `${import.meta.env.VITE_API_PROTOCOL}://${
+                    import.meta.env.VITE_API_HOST
+                  }:${import.meta.env.VITE_API_PORT}/default/pfp.png`
+                );
               }}
             >
               삭제
@@ -115,7 +128,7 @@ export default function PersonalInfoForm({
               ref={fileInputRef}
             />
             <S.UserName>
-              <S.Label htmlFor="">이름</S.Label>
+              <S.Label>이름</S.Label>
               <S.Input
                 type="text"
                 placeholder="Username"
@@ -123,11 +136,11 @@ export default function PersonalInfoForm({
               />
             </S.UserName>
             <S.UserAlias>
-              <S.Label htmlFor="">별명</S.Label>
+              <S.Label>별명</S.Label>
               <S.Input type="text" placeholder="Alias" {...register("alias")} />
             </S.UserAlias>
             <S.UserAddress>
-              <S.Label htmlFor="">주소</S.Label>
+              <S.Label>주소</S.Label>
               <S.Input
                 type="text"
                 placeholder="Address"
