@@ -79,10 +79,10 @@ export default function Page() {
         lastNotificationIdRef.current = latestNearDriverUnsafeAction.id;
         setNotificationData({
           key: latestNearDriverUnsafeAction.id.toString(),
-          message: `근처 운전자의 위험운전 행위 감지`,
-          description: `${
+          message: `주변 운전자 ${
             ACTION_LABEL[latestNearDriverUnsafeAction.label as ActionLabel]
-          }`,
+          } 행위 감지`,
+          description: `방어 운전하세요!`,
         });
       }
     }
