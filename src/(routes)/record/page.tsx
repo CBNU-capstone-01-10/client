@@ -7,6 +7,7 @@ import { convertDataURLToFile } from "../../_utils/convertor";
 import {
   ACTION_LABEL,
   ActionLabel,
+  geoOptions,
   SEND_DRIVER_IMAGE_INTERVAL_TIME,
 } from "../../constants/constants";
 import { getCameraPermission } from "../../_utils/camera";
@@ -16,12 +17,6 @@ import DriverVideo from "../../_components/driver-video/driver-video";
 import AlertBanner from "../../_components/alert-banner/alert-banner";
 import RecentActionBanners from "./_components/recent-action-banners/recent-action-banners";
 import Notification from "../../_components/notification/notification";
-
-const geoOptions = {
-  enableHighAccuracy: false,
-  maximumAge: 15000,
-  timeout: 5000,
-};
 
 export default function Page() {
   const [stream, setStream] = useState<MediaStream>();

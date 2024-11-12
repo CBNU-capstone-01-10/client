@@ -1,3 +1,9 @@
+// 위치정보 정확도
+export const geoOptions = {
+  enableHighAccuracy: false, // 정확도 true인 경우, 위치 안 잡힐 확률 높음
+  maximumAge: 15000, // 캐쉬 데이터 사용하는 최대 과거 시간
+  timeout: 5000, // 요청 시간 초과 허용 시간
+};
 // 조회 원하는 최근 시간 간격
 export const DESIRED_BEFORE_MINUTES = 10080;
 // 운전자 이미지 정보 서버로 보내는 주기
