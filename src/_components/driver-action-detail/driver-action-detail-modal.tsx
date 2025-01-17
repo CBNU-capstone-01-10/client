@@ -28,6 +28,7 @@ export default function DriverActionDetailModal({
           <OvalLoadingSpinner />
         ) : (
           <>
+            {/* 운전자 행위 촬영 모습 */}
             <S.ImageWrapper>
               <S.CapturedImage
                 src={`${import.meta.env.VITE_API_PROTOCOL}://${
@@ -39,18 +40,21 @@ export default function DriverActionDetailModal({
               />
             </S.ImageWrapper>
             <S.LabelScoreWrapper>
+              {/* 운전 행위 라벨 */}
               <S.Label>
                 {driverActionDetail?.label &&
                 (driverActionDetail.label as ActionLabel) in ACTION_LABEL
                   ? ACTION_LABEL[driverActionDetail.label as ActionLabel]
                   : "안전운전"}
               </S.Label>
+              {/* 운전 행위 점수 */}
               <S.Score score={driverActionDetail?.score}>
                 {driverActionDetail?.score}
               </S.Score>
             </S.LabelScoreWrapper>
             <LineDivider verticalMargin="0.1rem" />
             <S.LineWrapper>
+              {/* 기록 위치 */}
               <S.IconWrapper>
                 <S.LocationIcon />
               </S.IconWrapper>
@@ -59,6 +63,7 @@ export default function DriverActionDetailModal({
             </S.LineWrapper>
             <LineDivider verticalMargin="0.1rem" />
             <S.LineWrapper>
+              {/* 기록 일시 */}
               <S.IconWrapper>
                 <S.RecordedAtIcon />
               </S.IconWrapper>
