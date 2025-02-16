@@ -285,34 +285,180 @@
   ],
   "post-actions": [
     {
-      "id": "1",
-      "label": "졸음",
-      "score": -10,
-      "location_x": 0,
-      "location_y": 0,
-      "capture": "",
-      "recorded_at": "",
-      "user_id": 1
+      "action": {
+        "id": 12,
+        "label": "졸음",
+        "score": -10,
+        "location_x": 31.4,
+        "location_y": 31.4,
+        "capture": "http://localhost:8080/action/capture/1727052112046.jpeg",
+        "recorded_at": "2024-10-27T00:41:52.057Z",
+        "user_id": 3
+      },
+      "nearUnsafeActions": [
+        {
+          "id": 100,
+          "label": "졸음",
+          "score": -10,
+          "location_x": 31.4,
+          "location_y": 31.4,
+          "capture": "http://localhost:8080/action/capture/1727052112046.jpeg",
+          "recorded_at": "2024-10-27T00:41:52.057Z",
+          "user_id": 2
+        },
+        {
+          "id": 101,
+          "label": "졸음",
+          "score": -10,
+          "location_x": 31.4,
+          "location_y": 31.4,
+          "capture": "http://localhost:8080/action/capture/1727052112046.jpeg",
+          "recorded_at": "2024-10-27T00:41:52.057Z",
+          "user_id": 2
+        },
+        {
+          "id": 102,
+          "label": "졸음",
+          "score": -10,
+          "location_x": 31.4,
+          "location_y": 31.4,
+          "capture": "http://localhost:8080/action/capture/1727052112046.jpeg",
+          "recorded_at": "2024-10-27T00:41:52.057Z",
+          "user_id": 2
+        }
+      ]
     },
     {
-      "id": "2",
-      "label": "흡연",
-      "score": -10,
-      "location_x": 0,
-      "location_y": 0,
-      "capture": "",
-      "recorded_at": "",
-      "user_id": 1
+      "action": {
+        "id": 13,
+        "label": "안전운전 유지",
+        "score": 5.0,
+        "location_x": 31.4,
+        "location_y": 31.4,
+        "capture": "http://localhost:8080/action/capture/1727052113372.jpeg",
+        "recorded_at": "2024-10-28T10:10:53.379Z",
+        "user_id": 1
+      },
+      "nearUnsafeActions": [
+        {
+          "id": 100,
+          "label": "졸음",
+          "score": -10,
+          "location_x": 31.4,
+          "location_y": 31.4,
+          "capture": "http://localhost:8080/action/capture/1727052112046.jpeg",
+          "recorded_at": "2024-10-27T00:41:52.057Z",
+          "user_id": 2
+        },
+        {
+          "id": 101,
+          "label": "졸음",
+          "score": -10,
+          "location_x": 31.4,
+          "location_y": 31.4,
+          "capture": "http://localhost:8080/action/capture/1727052112046.jpeg",
+          "recorded_at": "2024-10-27T00:41:52.057Z",
+          "user_id": 2
+        },
+        {
+          "id": 102,
+          "label": "졸음",
+          "score": -10,
+          "location_x": 31.4,
+          "location_y": 31.4,
+          "capture": "http://localhost:8080/action/capture/1727052112046.jpeg",
+          "recorded_at": "2024-10-27T00:41:52.057Z",
+          "user_id": 2
+        }
+      ]
     },
     {
-      "id": "3",
-      "label": "휴대폰",
-      "score": -10,
-      "location_x": 0,
-      "location_y": 0,
-      "capture": "",
-      "recorded_at": "",
-      "user_id": 1
+      "action": {
+        "id": "2",
+        "label": "흡연",
+        "score": -10,
+        "location_x": 0,
+        "location_y": 0,
+        "capture": "",
+        "recorded_at": "",
+        "user_id": 1
+      },
+      "nearUnsafeActions": [
+        {
+          "id": 100,
+          "label": "졸음",
+          "score": -10,
+          "location_x": 31.4,
+          "location_y": 31.4,
+          "capture": "http://localhost:8080/action/capture/1727052112046.jpeg",
+          "recorded_at": "2024-10-27T00:41:52.057Z",
+          "user_id": 2
+        },
+        {
+          "id": 101,
+          "label": "졸음",
+          "score": -10,
+          "location_x": 31.4,
+          "location_y": 31.4,
+          "capture": "http://localhost:8080/action/capture/1727052112046.jpeg",
+          "recorded_at": "2024-10-27T00:41:52.057Z",
+          "user_id": 2
+        },
+        {
+          "id": 102,
+          "label": "졸음",
+          "score": -10,
+          "location_x": 31.4,
+          "location_y": 31.4,
+          "capture": "http://localhost:8080/action/capture/1727052112046.jpeg",
+          "recorded_at": "2024-10-27T00:41:52.057Z",
+          "user_id": 2
+        }
+      ]
+    },
+    {
+      "action": {
+        "id": "3",
+        "label": "휴대폰",
+        "score": -10,
+        "location_x": 0,
+        "location_y": 0,
+        "capture": "",
+        "recorded_at": "",
+        "user_id": 1
+      },
+      "nearUnsafeActions": [
+        {
+          "id": 100,
+          "label": "졸음",
+          "score": -10,
+          "location_x": 31.4,
+          "location_y": 31.4,
+          "capture": "http://localhost:8080/action/capture/1727052112046.jpeg",
+          "recorded_at": "2024-10-27T00:41:52.057Z",
+          "user_id": 2
+        },
+        {
+          "id": 101,
+          "label": "졸음",
+          "score": -10,
+          "location_x": 31.4,
+          "location_y": 31.4,
+          "capture": "http://localhost:8080/action/capture/1727052112046.jpeg",
+          "recorded_at": "2024-10-27T00:41:52.057Z",
+          "user_id": 2
+        },
+        {
+          "id": 102,
+          "label": "졸음",
+          "score": -10,
+          "location_x": 31.4,
+          "location_y": 31.4,
+          "capture": "http://localhost:8080/action/capture/1727052112046.jpeg",
+          "recorded_at": "2024-10-27T00:41:52.057Z",
+          "user_id": 2
+        }
+      ]
     }
   ],
   "get-action": [
