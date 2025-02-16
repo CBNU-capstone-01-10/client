@@ -5,9 +5,12 @@ import { DESIRED_BEFORE_MINUTES } from "../constants/constants";
 import dayjs from "dayjs";
 import { IServerErrorResponse } from "../interface/error-interface";
 import { axiosInstance } from "./axios-instance";
+import { useDriverActionsStore } from "../store/use-driver-actions";
 
 // POST: 운전자 행위 데이터 전송
 export const usePostDriverAction = () => {
+  const { addDriverAction } = useDriverActionsStore();
+
   return useMutation<
     IDriverActionResponse,
     AxiosError<IServerErrorResponse>,
@@ -24,6 +27,9 @@ export const usePostDriverAction = () => {
         .then((res) => {
           return res.data;
         });
+    },
+    onSuccess: (newDriverActionFeedback) => {
+      addDriverAction(newDriverActionFeedback.action);
     },
   });
 };

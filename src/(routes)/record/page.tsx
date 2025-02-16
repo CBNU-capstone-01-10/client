@@ -12,7 +12,6 @@ import {
   SEND_DRIVER_IMAGE_INTERVAL_TIME,
 } from "../../constants/constants";
 import { getCameraPermission } from "../../_utils/camera";
-import { useDriverActionsStore } from "../../store/use-driver-actions";
 import * as S from "./page.style";
 import DriverVideo from "../../_components/driver-video/driver-video";
 import AlertBanner from "../../_components/alert-banner/alert-banner";
@@ -24,7 +23,6 @@ export default function Page() {
   const [driverImage, setDriverImage] = useState<File>();
   const { location, cancelLocationWatch, locationErrorMessage } =
     useWatchLocation(geoOptions);
-  const { addDriverAction } = useDriverActionsStore();
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const lastNotificationIdRef = useRef<number | null>(null);
@@ -66,7 +64,6 @@ export default function Page() {
   // 주변 운전자 위험 행위 탐지
   useEffect(() => {
     if (newDriverActionFeedback) {
-      // addDriverAction(newDriverActionFeedback.action); // 전역 action(최신 action 로그 저장 용도)에 추가
       const latestNearDriverUnsafeAction =
         newDriverActionFeedback.nearUnsafeActions?.[0];
       if (
@@ -83,7 +80,7 @@ export default function Page() {
         });
       }
     }
-  }, [newDriverActionFeedback, addDriverAction]);
+  }, [newDriverActionFeedback]);
 
   // 녹화 화면 초기화
   useEffect(() => {
