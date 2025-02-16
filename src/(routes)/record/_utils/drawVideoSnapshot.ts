@@ -1,3 +1,8 @@
+/**
+ * video 요소를 바탕으로 canvas로 이미지 그려 반환하는 함수
+ * @param videoElement 비디오 요소를 담은 HTML 요소
+ * @returns 운전자 이미지 데이터
+ */
 export default function drawVideoSnapshot(videoElement: HTMLVideoElement) {
   let driverImageData;
   const video = videoElement;
