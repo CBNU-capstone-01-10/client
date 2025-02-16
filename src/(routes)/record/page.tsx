@@ -1,3 +1,4 @@
+// PAGE: 녹화 화면
 import { useEffect, useRef, useState } from "react";
 import useWatchLocation from "../../hooks/useWatchLocation";
 import drawVideoSnapshot from "./_utils/drawVideoSnapshot";
@@ -62,9 +63,10 @@ export default function Page() {
     }
   }, SEND_DRIVER_IMAGE_INTERVAL_TIME);
 
+  // 주변 운전자 위험 행위 탐지
   useEffect(() => {
     if (newDriverActionFeedback) {
-      addDriverAction(newDriverActionFeedback.action); // 전역 action(최신 action 로그 저장 용도)에 추가
+      // addDriverAction(newDriverActionFeedback.action); // 전역 action(최신 action 로그 저장 용도)에 추가
       const latestNearDriverUnsafeAction =
         newDriverActionFeedback.nearUnsafeActions?.[0];
       if (
@@ -109,12 +111,17 @@ export default function Page() {
 
   return (
     <S.Wrapper>
+      {/* 촬영 화면 */}
       <DriverVideo ref={videoRef} />
+      {/* 최근 운전 행위 결과 배너 */}
       <RecentActionBanners />
+      {/* 위치 정보 에러 배너 */}
       {locationErrorMessage && (
         <AlertBanner errorMessage={locationErrorMessage} />
       )}
+      {/* 에러 배너 */}
       {error && <AlertBanner error={error} />}
+      {/* 근처 운전자 위험 운전 행위 알림 */}
       <Notification
         key={notificationData.key}
         message={notificationData.message}
