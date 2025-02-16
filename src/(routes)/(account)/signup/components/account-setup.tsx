@@ -22,37 +22,35 @@ export default function AccountSetup({
   Step,
 }: IAccountSetupProps) {
   return (
-    <>
-      <Funnel>
-        <Step name="이름 설정">
-          <SetupUsername onNext={() => nextClickHandler(steps[1])} />
-        </Step>
+    <Funnel>
+      <Step name="이름 설정">
+        <SetupUsername onNext={() => nextClickHandler(steps[1])} />
+      </Step>
 
-        <Step name="별명 설정">
-          <SetupAlias
-            onPrevious={() => prevClickHandler(steps[0])}
-            onNext={() => nextClickHandler(steps[2])}
-          />
-        </Step>
+      <Step name="별명 설정">
+        <SetupAlias
+          onPrevious={() => prevClickHandler(steps[0])}
+          onNext={() => nextClickHandler(steps[2])}
+        />
+      </Step>
 
-        <Step name="주소 설정">
-          <SetupAddress
-            onPrevious={() => prevClickHandler(steps[1])}
-            onNext={() => nextClickHandler(steps[3])}
-          />
-        </Step>
+      <Step name="주소 설정">
+        <SetupAddress
+          onPrevious={() => prevClickHandler(steps[1])}
+          onNext={() => nextClickHandler(steps[3])}
+        />
+      </Step>
 
-        <Step name="비밀번호 설정">
-          <SetupPassword
-            onPrevious={() => prevClickHandler(steps[2])}
-            onNext={() => nextClickHandler(steps[4])}
-          />
-        </Step>
+      <Step name="비밀번호 설정">
+        <SetupPassword
+          onPrevious={() => prevClickHandler(steps[2])}
+          onNext={() => nextClickHandler(steps[4])}
+        />
+      </Step>
 
-        <Step name="이메일 인증">
-          <SetupEmail onPrevious={() => prevClickHandler(steps[3])} />
-        </Step>
-      </Funnel>
-    </>
+      <Step name="이메일 인증">
+        <SetupEmail onPrevious={() => prevClickHandler(steps[3])} />
+      </Step>
+    </Funnel>
   );
 }

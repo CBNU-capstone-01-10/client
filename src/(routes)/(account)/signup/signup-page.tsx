@@ -1,6 +1,8 @@
+// PAGE: 회원가입 페이지(퍼널 형식)
 import GenericForm from "../../../_components/form/generic-form";
 import { useFunnel } from "../../../hooks/useFunnel";
 import AccountSetup from "./components/account-setup";
+import FormSessionStorage from "./components/form-session-storage";
 
 const steps = [
   "이름 설정",
@@ -9,7 +11,7 @@ const steps = [
   "비밀번호 설정",
   "이메일 인증",
 ];
-// PAGE: 회원가입 페이지(퍼널 형식)
+
 export default function SignupPage() {
   const { Funnel, Step, setStep } = useFunnel(steps[0]);
 
@@ -20,17 +22,20 @@ export default function SignupPage() {
     setStep(step);
   };
 
+  // STORAGE: 세션 스토리지에 저장된 폼 입력값 복원하기
+  const savedData = sessionStorage.getItem("accountSetup");
+  const defaultValues = savedData ? JSON.parse(savedData) : {};
+
   return (
-    <>
-      <GenericForm formOptions={{ mode: "onChange" }}>
-        <AccountSetup
-          steps={steps}
-          nextClickHandler={nextClickHandler}
-          prevClickHandler={prevClickHandler}
-          Funnel={Funnel}
-          Step={Step}
-        />
-      </GenericForm>
-    </>
+    <GenericForm formOptions={{ mode: "onChange", defaultValues }}>
+      <FormSessionStorage />
+      <AccountSetup
+        steps={steps}
+        nextClickHandler={nextClickHandler}
+        prevClickHandler={prevClickHandler}
+        Funnel={Funnel}
+        Step={Step}
+      />
+    </GenericForm>
   );
 }
