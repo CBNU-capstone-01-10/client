@@ -38,6 +38,7 @@ export default function SetupEmail({ onPrevious }: ISetupEmailProps) {
     mutate: registerAccount,
     isSuccess: isRegisteredSuccess,
     error: registerError,
+    isPending: isRegisterPending,
   } = useRegisterEmail();
   // HANDLER: 이메일 인증 요청
   const handleRegisterAccount = () => {
@@ -83,7 +84,7 @@ export default function SetupEmail({ onPrevious }: ISetupEmailProps) {
   // 이메일 인증 처리
   useEffect(() => {
     if (isConfirmedSuccess) {
-      setSuccessMessage("이메일이 인증에 성공했습니다.");
+      setSuccessMessage("이메일 인증에 성공했습니다.");
       setTimeout(() => navigate("/"), 2000);
     }
     if (confirmedError) {
@@ -120,6 +121,7 @@ export default function SetupEmail({ onPrevious }: ISetupEmailProps) {
           type="button"
           onClick={handleSubmit(handleRegisterAccount)}
           width="6rem"
+          disabled={isRegisterPending}
         >
           메일 전송
         </S.InteractionBtn>
