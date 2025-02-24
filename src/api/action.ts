@@ -1,4 +1,8 @@
-import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query";
+import {
+  useMutation,
+  useQuery,
+  useSuspenseInfiniteQuery,
+} from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { IDriverActionResponse } from "../(routes)/record/types/type";
 import { DESIRED_BEFORE_MINUTES } from "../constants/constants";
@@ -36,7 +40,7 @@ export const usePostDriverAction = () => {
 
 // GET: 최근 운전자 행위 결과 다건 조회 (무한스크롤)
 export const useGetRecentDriverActions = () => {
-  return useInfiniteQuery({
+  return useSuspenseInfiniteQuery({
     queryKey: ["recent-driver-actions"],
     queryFn: async ({ pageParam }) => {
       const recentDriverActionsURL = `/api/actions`;
