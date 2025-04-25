@@ -1,7 +1,7 @@
 import { useDriverActionsStore } from "../../../../store/use-driver-actions";
 import ScoreGauge from "../../../../_components/score-gauge/score-gauge";
 import WangnooniLottieLogo from "../../../../_components/wangnooni-logo/wangnooni-lottie-logo";
-import beepSoundFile from "../../../../../public/assets/sounds/beep-warning.ogg";
+import beepSoundFile from "../../../../assets/sounds/beep-warning.ogg";
 import { useEffect, useRef } from "react";
 import LiveScoreLog from "../live-score-log/live-score-log";
 import * as S from "./recent-action-banners.style";
