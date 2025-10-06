@@ -1,7 +1,10 @@
-// HOOK: 기기 위치정보 조회
 import { useState, useEffect, useRef } from "react";
+import { geoOptions } from "../constants/constants";
 
-export default function useWatchLocation(geoOptions = {}) {
+/**
+ * HOOK: 기기 위치정보 조회
+ */
+export default function useWatchLocation() {
   const [location, setLocation] = useState<GeolocationPosition>();
   const [locationErrorMessage, setLocationErrorMessage] = useState<string>();
   // watchPosition의 반환 id 저장
@@ -46,7 +49,7 @@ export default function useWatchLocation(geoOptions = {}) {
 
     // UNMOUNT
     return cancelLocationWatch;
-  }, [geoOptions]);
+  }, []);
 
   return { location, cancelLocationWatch, locationErrorMessage };
 }
