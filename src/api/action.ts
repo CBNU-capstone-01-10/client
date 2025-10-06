@@ -33,7 +33,27 @@ export const usePostDriverAction = () => {
         });
     },
     onSuccess: (newDriverActionFeedback) => {
-      addDriverAction(newDriverActionFeedback.action);
+      const newAction = newDriverActionFeedback.action;
+
+      // 최신 전역 상태를 가져오기
+      const currentDriverActions =
+        useDriverActionsStore.getState().driverActions;
+      const latestAction = currentDriverActions[0]; // 가장 최근 저장된 action
+
+      // 조건부로 전역 상태 업데이트
+      // 1. 저장된 action이 없는 경우
+      // 2. safe_driving 상태가 다른 경우
+      // 3. 둘 다 위험운전이지만 label이 다른 경우
+      const shouldAddAction =
+        !latestAction ||
+        latestAction.safe_driving !== newAction.safe_driving ||
+        (!latestAction.safe_driving &&
+          !newAction.safe_driving &&
+          latestAction.label !== newAction.label);
+
+      if (shouldAddAction) {
+        addDriverAction(newAction);
+      }
     },
   });
 };
