@@ -1,12 +1,70 @@
-// COMPONENT: 운전자 모습을 녹화하는 비디오
-import { forwardRef } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import * as S from "./driver-video.style";
+import useSetTimeout from "../../hooks/useSetTimeout";
+import drawVideoSnapshot from "../../(routes)/record/_utils/drawVideoSnapshot";
+import { convertDataURLToFile } from "../../_utils/convertor";
+import { SEND_DRIVER_IMAGE_INTERVAL_TIME } from "../../constants/constants";
+import { usePostDriverAction } from "../../api/action";
+import useWatchLocation from "../../hooks/useWatchLocation";
+import { getCameraPermission } from "../../_utils/camera";
 
-export default forwardRef<HTMLVideoElement>(function DriverVideo(_, ref) {
+/**
+ * COMPONENT: 운전자 모습을 녹화하는 비디오
+ */
+export default forwardRef<HTMLVideoElement>(function DriverVideo() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const { location } = useWatchLocation();
+  const { mutate: createDriverAction } = usePostDriverAction();
+
+  const [stream, setStream] = useState<MediaStream>();
+
+  // 녹화 화면 초기화
+  useEffect(() => {
+    if (!videoRef.current) {
+      return;
+    }
+    if (stream) {
+      videoRef.current.srcObject = stream;
+    }
+  }, [stream]);
+
+  // MOUNT: 녹화 허용 요청과 스트림 등록
+  useEffect(() => {
+    const startCameraStream = async () => {
+      const driverStream = await getCameraPermission();
+      setStream(driverStream);
+    };
+
+    startCameraStream();
+  }, []);
+
+  useSetTimeout(() => {
+    // POST: 일정 주기마다 운전자 행위를 캡처한 이미지와 위치 정보 전송
+    if (videoRef.current) {
+      const driverImageData = drawVideoSnapshot(videoRef.current);
+      // driverImageData가 존재하면 File 객체로 변환하여 반환
+      if (!driverImageData) {
+        return;
+      }
+      const filename = `snapshot_${new Date().toISOString()}.jpg`; // 파일 이름 설정
+      const driverImage = convertDataURLToFile(driverImageData, filename);
+
+      if (driverImage && location) {
+        const { latitude, longitude } = location.coords;
+
+        const driverActionData = new FormData();
+        driverActionData.append("capture", driverImage);
+        driverActionData.append("location_x", latitude.toString());
+        driverActionData.append("location_y", longitude.toString());
+        createDriverAction(driverActionData);
+      }
+    }
+  }, SEND_DRIVER_IMAGE_INTERVAL_TIME);
+
   return (
     <S.VideoWrapper>
       <S.VideoElement
-        ref={ref}
+        ref={videoRef}
         id="local-video"
         autoPlay
         muted
