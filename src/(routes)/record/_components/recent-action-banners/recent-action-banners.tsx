@@ -10,7 +10,7 @@ export default function RecentActionBanners() {
   const { driverActions } = useDriverActionsStore();
 
   // 첫 번째 action과 나머지 action들로 분리
-  const [mostRecentAction, ...restActions] = driverActions;
+  const mostRecentAction = driverActions[0];
 
   // 이전 action의 id를 저장하기 위한 ref
   const previousActionIdRef = useRef(-1);
@@ -44,7 +44,7 @@ export default function RecentActionBanners() {
         </S.ActionBanner>
       </S.ActionBannerWrapper>
       {/* 실시간 점수 히스토리 */}
-      <LiveScoreLog driverActions={restActions} />
+      <LiveScoreLog />
     </>
   );
 }
