@@ -1,5 +1,5 @@
 // INTERCEPTOR: Axios 요청, 응답을 가로채어 중간처리를 하는 객체
-import axios, { AxiosError, AxiosResponse } from "axios";
+import axios, { AxiosResponse } from "axios";
 import { IServerErrorResponse } from "../interface/error-interface";
 import isServerError from "../error/is-server-error";
 
@@ -14,8 +14,9 @@ axiosInstance.interceptors.response.use(
   (response: AxiosResponse) => response,
   (error) => {
     if (!isServerError(error)) {
+      // TODO: 토스트 메시지로 처리
       console.error("알 수 없는 에러가 발생했습니다. 관리자에게 문의해주세요.");
-      return;
+      return Promise.reject(error);
     }
 
     // error는 AxiosError<IServerErrorResponse> 타입
