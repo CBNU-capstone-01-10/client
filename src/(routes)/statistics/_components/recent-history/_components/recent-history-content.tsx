@@ -5,7 +5,7 @@ import * as S from "../recent-history.style";
 import { IDriverActionResponse } from "../../../../record/types/type";
 import { getFormattedDate } from "../../../../../_utils/date";
 import { formatTime } from "../../../../../_utils/time";
-import { ACTION_LABEL, ActionLabel } from "../../../../../constants/constants";
+import { ACTION_LABEL } from "../../../../../constants/constants";
 import OvalLoadingSpinner from "../../../../../_components/loading-spinner/oval-loading-spinner";
 import { useInView } from "react-intersection-observer";
 
@@ -60,9 +60,7 @@ export default function RecentHistoryContent({
                     <S.ScoreWrapper score={recentDriverActionItem.score}>
                       {recentDriverActionItem.score >= 0
                         ? formatTime(recentDriverActionItem.score)
-                        : ACTION_LABEL[
-                            recentDriverActionItem.label as ActionLabel
-                          ]}
+                        : ACTION_LABEL[recentDriverActionItem.label]}
                     </S.ScoreWrapper>
                   </S.HistoryItem>
                 );

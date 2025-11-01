@@ -5,7 +5,6 @@ import {
 } from "../../../../_utils/time";
 import {
   ACTION_LABEL,
-  ActionLabel,
   MAX_LIVE_SCORE_LOG_SIZE,
 } from "../../../../constants/constants";
 import * as S from "./live-score-log.style";
@@ -32,8 +31,7 @@ export default memo(function LiveScoreLog() {
             </S.ScoreWrapper>
             <S.ContentWrapper>
               <S.Label>
-                {ACTION_LABEL[actionItem.label as ActionLabel] ||
-                  "안전 운전 유지"}
+                {ACTION_LABEL[actionItem.label] || "안전 운전 유지"}
               </S.Label>
               <S.ElapsedTime>
                 {getElapsedTime(actionItem.recorded_at)}

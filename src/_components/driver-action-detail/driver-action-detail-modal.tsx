@@ -3,7 +3,7 @@ import { useGetDriverAction } from "../../api/action";
 import OvalLoadingSpinner from "../loading-spinner/oval-loading-spinner";
 import CustomModal from "../modal/custom-modal";
 import LineDivider from "../divider/line-divider";
-import { ACTION_LABEL, ActionLabel } from "../../constants/constants";
+import { ACTION_LABEL } from "../../constants/constants";
 import * as S from "./driver-action-detail-modal.style";
 
 interface IDriverActionDetailModalProps {
@@ -43,8 +43,8 @@ export default function DriverActionDetailModal({
               {/* 운전 행위 라벨 */}
               <S.Label>
                 {driverActionDetail?.label &&
-                (driverActionDetail.label as ActionLabel) in ACTION_LABEL
-                  ? ACTION_LABEL[driverActionDetail.label as ActionLabel]
+                driverActionDetail.label in ACTION_LABEL
+                  ? ACTION_LABEL[driverActionDetail.label]
                   : "안전운전"}
               </S.Label>
               {/* 운전 행위 점수 */}

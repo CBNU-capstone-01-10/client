@@ -1,7 +1,10 @@
 // COMPONENT: 최근 일주일 위험 운전 분석 그래프
 import { useGetRecentSevenDaysBadDriverActions } from "../../../../api/action";
 import DoughnutChart from "../../../../_components/chart/doughnut-chart";
-import { ACTION_LABEL, ActionLabel } from "../../../../constants/constants";
+import {
+  ACTION_LABEL,
+  type TActionLabel,
+} from "../../../../constants/constants";
 import OvalLoadingSpinner from "../../../../_components/loading-spinner/oval-loading-spinner";
 import BarChart from "../../../../_components/chart/bar-chart";
 import { useTheme } from "styled-components";
@@ -35,7 +38,7 @@ export default function RecentSevenDaysBadActionsGraph() {
     // 키(차트의 라벨), 값(차트의 값) 추출
     // 영어 라벨을 한글 라벨로 변환
     const labels = Object.keys(scoreByLabel).map(
-      (label) => ACTION_LABEL[label as ActionLabel] || label
+      (label) => ACTION_LABEL[label as TActionLabel] || label
     );
     const chartData = Object.values(scoreByLabel);
 

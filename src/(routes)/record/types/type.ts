@@ -1,3 +1,5 @@
+import { type TActionLabel } from "../../../constants/constants";
+
 // // 운전자의 운전 중 이미지와 위치정보
 // export interface IDriverActionRequestBody {
 //   location_x: number;
@@ -8,7 +10,7 @@
 export interface IDriverActionResponse {
   action: {
     id: number;
-    label: string;
+    label: TActionLabel;
     location_x: string;
     location_y: string;
     capture: string;

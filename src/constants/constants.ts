@@ -12,16 +12,18 @@ export const SEND_DRIVER_IMAGE_INTERVAL_TIME = 1000;
 export const MAX_LIVE_SCORE_LOG_SIZE = 20;
 // 요일
 export const WEEK_DAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+
+// 위험 운전 행위 키
+export const ACTION_KEYS = ["cellphone", "drowsy", "cigarette"] as const;
+export type TActionLabel = (typeof ACTION_KEYS)[number];
 // 운전 중 행위 라벨에 대응하는 이미지 경로
-export const IMAGE_MAP: Record<string, string> = {
-  safe_driving: "assets/images/safe.png",
-  cellphone: "assets/images/phone.png",
-  drowsy: "assets/images/drowsy.png",
-  cigarette: "assets/images/cigarette.png",
+export const IMAGE_MAP: Record<"safe_driving" | TActionLabel, string> = {
+  safe_driving: "assets/images/safe.webp",
+  cellphone: "assets/images/phone.webp",
+  drowsy: "assets/images/drowsy.webp",
+  cigarette: "assets/images/cigarette.webp",
 };
-// 위험 운전 응답 label에 대응하는 한글 라벨
-export type ActionLabel = "cellphone" | "drowsy" | "cigarette";
-export const ACTION_LABEL: Record<ActionLabel, string> = {
+export const ACTION_LABEL: Record<TActionLabel, string> = {
   cellphone: "휴대폰 사용",
   drowsy: "졸음운전",
   cigarette: "흡연",

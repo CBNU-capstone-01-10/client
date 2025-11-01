@@ -1,10 +1,6 @@
 // COMPONENT: 점수 게이지
 import { useEffect, useState } from "react";
-import {
-  ACTION_LABEL,
-  ActionLabel,
-  DEG_ROTATE_PER_SEC,
-} from "../../constants/constants";
+import { ACTION_LABEL, DEG_ROTATE_PER_SEC } from "../../constants/constants";
 import { IDriverActionResponse } from "../../(routes)/record/types/type";
 import { usePostCoin } from "../../api/coin";
 import CoinLottieLogo from "../coin/coin-lottie-logo";
@@ -71,7 +67,7 @@ export default function ScoreGauge({ driverAction }: ScoreGaugeProps) {
               <S.ScoreLabelTitle>
                 {driverAction?.safe_driving
                   ? "안전운전"
-                  : ACTION_LABEL[driverAction?.label as ActionLabel]}
+                  : ACTION_LABEL[driverAction?.label]}
               </S.ScoreLabelTitle>
             </>
           )}
