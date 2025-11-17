@@ -2,7 +2,6 @@ import { forwardRef, useEffect, useRef, useState } from "react";
 import * as S from "./driver-video.style";
 import useSetTimeout from "../../hooks/useSetTimeout";
 import drawVideoSnapshot from "../../(routes)/record/_utils/drawVideoSnapshot";
-import { convertDataURLToFile } from "../../_utils/convertor";
 import { SEND_DRIVER_IMAGE_INTERVAL_TIME } from "../../constants/constants";
 import { usePostDriverAction } from "../../api/action";
 import useWatchLocation from "../../hooks/useWatchLocation";
@@ -38,16 +37,18 @@ export default forwardRef<HTMLVideoElement>(function DriverVideo() {
     startCameraStream();
   }, []);
 
-  useSetTimeout(() => {
+  useSetTimeout(async () => {
     // POST: 일정 주기마다 운전자 행위를 캡처한 이미지와 위치 정보 전송
     if (videoRef.current) {
-      const driverImageData = drawVideoSnapshot(videoRef.current);
-      // driverImageData가 존재하면 File 객체로 변환하여 반환
-      if (!driverImageData) {
+      const driverImageBlob = await drawVideoSnapshot(videoRef.current);
+      if (!driverImageBlob) {
         return;
       }
-      const filename = `snapshot_${new Date().toISOString()}.jpg`; // 파일 이름 설정
-      const driverImage = convertDataURLToFile(driverImageData, filename);
+
+      const filename = `snapshot_${new Date().toISOString()}.jpg`;
+      const driverImage = new File([driverImageBlob as BlobPart], filename, {
+        type: "image/jpeg",
+      });
 
       if (driverImage && location) {
         const { latitude, longitude } = location.coords;
