@@ -1,12 +1,13 @@
+import { useEffect, useState, lazy, Suspense } from "react";
 import BottomNavBar from "../_components/bottomNavBar/bottom-navbar";
 import TopNavBar from "../_components/topNavBar/top-navbar";
-import RecordPage from "./record/page";
-import StatisticsPage from "./statistics/page";
-import ProfilePage from "./profile/page";
-import { useEffect, useState } from "react";
 import { TAB } from "../constants/constants";
 import { useGetPersonalInfo } from "../api/user";
 import { useUserStore } from "../store/use-user-store";
+
+import RecordPage from "./record/page";
+const StatisticsPage = lazy(() => import("./statistics/page"));
+const ProfilePage = lazy(() => import("./profile/page"));
 
 // Layout: 메인 레이아웃
 export default function MainLayout() {
@@ -17,9 +18,20 @@ export default function MainLayout() {
       case TAB.RECORD:
         return <RecordPage />;
       case TAB.STATISTICS:
-        return <StatisticsPage />;
+        return (
+          // TODO: 로딩 Suspense 보완 필요
+          <Suspense fallback={<div>loading</div>}>
+            <StatisticsPage />
+          </Suspense>
+        );
+
       case TAB.PROFILE:
-        return <ProfilePage />;
+        return (
+          // TODO: 로딩 Suspense 보완 필요
+          <Suspense fallback={<div>loading</div>}>
+            <ProfilePage />
+          </Suspense>
+        );
       default:
         return <RecordPage />;
     }
