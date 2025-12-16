@@ -9,22 +9,22 @@ import { getCameraPermission } from "../../_utils/camera";
 
 /**
  * COMPONENT: 운전자 모습을 녹화하는 비디오
- * - 고정 간격 폴링으로 초기 렌더링 지연 영향 최소화
- * - Fire-and-Forget 패턴으로 이전 요청 완료 대기 없이 새 요청 발송
+ * - 고정 간격 폴링으로 주기적으로 프레임 캡처 및 서버 전송
+ * - waitForPrevious=true + mutateAsync 사용으로 "동시 1개" 요청만 유지
  */
 export default forwardRef<HTMLVideoElement>(function DriverVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const { location } = useWatchLocation();
-  const { mutate: createDriverAction } = usePostDriverAction();
-  const [isReady, setIsReady] = useState(false);
 
+  // mutateAsync 사용 → 실패 시 throw 되어 폴링 훅에서 에러로 인식 가능
+  const { mutateAsync: createDriverAction } = usePostDriverAction();
+
+  const [isReady, setIsReady] = useState(false);
   const [stream, setStream] = useState<MediaStream>();
 
   // 녹화 화면 초기화
   useEffect(() => {
-    if (!videoRef.current) {
-      return;
-    }
+    if (!videoRef.current) return;
     if (stream) {
       videoRef.current.srcObject = stream;
     }
@@ -74,35 +74,34 @@ export default forwardRef<HTMLVideoElement>(function DriverVideo() {
       return;
     }
 
-    try {
-      const driverImageBlob = await drawVideoSnapshot(video);
-      if (!driverImageBlob) {
-        return;
-      }
-
-      const filename = `snapshot_${new Date().toISOString()}.jpg`;
-      const driverImage = new File([driverImageBlob as BlobPart], filename, {
-        type: "image/jpeg",
-      });
-
-      const { latitude, longitude } = location.coords;
-
-      const driverActionData = new FormData();
-      driverActionData.append("capture", driverImage);
-      driverActionData.append("location_x", latitude.toString());
-      driverActionData.append("location_y", longitude.toString());
-
-      // Fire-and-Forget: 응답을 기다리지 않음
-      createDriverAction(driverActionData);
-    } catch (error) {
-      console.error("비디오 프레임 캡처 오류:", error);
+    const driverImageBlob = await drawVideoSnapshot(video);
+    if (!driverImageBlob) {
+      return;
     }
+
+    const filename = `snapshot_${new Date().toISOString()}.jpg`;
+    const driverImage = new File([driverImageBlob as BlobPart], filename, {
+      type: "image/jpeg",
+    });
+
+    const { latitude, longitude } = location.coords;
+
+    const driverActionData = new FormData();
+    driverActionData.append("capture", driverImage);
+    driverActionData.append("location_x", latitude.toString());
+    driverActionData.append("location_y", longitude.toString());
+
+    // mutateAsync 사용 → 실패 시 예외 발생 → usePollingInterval에서 에러로 카운트
+    await createDriverAction(driverActionData);
   }, [createDriverAction, location]);
 
-  // 고정 간격 폴링 (비디오 준비 후 활성화)
+  // 연속 실패 시 ConsecutiveFailureError를 throw하여 NetworkErrorBoundary에서 처리
   usePollingInterval(captureAndSendFrame, SEND_DRIVER_IMAGE_INTERVAL_TIME, {
     enabled: isReady && !!location,
-    waitForPrevious: false, // Fire-and-Forget 모드
+    waitForPrevious: true,
+    immediate: false,
+    maxConsecutiveError: 5,
+    throwOnMaxError: true,
   });
 
   return (
